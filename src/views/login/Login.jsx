@@ -31,17 +31,15 @@ const Login = () => {
         {/*  type, className, onChange, eventParam  */}
         <Input 
           type="text"
-          className="test1"
+          className={styles.idInputEle}
           onChange={onChangeTest}
         />
           <Input 
-          type="text"
-          className="test1"
+          type="password"
+          className="pwInputEle"
           onChange={onChangeTestParams}
           eventParam={["t1"]}
         />
-        {/* <input type="text" className={styles.idInputEle} name="" id="" />
-        <input type="password" className="pwInputEle" name="" id="" /> */}
         <Button
           txt="로그인"
           className="loginBtn"

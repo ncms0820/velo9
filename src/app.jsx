@@ -6,9 +6,6 @@ import Login from "./views/login/Login";
 function App() {
   return (
     <BrowserRouter>
-      <nav>
-        <Link to="/">Home</Link>
-      </nav>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
