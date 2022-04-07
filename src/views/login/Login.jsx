@@ -19,47 +19,48 @@ const Login = () => {
 
   return(
     <>
-      <div className={styles.loginHeader}>
-        <span>Logo</span>
-        <h1>로그인</h1>
-        <Button
-          txt={"야간모드버튼"}
-        />
-      </div>
 
-      <div className="loginMain">
-        {/*  type, className, onChange, eventParam  */}
-        <Input 
-          type="text"
-          className={styles.idInputEle}
-          onChange={onChangeTest}
-        />
+      <div className={styles.loginBox}>
+        <div className={styles.idPwBox}>
           <Input 
-          type="password"
-          className="pwInputEle"
-          onChange={onChangeTestParams}
-          eventParam={["t1"]}
-        />
-        <Button
-          txt="로그인"
-          className="loginBtn"
-        />
+            type="text"
+            className={styles.idInput}
+            onChange={onChangeTest}
+          />
+          <Input 
+            type="password"
+            className={styles.pwInput}
+            onChange={onChangeTestParams}
+            eventParam={["t1"]}
+          />
+          <Button
+            txt="로그인"
+            className={styles.loginBtn}
+          />
+        </div>
 
-        <div>
+        <div className={styles.joinFindBox}>
           <Button
             txt="회원가입"
-            className="joinBtn"
+            className={styles.joinBtn}
           />
           <Button
             txt="아이디/비밀번호 찾기"
-            className="joinBtn"
+            className={styles.findUserBtn}
           />
         </div>
 
-        <div className="socialLoginBox">
-          <button className="githubLoginBtn"></button>
-          <button className="googleLoginBtn"></button>
+        <div className={styles.socialLoginBox}>
+          <Button
+            txt="깃허브로 로그인(아마 아이콘)"
+            className="githubLoginBtn"
+          />
+          <Button
+            txt="구글로 로그인(아마 아이콘)"
+            className="googleLoginBtn"
+          />
         </div>
+
       </div>
     </>
   )

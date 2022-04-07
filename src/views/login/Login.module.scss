@@ -1,7 +1,56 @@
-h1 {
-  color: blue;
+@mixin totalHeight {
+  height: 2.5rem;
 }
 
-.loginHeader {
-  background: red;
+.loginHeaderBox {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-around;
+  height: 3rem;
+
+  border-bottom: 1px solid gray;
+
+  span {
+    line-height: 3rem;
+    vertical-align: center;
+  }
+}
+
+
+.idPwBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 80%;
+  height: 12rem;
+  margin: 1rem auto;
+  
+  .idInput, .pwInput, .loginBtn {
+    margin: .5rem;
+    @include totalHeight()
+  }
+}
+
+@mixin flexDefault {
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  margin: 1rem auto;
+}
+
+.joinFindBox {
+  @include flexDefault();
+  @include totalHeight();
+  button {
+    width: 47%
+  }
+}
+
+.socialLoginBox {
+  @include flexDefault();
+  @include totalHeight();
+  button {
+    width: 47%
+  }
 }

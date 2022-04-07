@@ -1,5 +1,5 @@
 
-const Input = ( { type, className, onChange, value, eventParam } ) => {
+const Input = ( { type, className, onChange, value, eventParam, placeholder } ) => {
   
   const onChangeSetParam = (e, eventParam) => {
     if (eventParam) onChange(e, ...eventParam)
@@ -11,6 +11,7 @@ const Input = ( { type, className, onChange, value, eventParam } ) => {
       className={className}
       value={value}
       name={type}
+      placeholder={placeholder}
       onChange={(e) => onChangeSetParam(e, eventParam)}
     />
   );
