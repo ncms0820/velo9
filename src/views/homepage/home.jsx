@@ -1,13 +1,13 @@
 import React from "react";
-import Footer from "../footer/footer";
 import Header from "../header/header";
-import "./home.module.scss";
+import styles from "./home.module.scss";
+import Nav from "./nav";
 
 const Home = (props) => (
-  <div>
+  <div className={styles.container}>
     <Header />
+    <Nav />
     <section>Main Section</section>
-    <Footer />
   </div>
 );
 
