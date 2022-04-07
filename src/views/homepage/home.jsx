@@ -1,4 +1,5 @@
 import React from "react";
+import Card from "../../components/card/card";
 import Header from "../header/header";
 import styles from "./home.module.scss";
 import Nav from "./nav";
@@ -7,7 +8,9 @@ const Home = (props) => (
   <div className={styles.container}>
     <Header />
     <Nav />
-    <section>Main Section</section>
+    <section className={styles.grid_container}>
+      <Card />
+    </section>
   </div>
 );
 
