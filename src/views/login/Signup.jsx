@@ -4,129 +4,97 @@ import styles from "./Login.module.scss";
 // Components
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import Txt from "../../components/Txt"
 
-const ChangePw = () => {
+const ChangePw = ( {page, setPage} ) => {
 
-  const onChangeTest = (e, param) => {
+  const onChangeTest = (e) => {
     console.log("파라메터 없음")
   }
-  
-  const onChangeTestParams = (e, param) => {
-    console.log(param)
-    console.log(...param, "이게 파라메터들임")
+
+  const finishSignup = () => {
+    console.log("가입 완료")
+    setPage('login')
   }
 
 
   return(
-      <div className={styles.loginBox}>
+      <div className={styles.columnBox}>
 
-        <div>
-          <span>이메일 인증</span>
+        <Txt txt="아이디" />
+        <div className={styles.inputAndBtn}>
           <Input 
             type="password"
             className={styles.pwInput}
-            onChange={onChangeTestParams}
-            eventParam={["t1"]}
-          />
-          <Button
-            txt="로그인"
-            className={styles.loginBtn}
-          />
-<hr/>
-
-          <Input 
-            type="password"
-            className={styles.pwInput}
-            onChange={onChangeTestParams}
-            eventParam={["t1"]}
-          />
-          <Button
-            txt="로그인"
-            className={styles.loginBtn}
-          />
-<hr/>
-          <span> {"인증완료"} </span>
-        </div>
-
-        <div className={styles.idPwBox}>
-          <span>아이디를 입력해주세요</span>
-          <Input 
-            type="text"
-            className={styles.idInput}
             onChange={onChangeTest}
+            eventParam={["t1"]}
           />
           <Button
             txt="아이디 중복확인"
             className={styles.loginBtn}
           />
-
-          <span span> {"사용 가능, 불가능 아이디"} </span>
         </div>
+        <Txt txt ={"사용 가능한 아이디입니다."} />
 
-<hr/>
+        <Txt txt="닉네임" />
+        <Input 
+          type="text"
+          className={styles.pwInput}
+          onChange={onChangeTest}
+          eventParam={["t1"]}
+        />
 
+        <Txt txt="비밀번호" />
+        <Input 
+          type="password"
+          className={styles.pwInput}
+          onChange={onChangeTest}
+        />
+         <Txt txt="비밀번호 확인" />
+        <Input 
+          type="password"
+          className={styles.pwInput}
+          onChange={onChangeTest}
+        />
+        <Txt txt ={"비밀번호가 일치합니다."} />
 
-        <div className={styles.joinFindBox}>
-          <span>새로운 비밀번호</span>
-          <Input 
-            type="password"
-            className={styles.pwInput}
-            onChange={onChangeTestParams}
-            eventParam={["t1"]}
-          />
- <hr/>
-
-        </div>
-
-        <div className={styles.socialLoginBox}>
- 
-          <span>새로운 비밀번호 확인</span>
-          <Input 
-            type="password"
-            className={styles.pwInput}
-            onChange={onChangeTestParams}
-            eventParam={["t1"]}
-          />
-<hr/>
-
-        </div>
-        <div>
-          <span>{"비밀번호가 일치/불일치합니다"}</span>
-          <Button
-            txt="비밀번호 변경"
-            className={styles.loginBtn}
-          />
-        </div>
-
-<hr/>
-
-        <div className={styles.idPwBox}>
-          <span>닉네임</span>
+        <Txt txt ="이메일 인증" />
+        <div className={styles.inputAndBtn}>
           <Input 
             type="text"
             className={styles.idInput}
             onChange={onChangeTest}
           />
           <Button
-            txt="중복확인"
+            txt="인증 요청"
             className={styles.loginBtn}
           />
-
-          <span> {"닉네임은 중복 체크 필요없을듯"} </span>
         </div>
 
-<hr/>
-
-        <div>
+        <div className={styles.inputAndBtn}>
+          <Input 
+            type="text"
+            className={styles.idInput}
+            onChange={onChangeTest}
+          />
+          <Button
+            txt="인증번호 확인"
+            className={styles.loginBtn}
+          />
+        </div>
+        <div className={styles.twoBtnBox}>
           <Button
             txt="돌아가기"
             className={styles.loginBtn}
+            onClick={() => setPage("login")}
           />
           <Button
             txt="가입하기"
             className={styles.loginBtn}
+            onClick={() => finishSignup()}
           />
         </div>
+
       </div>
   )
 } 

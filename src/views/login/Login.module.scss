@@ -2,12 +2,24 @@
   height: 2.5rem;
 }
 
+@mixin maxSize {
+  max-width: 768px;
+  margin: 0 auto;
+  height: 2.5rem;
+}
+@mixin innerSize {
+  width: 80%;
+  margin: 0 auto;
+}
+
+// Header
 .loginHeaderBox {
   position: sticky;
   top: 0;
   display: flex;
   justify-content: space-around;
   height: 3rem;
+  @include maxSize();
 
   border-bottom: 1px solid gray;
 
@@ -16,6 +28,37 @@
     vertical-align: center;
   }
 }
+
+// Main
+.loginContentBox{
+  @include maxSize();
+}
+
+// Find ID
+.columnBox {
+  @include innerSize();
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+
+  span {
+    height: 3rem;
+    line-height: 4rem;
+  }
+  input {
+    height: 3rem;
+  }
+  button {
+    height: 3rem;
+  }
+}
+
+.inputAndBtn {
+  display: grid;
+  grid-template-columns: auto 80px;
+  margin: .5rem 0;
+}
+
 
 
 .idPwBox {
@@ -35,15 +78,15 @@
 @mixin flexDefault {
   display: flex;
   justify-content: space-around;
-  width: 80%;
+  width: 100%;
   margin: 1rem auto;
 }
 
-.joinFindBox {
+.twoBtnBox {
   @include flexDefault();
   @include totalHeight();
   button {
-    width: 47%
+    width: 100%
   }
 }
 
@@ -51,6 +94,7 @@
   @include flexDefault();
   @include totalHeight();
   button {
-    width: 47%
+    width: 100%
   }
 }
+

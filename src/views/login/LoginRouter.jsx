@@ -41,17 +41,13 @@ const LoginRouter = () => {
         />
       </div>
 
-        {page === 'login' && <Login />}
-        {page === 'findId' && <FindId />}
-        {page === 'changePw' && <ChangePw />}
-        {page === 'signup' && <Signup />}
+      <div className={styles.loginContentBox}>
+        {page === 'login' && <Login page={page} setPage={setPage} />}
+        {page === 'findId' && <FindId page={page} setPage={setPage} />}
+        {page === 'changePw' && <ChangePw page={page} setPage={setPage} />}
+        {page === 'signup' && <Signup page={page} setPage={setPage} />}
+      </div>
 
-      <span>라우팅 테스트 버튼입니다</span>
-      <button onClick={() => setPage('login')}>로그인</button>
-      <button onClick={() => setPage('findId')}>아이디찾기</button>
-      <button onClick={() => setPage('changePw')}>비밀번호변경</button>
-      <button onClick={() => setPage('signup')}>회원가입</button>
-    
     </>
   )
 }

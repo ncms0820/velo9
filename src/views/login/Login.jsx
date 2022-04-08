@@ -4,8 +4,9 @@ import styles from "./Login.module.scss";
 // Components
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import Txt from "../../components/Txt";
 
-const Login = () => {
+const Login = ( {page, setPage} ) => {
 
   const onChangeTest = (e) => {
     console.log("파라메터 없음")
@@ -13,13 +14,16 @@ const Login = () => {
   
 
   return(
-      <div className={styles.loginBox}>
-        <div className={styles.idPwBox}>
+      <div className={styles.columnBox}>
+        
+
+          <Txt txt="아이디" />
           <Input 
             type="text"
             className={styles.idInput}
             onChange={onChangeTest}
           />
+          <Txt txt="비밀번호" />
           <Input 
             type="password"
             className={styles.pwInput}
@@ -29,16 +33,17 @@ const Login = () => {
             txt="로그인"
             className={styles.loginBtn}
           />
-        </div>
 
-        <div className={styles.joinFindBox}>
+        <div className={styles.twoBtnBox}>
           <Button
             txt="회원가입"
             className={styles.joinBtn}
+            onClick={() => setPage("signup")}
           />
           <Button
             txt="아이디/비밀번호 찾기"
             className={styles.findUserBtn}
+            onClick={() => setPage("findId")}
           />
         </div>
 
