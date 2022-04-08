@@ -13,8 +13,6 @@ const Login = () => {
   
 
   return(
-    <>
-
       <div className={styles.loginBox}>
         <div className={styles.idPwBox}>
           <Input 
@@ -56,7 +54,6 @@ const Login = () => {
         </div>
 
       </div>
-    </>
   )
 } 
 
