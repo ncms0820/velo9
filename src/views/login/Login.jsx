@@ -7,15 +7,10 @@ import Input from "../../components/Input";
 
 const Login = () => {
 
-  const onChangeTest = (e, param) => {
+  const onChangeTest = (e) => {
     console.log("파라메터 없음")
   }
   
-  const onChangeTestParams = (e, param) => {
-    console.log(param)
-    console.log(...param, "이게 파라메터들임")
-  }
-
 
   return(
     <>
@@ -30,8 +25,7 @@ const Login = () => {
           <Input 
             type="password"
             className={styles.pwInput}
-            onChange={onChangeTestParams}
-            eventParam={["t1"]}
+            onChange={(e) => onChangeTest(e)}
           />
           <Button
             txt="로그인"

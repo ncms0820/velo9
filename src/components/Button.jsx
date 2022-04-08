@@ -7,7 +7,7 @@ const Button = ( { txt, className, onClick } ) => {
     <button
       style={btnCSS}
       className={className}
-      onClick={() => onClick()}
+      onClick={onClick}
     >
       {txt}
     </button>
@@ -21,5 +21,4 @@ const btnCSS = {
   background: "none",
   border: "none",
   boxShadow: "2px 2px 4px gray"
-  
 }
