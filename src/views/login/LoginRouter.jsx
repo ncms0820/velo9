@@ -1,4 +1,5 @@
 import react, {useState} from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.scss";
 
 // page
@@ -11,7 +12,7 @@ import Signup from "./Signup";
 import Button from "../../components/Button";
 
 const LoginRouter = () => {
-
+  const navigate = useNavigate();
   const [page, setPage] = useState('login')
 
   const setTitle = () => {
@@ -24,20 +25,21 @@ const LoginRouter = () => {
         return "비밀번호 변경하기"
       case 'signup':
         return "회원가입"
-
       default:
-        
     }
   }
 
   return(
     <>
       <div className={styles.loginHeaderBox}>
-        <span>Logo</span>
+        <Button
+          txt="Velo9"
+          onClick={() => navigate("/")}
+        />
         <span>{setTitle()}</span>
         <Button
           className={styles.dayAndNight}
-          txt={"야간모드버튼"}
+          txt="야간모드"
         />
       </div>
 

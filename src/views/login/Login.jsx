@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import react, { useState, useEffect } from "react";
 import styles from "./Login.module.scss";
 
 // Components
@@ -8,31 +8,52 @@ import Txt from "../../components/Txt";
 
 const Login = ( {page, setPage} ) => {
 
-  const onChangeTest = (e) => {
-    console.log("파라메터 없음")
-  }
-  
+  const [id, setId] = useState('')
+  const [pw, setPw] = useState('')
 
+  // 일반 로그인
+  const goLogin = () => {
+    console.log("로그인 ")
+  }
+
+  // 소셜 로그인
+  const goSocialLogin = (e) => {
+    const {className} = e.target;
+    console.log(className)
+    if (className === "githubLogin" ) {
+      console.log("깃허브로 로그인")
+    } else if (className === "googleLogin") {
+      console.log("구글로 로그인")
+    }
+  }
+
+  useEffect(() => {
+    console.log("id: ", id)
+    console.log("pw: ", pw)
+  }, [id, pw])
+  
   return(
       <div className={styles.columnBox}>
         
-
-          <Txt txt="아이디" />
-          <Input 
-            type="text"
-            className={styles.idInput}
-            onChange={onChangeTest}
-          />
-          <Txt txt="비밀번호" />
-          <Input 
-            type="password"
-            className={styles.pwInput}
-            onChange={(e) => onChangeTest(e)}
-          />
-          <Button
-            txt="로그인"
-            className={styles.loginBtn}
-          />
+        <Txt txt="아이디" />
+        <Input 
+          type="text"
+          className={styles.idInput}
+          value={id}
+          onChange={(e) => setId(e.target.value)}
+        />
+        <Txt txt="비밀번호" />
+        <Input 
+          type="password"
+          className={styles.pwInput}
+          value={pw}
+          onChange={(e) => setPw(e.target.value)}
+        />
+        <Button
+          txt="로그인"
+          className={styles.loginBtn}
+          onClick={() => goLogin()}
+        />
 
         <div className={styles.twoBtnBox}>
           <Button
@@ -50,11 +71,13 @@ const Login = ( {page, setPage} ) => {
         <div className={styles.socialLoginBox}>
           <Button
             txt="깃허브로 로그인(아마 아이콘)"
-            className="githubLoginBtn"
+            className="githubLogin"
+            onClick={(e) => goSocialLogin(e)}
           />
           <Button
             txt="구글로 로그인(아마 아이콘)"
-            className="googleLoginBtn"
+            className="googleLogin"
+            onClick={(e) => goSocialLogin(e)}
           />
         </div>
 

@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import react, { useState, useEffect } from "react";
 import styles from "./Login.module.scss";
 
 // Components
@@ -6,90 +6,60 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Txt from "../../components/Txt";
 
+import VerifyEmail from "./pageCompnents/VerifyEmail"
+import DoubleCheckPw from "./pageCompnents/DoubleCheckPw"
+
 const ChangePw = ( {page, setPage} ) => {
 
-  const onChangeTest = (e, param) => {
-    console.log("파라메터 없음")
+  const [id, setId] = useState('') // 아이디 입력
+  const [isVerified, setIsVerified] = useState(null) // null || boolean, 인증번호 확인여부
+  const [isCheckedPw, setIsCheckedPw] = useState(null) // null || boolean, 비밀번호 체크여부
+
+  // Test
+  const [testVerifyNumber, setTestVerifyNumber] = useState("") // 인증번호 생성, 임시
+
+  const finishChangePw = () => {
+    //아이디 확인절차 필요
+    if (!isCheckedPw || !isVerified) {
+      alert("이메일 인증 및 비밀번호를 확인해주세요.")
+      return
+    }
+    // 비밀번호 변경 로직
+    setPage("login")
   }
   
-  const finishChangePw = () => {
-    console.log("비밀번호 변경됨.")
-    setPage('login')
-  }
-
   return(
       <div className={styles.columnBox}>
 
+        <VerifyEmail
+          testVerifyNumber={testVerifyNumber}
+          setIsVerified={setIsVerified}
+          setTestVerifyNumber={setTestVerifyNumber}
+          isVerified={isVerified}
+        />
+
         <Txt txt="아이디를 입력해주세요" />
-        <div className={styles.inputAndBtn}>
-          <Input 
-            type="text"
-            className={styles.idInput}
-            onChange={onChangeTest}
+        <Input 
+          type="text"
+          value={id}
+          onChange={(e) => setId(e.target.value)}
+        />
+
+        <DoubleCheckPw 
+          isCheckedPw={isCheckedPw}
+          setIsCheckedPw={setIsCheckedPw}
+          page={page}
+        />
+
+        <div className={styles.twoBtnBox}>
+          <Button
+            txt="돌아가기"
+            onClick={() => setPage("login")}
           />
           <Button
-            txt="아이디 중복확인"
-            className={styles.loginBtn}
+            txt="비밀번호 변경완료"
+            onClick={finishChangePw}
           />
-        </div>
-
-        <span> {"사용 가능, 불가능 아이디"} </span>
-          
-        <Txt txt="이메일 인증" />
-        <div className={styles.inputAndBtn}>
-          <Input 
-            type="password"
-            className={styles.pwInput}
-            eventParam={["t1"]}
-          />
-          <Button
-            txt="로그인"
-            className={styles.loginBtn}
-          />
-        </div>
-
-        <div className={styles.inputAndBtn}>
-          <Input 
-            type="password"
-            className={styles.pwInput}
-            eventParam={["t1"]}
-          />
-          <Button
-            txt="로그인"
-            className={styles.loginBtn}
-          />
-        </div>
-          <span> {"인증완료"} </span>
-
-          <Txt txt="새로운 비밀번호" />
-          <Input 
-            type="password"
-            className={styles.pwInput}
-            eventParam={["t1"]}
-          />
-
-
-
-          <span>새로운 비밀번호 확인</span>
-          <Input 
-            type="password"
-            className={styles.pwInput}
-            eventParam={["t1"]}
-          />
-
-          <span>{"비밀번호가 일치/불일치합니다"}</span>
-
-          <div className={styles.twoBtnBox}>
-            <Button
-              txt="로그인 페이지로"
-              className={styles.joinBtn}
-              onClick={() => setPage("login")}
-            />
-            <Button
-              txt="비밀번호 변경완료"
-              className={styles.findUserBtn}
-              onClick={() => finishChangePw()}
-            />
         </div>
       </div>
   )

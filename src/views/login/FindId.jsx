@@ -8,10 +8,16 @@ import Txt from "../../components/Txt";
 
 const FindId = ( {page, setPage} ) => {
 
-  const [showId, setShowId] = useState('')
+  const [email, setEmail] = useState('')
+  const [findedId, setFindedId] = useState(null)
 
-  const onChangeTest = (e, param) => {
-    console.log("파라메터 없음")
+  const checkEmail = () => {
+    console.log("아이디찾기 실행됨")
+    if (email === "admin@gmail.com") {
+      setFindedId("admin")
+    } else {
+      setFindedId("")
+    }
   }
 
   return(
@@ -21,15 +27,24 @@ const FindId = ( {page, setPage} ) => {
         <Input 
           type="text"
           className={styles.idInput}
-          onChange={onChangeTest}
-          placeholder={"아이디를 입력해주세요"}
+          onChange={(e) => setEmail(e.target.value)}
+          onEnter={checkEmail}
+          value={email}
+          placeholder="input Email"
           />
-        <Txt 
-          txt={showId} 
-        />
         <Button
           className={styles.findIdBtn}
+          onClick={checkEmail}
           txt={"아이디 찾기"}
+        />
+        <Txt 
+          txt={
+            findedId 
+            ? `가입한 아이디는 ${findedId} 입니다.` 
+            : findedId === null
+              ? null // 초기값만 아무것도 표시 안되게.
+              : `가입한 아이디가 아닙니다.`
+          } 
         />
 
         <div className={styles.twoBtnBox}>
