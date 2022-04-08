@@ -1,11 +1,20 @@
 import React from "react";
 import styles from "./_nav.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowTrendUp, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
+import { faClock } from "@fortawesome/free-regular-svg-icons";
 const Nav = (props) => (
   <div className={styles.nav}>
     <div>
       <div className={styles.wrapper}>
-        <input type="button" value={"트렌드"} />
-        <input type="button" value={"최신"} />
+        <button>
+          <FontAwesomeIcon icon={faArrowTrendUp} className={styles.fontAwesome} />
+          <span>트랜딩</span>
+        </button>
+        <button>
+          <FontAwesomeIcon icon={faClock} className={styles.fontAwesome} />
+          <span>최신</span>
+        </button>
         <select type="option">
           <option value="1">오늘</option>
           <option value="2">이번 주</option>
@@ -13,7 +22,7 @@ const Nav = (props) => (
           <option value="4">올해</option>
         </select>
       </div>
-      <div>elipse</div>
+      <FontAwesomeIcon icon={faEllipsisV} size="lg" />
     </div>
   </div>
 );

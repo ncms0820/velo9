@@ -1,35 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap");
+
 .nav {
   align-items: center;
   margin-top: 40px;
   width: 100%;
   height: 4rem;
-  border: 1px solid black;
+  box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.1);
   & > div {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 100%;
+    width: 100%;
     padding: 0 1rem;
     .wrapper {
       height: 100%;
-      width: 20%;
+      width: 100%;
       min-width: 15rem;
-      max-width: 20rem;
+      max-width: 22rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      input {
-        font-size: 1.5rem;
-        font-weight: 600;
+      button {
+        font-size: 1.4rem;
+        font-family: "Nanum Gothic Coding", monospace;
+        font-weight: bold;
         border: none;
         border-bottom: 1px solid black;
         background-color: transparent;
-        padding: 0.2em;
+        padding: 0.3em 0.3em 0.5em 0.3em;
         justify-self: center;
       }
+      & button:nth-child(2) {
+        color: grey;
+        border: none;
+        font-weight: 300;
+        margin-bottom: 1px;
+      }
       select {
-        height: 70%;
+        border: none;
+        width: 5rem;
+        font-family: "Nanum Gothic Coding", monospace;
+        height: 60%;
+        option {
+          font-family: "Nanum Gothic Coding", monospace;
+        }
+      }
+      select:focus {
+        outline: none;
       }
     }
   }
+}
+.fontAwesome {
+  font-size: 1.5rem;
+  margin-right: 1rem;
 }
