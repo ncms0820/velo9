@@ -4,12 +4,12 @@ import Home from "./views/homepage/home";
 import Login from "./views/login/Login";
 import LoginRouter from "./views/login/LoginRouter";
 
-function App() {
+function App({ dbService }) {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home dbService={dbService} />} />
+        <Route path="/home" element={<Home dbService={dbService} />} />
         <Route path="/login" element={<LoginRouter />} />
       </Routes>
     </BrowserRouter>

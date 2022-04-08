@@ -1,2 +1,19 @@
 @import "./common/colors";
 @import "./common/_reset";
+@import "/src/common/mixins";
+
+.btn {
+  @include button;
+  font-weight: 300;
+  margin-bottom: 1px;
+  color: grey;
+}
+.highlight {
+  @include button;
+
+  span {
+    font-weight: bold;
+    color: black;
+  }
+  border-bottom: 2px solid black;
+}
