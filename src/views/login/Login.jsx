@@ -1,55 +1,83 @@
-import react, { useState } from "react";
+import react, { useState, useEffect } from "react";
 import styles from "./Login.module.scss";
 
 // Components
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import Txt from "../../components/Txt";
 
-const Login = () => {
+const Login = ( {page, setPage} ) => {
 
-  const onChangeTest = (e) => {
-    console.log("파라메터 없음")
+  const [id, setId] = useState('')
+  const [pw, setPw] = useState('')
+
+  // 일반 로그인
+  const goLogin = () => {
+    console.log("로그인 ")
   }
+
+  // 소셜 로그인
+  const goSocialLogin = (e) => {
+    const {className} = e.target;
+    console.log(className)
+    if (className === "githubLogin" ) {
+      console.log("깃허브로 로그인")
+    } else if (className === "googleLogin") {
+      console.log("구글로 로그인")
+    }
+  }
+
+  useEffect(() => {
+    console.log("id: ", id)
+    console.log("pw: ", pw)
+  }, [id, pw])
   
-
   return(
-      <div className={styles.loginBox}>
-        <div className={styles.idPwBox}>
-          <Input 
-            type="text"
-            className={styles.idInput}
-            onChange={onChangeTest}
-          />
-          <Input 
-            type="password"
-            className={styles.pwInput}
-            onChange={(e) => onChangeTest(e)}
-          />
-          <Button
-            txt="로그인"
-            className={styles.loginBtn}
-          />
-        </div>
+      <div className={styles.columnBox}>
+        
+        <Txt txt="아이디" />
+        <Input 
+          type="text"
+          className={styles.idInput}
+          value={id}
+          onChange={(e) => setId(e.target.value)}
+        />
+        <Txt txt="비밀번호" />
+        <Input 
+          type="password"
+          className={styles.pwInput}
+          value={pw}
+          onChange={(e) => setPw(e.target.value)}
+        />
+        <Button
+          txt="로그인"
+          className={styles.loginBtn}
+          onClick={() => goLogin()}
+        />
 
-        <div className={styles.joinFindBox}>
+        <div className={styles.twoBtnBox}>
           <Button
             txt="회원가입"
             className={styles.joinBtn}
+            onClick={() => setPage("signup")}
           />
           <Button
             txt="아이디/비밀번호 찾기"
             className={styles.findUserBtn}
+            onClick={() => setPage("findId")}
           />
         </div>
 
         <div className={styles.socialLoginBox}>
           <Button
             txt="깃허브로 로그인(아마 아이콘)"
-            className="githubLoginBtn"
+            className="githubLogin"
+            onClick={(e) => goSocialLogin(e)}
           />
           <Button
             txt="구글로 로그인(아마 아이콘)"
-            className="googleLoginBtn"
+            className="googleLogin"
+            onClick={(e) => goSocialLogin(e)}
           />
         </div>
 
