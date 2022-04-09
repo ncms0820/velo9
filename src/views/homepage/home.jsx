@@ -21,7 +21,6 @@ const Home = ({ dbService }) => {
       <Header />
       <Nav handleTab={handleTab} />
       <section className={styles.grid_container}>
-        {console.log(cards)}
         {cards && cards.content.map((content, index) => <Card key={index} content={content} />)}
       </section>
     </div>

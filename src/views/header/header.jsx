@@ -3,7 +3,8 @@ import styles from "./_header.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-const Header = (props) => (
+import { memo } from "react/cjs/react.development";
+const Header = memo((props) => (
   <div className={styles.header}>
     <a href="/" className={styles.logo}>
       Velo9
@@ -21,6 +22,6 @@ const Header = (props) => (
       </Link>
     </div>
   </div>
-);
+));
 
 export default Header;
