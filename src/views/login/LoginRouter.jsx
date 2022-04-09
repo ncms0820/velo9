@@ -1,4 +1,5 @@
 import react, {useState} from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.scss";
 
 // page
@@ -11,7 +12,7 @@ import Signup from "./Signup";
 import Button from "../../components/Button";
 
 const LoginRouter = () => {
-
+  const navigate = useNavigate();
   const [page, setPage] = useState('login')
 
   const setTitle = () => {
@@ -24,34 +25,31 @@ const LoginRouter = () => {
         return "비밀번호 변경하기"
       case 'signup':
         return "회원가입"
-
       default:
-        
     }
   }
 
   return(
     <>
       <div className={styles.loginHeaderBox}>
-        <span>Logo</span>
+        <Button
+          txt="Velo9"
+          onClick={() => navigate("/")}
+        />
         <span>{setTitle()}</span>
         <Button
           className={styles.dayAndNight}
-          txt={"야간모드버튼"}
+          txt="야간모드"
         />
       </div>
 
-        {page === 'login' && <Login />}
-        {page === 'findId' && <FindId />}
-        {page === 'changePw' && <ChangePw />}
-        {page === 'signup' && <Signup />}
+      <div className={styles.loginContentBox}>
+        {page === 'login' && <Login page={page} setPage={setPage} />}
+        {page === 'findId' && <FindId page={page} setPage={setPage} />}
+        {page === 'changePw' && <ChangePw page={page} setPage={setPage} />}
+        {page === 'signup' && <Signup page={page} setPage={setPage} />}
+      </div>
 
-      <span>라우팅 테스트 버튼입니다</span>
-      <button onClick={() => setPage('login')}>로그인</button>
-      <button onClick={() => setPage('findId')}>아이디찾기</button>
-      <button onClick={() => setPage('changePw')}>비밀번호변경</button>
-      <button onClick={() => setPage('signup')}>회원가입</button>
-    
     </>
   )
 }

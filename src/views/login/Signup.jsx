@@ -1,132 +1,85 @@
-import react, { useState } from "react";
+import react, { useState, useEffect } from "react";
 import styles from "./Login.module.scss";
 
 // Components
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import Txt from "../../components/Txt";
 
-const ChangePw = () => {
+import VerifyEmail from "./pageCompnents/VerifyEmail";
+import DoubleCheckPw from "./pageCompnents/DoubleCheckPw";
+import CheckId from "./pageCompnents/CheckId";
 
-  const onChangeTest = (e, param) => {
-    console.log("파라메터 없음")
-  }
-  
-  const onChangeTestParams = (e, param) => {
-    console.log(param)
-    console.log(...param, "이게 파라메터들임")
+
+const ChangePw = ( {page, setPage} ) => {
+
+  const [nickName, setnickName] = useState(null) // 닉네임
+
+  const [isCheckedId, setIsCheckedId] = useState(null) // null || boolean, 아이디 중복확인여부
+  const [isVerified, setIsVerified] = useState(null) // null || boolean, 인증번호 확인여부
+  const [isCheckedPw, setIsCheckedPw] = useState(null) // null || boolean, 비밀번호 체크여부
+
+  // Test
+  const [testVerifyNumber, setTestVerifyNumber] = useState("") // 인증번호 생성, 임시
+
+  const finishSignup = () => {
+    if (!isCheckedId) {
+      alert("아이디 중복체크가 필요합니다.")
+      return
+    }
+    if (!isVerified) {
+      alert("이메일 인증이 필요합니다.")
+      return
+    }
+    if (!isCheckedPw) {
+      alert("비밀번호가 일치하지 않습니다.")
+      return
+    }
+    console.log("가입 완료") //가입로직
+    setPage('login')
   }
 
 
   return(
-      <div className={styles.loginBox}>
+      <div className={styles.columnBox}>
 
-        <div>
-          <span>이메일 인증</span>
-          <Input 
-            type="password"
-            className={styles.pwInput}
-            onChange={onChangeTestParams}
-            eventParam={["t1"]}
-          />
-          <Button
-            txt="로그인"
-            className={styles.loginBtn}
-          />
-<hr/>
+        <VerifyEmail
+          testVerifyNumber={testVerifyNumber}
+          setIsVerified={setIsVerified}
+          setTestVerifyNumber={setTestVerifyNumber}
+          isVerified={isVerified}
+        />
 
-          <Input 
-            type="password"
-            className={styles.pwInput}
-            onChange={onChangeTestParams}
-            eventParam={["t1"]}
-          />
-          <Button
-            txt="로그인"
-            className={styles.loginBtn}
-          />
-<hr/>
-          <span> {"인증완료"} </span>
-        </div>
+        <CheckId
+          isCheckedId={isCheckedId}
+          setIsCheckedId={setIsCheckedId}
+        /> 
 
-        <div className={styles.idPwBox}>
-          <span>아이디를 입력해주세요</span>
-          <Input 
-            type="text"
-            className={styles.idInput}
-            onChange={onChangeTest}
-          />
-          <Button
-            txt="아이디 중복확인"
-            className={styles.loginBtn}
-          />
+        <DoubleCheckPw 
+          isCheckedPw={isCheckedPw}
+          setIsCheckedPw={setIsCheckedPw}
+        />
 
-          <span span> {"사용 가능, 불가능 아이디"} </span>
-        </div>
+        <Txt txt="닉네임" />
+        <Input 
+          type="text"
+          value={nickName}
+          onChange={(e) => setnickName(e.target.value)}
+        />
 
-<hr/>
-
-
-        <div className={styles.joinFindBox}>
-          <span>새로운 비밀번호</span>
-          <Input 
-            type="password"
-            className={styles.pwInput}
-            onChange={onChangeTestParams}
-            eventParam={["t1"]}
-          />
- <hr/>
-
-        </div>
-
-        <div className={styles.socialLoginBox}>
- 
-          <span>새로운 비밀번호 확인</span>
-          <Input 
-            type="password"
-            className={styles.pwInput}
-            onChange={onChangeTestParams}
-            eventParam={["t1"]}
-          />
-<hr/>
-
-        </div>
-        <div>
-          <span>{"비밀번호가 일치/불일치합니다"}</span>
-          <Button
-            txt="비밀번호 변경"
-            className={styles.loginBtn}
-          />
-        </div>
-
-<hr/>
-
-        <div className={styles.idPwBox}>
-          <span>닉네임</span>
-          <Input 
-            type="text"
-            className={styles.idInput}
-            onChange={onChangeTest}
-          />
-          <Button
-            txt="중복확인"
-            className={styles.loginBtn}
-          />
-
-          <span> {"닉네임은 중복 체크 필요없을듯"} </span>
-        </div>
-
-<hr/>
-
-        <div>
+        <div className={styles.twoBtnBox}>
           <Button
             txt="돌아가기"
             className={styles.loginBtn}
+            onClick={() => setPage("login")}
           />
           <Button
             txt="가입하기"
             className={styles.loginBtn}
+            onClick={() => finishSignup()}
           />
         </div>
+
       </div>
   )
 } 
