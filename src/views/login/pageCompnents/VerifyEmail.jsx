@@ -43,6 +43,7 @@ const VerifyEmail = ( {testVerifyNumber, setIsVerified, setTestVerifyNumber, isV
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          onEnter={CreateTextVerifyNumber}
         />
         <Button
           txt="인증 요청"
@@ -55,6 +56,7 @@ const VerifyEmail = ( {testVerifyNumber, setIsVerified, setTestVerifyNumber, isV
           type="text"
           value={verifyNumber}
           onChange={(e) => setVerifyNumber(e.target.value)}
+          onEnter={confirmVerifyNumber}
         />
         <Button
           txt="인증 번호 확인"

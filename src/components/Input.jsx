@@ -14,7 +14,7 @@ const Input = ( { type, className, onChange, value, placeholder, onEnter } ) => 
       name={type}
       placeholder={placeholder}
       onChange={onChange}
-      onKeyUp={(e) => onPressEnter(e)}
+      onKeyUp={ onEnter ? (e) => onPressEnter(e) : null}
     />
   );
 };

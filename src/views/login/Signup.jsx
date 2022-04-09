@@ -22,18 +22,20 @@ const ChangePw = ( {page, setPage} ) => {
   // Test
   const [testVerifyNumber, setTestVerifyNumber] = useState("") // 인증번호 생성, 임시
 
-
-  const finishChangePw = () => {
-    if (!isCheckedPw || !isVerified) {
-      alert("이메일 인증 및 비밀번호를 확인해주세요.")
+  const finishSignup = () => {
+    if (!isCheckedId) {
+      alert("아이디 중복체크가 필요합니다.")
       return
     }
-    // 비밀번호 변경 로직
-    setPage("login")
-  }
-
-  const finishSignup = () => {
-    console.log("가입 완료")
+    if (!isVerified) {
+      alert("이메일 인증이 필요합니다.")
+      return
+    }
+    if (!isCheckedPw) {
+      alert("비밀번호가 일치하지 않습니다.")
+      return
+    }
+    console.log("가입 완료") //가입로직
     setPage('login')
   }
 

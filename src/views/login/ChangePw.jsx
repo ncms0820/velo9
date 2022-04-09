@@ -20,8 +20,12 @@ const ChangePw = ( {page, setPage} ) => {
 
   const finishChangePw = () => {
     //아이디 확인절차 필요
-    if (!isCheckedPw || !isVerified) {
-      alert("이메일 인증 및 비밀번호를 확인해주세요.")
+    if (!isCheckedPw) {
+      alert("비밀번호가 일치하지 않습니다.")
+      return
+    }
+    if (!isVerified) {
+      alert("이메일 인증이 필요합니다.")
       return
     }
     // 비밀번호 변경 로직

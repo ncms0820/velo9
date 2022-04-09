@@ -17,27 +17,28 @@ const CheckId = ( { isCheckedId, setIsCheckedId } ) => {
   
   return(
     <>
-        <Txt txt="아이디" />
-        <div className={styles.inputAndBtn}>
-          <Input 
-            type="text"
-            value={id}
-            onChange={(e) => setId(e.target.value)}
-          />
-          <Button
-            txt="아이디 중복확인"
-            onClick={아이디중복확인}
-          />
-        </div>
-        <Txt  
-        txt={
-            isCheckedId 
-            ? "비밀번호가 일치합니다"
-            : isCheckedId === null
-              ? null // 초기값만 아무것도 표시 안되게.
-              : "비밀번호가 일치하지 않습니다."
-          } 
+      <Txt txt="아이디" />
+      <div className={styles.inputAndBtn}>
+        <Input 
+          type="text"
+          value={id}
+          onChange={(e) => setId(e.target.value)}
+          onEnter={아이디중복확인}
         />
+        <Button
+          txt="아이디 중복확인"
+          onClick={아이디중복확인}
+        />
+      </div>
+      <Txt  
+      txt={
+          isCheckedId 
+          ? "비밀번호가 일치합니다"
+          : isCheckedId === null
+            ? null // 초기값만 아무것도 표시 안되게.
+            : "비밀번호가 일치하지 않습니다."
+        } 
+      />
     </>
   )
 }
