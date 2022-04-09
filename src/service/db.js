@@ -1,3 +1,4 @@
+// 임시로 만든 데이터 더미들입니다 DB연결 후 삭제 합니다.
 export const fakeDbNew = {
   content: [
     {

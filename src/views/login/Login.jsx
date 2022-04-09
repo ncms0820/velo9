@@ -5,84 +5,68 @@ import styles from "./Login.module.scss";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Txt from "../../components/Txt";
+import { useNavigate } from "react-router-dom";
 
-const Login = ( {page, setPage} ) => {
-
-  const [id, setId] = useState('')
-  const [pw, setPw] = useState('')
+const Login = ({ page, setPage, authService }) => {
+  const navigate = useNavigate();
+  const [id, setId] = useState("");
+  const [pw, setPw] = useState("");
 
   // 일반 로그인
   const goLogin = () => {
-    console.log("로그인 ")
-  }
-
+    console.log("로그인 ");
+  };
+  // 로그인 후 관리 홈페이지 이동
+  const goToHome = (userId) => {
+    navigate("/", {
+      state: { id: userId },
+    });
+  };
   // 소셜 로그인
   const goSocialLogin = (e) => {
-    const {className} = e.target;
-    console.log(className)
-    if (className === "githubLogin" ) {
-      console.log("깃허브로 로그인")
+    const { className } = e.target;
+    console.log(className);
+    if (className === "githubLogin") {
+      authService.login("Github").then((data) => goToHome(data.user.uid));
     } else if (className === "googleLogin") {
-      console.log("구글로 로그인")
+      authService.login("Google").then((data) => goToHome(data.user.uid));
     }
-  }
-
+  };
   useEffect(() => {
-    console.log("id: ", id)
-    console.log("pw: ", pw)
-  }, [id, pw])
-  
-  return(
-      <div className={styles.columnBox}>
-        
-        <Txt txt="아이디" />
-        <Input 
-          type="text"
-          className={styles.idInput}
-          value={id}
-          onChange={(e) => setId(e.target.value)}
-        />
-        <Txt txt="비밀번호" />
-        <Input 
-          type="password"
-          className={styles.pwInput}
-          value={pw}
-          onChange={(e) => setPw(e.target.value)}
-        />
-        <Button
-          txt="로그인"
-          className={styles.loginBtn}
-          onClick={() => goLogin()}
-        />
+    let value = true;
+    if (value) {
+      authService.onAuthChange((user) => {
+        user && goToHome(user.uid);
+      });
+    }
+    console.log("useEffect at Login");
+    return () => (value = false);
+  });
+  useEffect(() => {
+    console.log("id: ", id);
+    console.log("pw: ", pw);
+    console.log("useEffect at Login2");
+  }, [id, pw]);
 
-        <div className={styles.twoBtnBox}>
-          <Button
-            txt="회원가입"
-            className={styles.joinBtn}
-            onClick={() => setPage("signup")}
-          />
-          <Button
-            txt="아이디/비밀번호 찾기"
-            className={styles.findUserBtn}
-            onClick={() => setPage("findId")}
-          />
-        </div>
+  return (
+    <div className={styles.columnBox}>
+      <Txt txt="아이디" />
+      <Input type="text" className={styles.idInput} value={id} onChange={(e) => setId(e.target.value)} />
+      <Txt txt="비밀번호" />
+      <Input type="password" className={styles.pwInput} value={pw} onChange={(e) => setPw(e.target.value)} />
+      <Button txt="로그인" className={styles.loginBtn} onClick={() => goLogin()} />
 
-        <div className={styles.socialLoginBox}>
-          <Button
-            txt="깃허브로 로그인(아마 아이콘)"
-            className="githubLogin"
-            onClick={(e) => goSocialLogin(e)}
-          />
-          <Button
-            txt="구글로 로그인(아마 아이콘)"
-            className="googleLogin"
-            onClick={(e) => goSocialLogin(e)}
-          />
-        </div>
-
+      <div className={styles.twoBtnBox}>
+        <Button txt="회원가입" className={styles.joinBtn} onClick={() => setPage("signup")} />
+        <Button txt="아이디/비밀번호 찾기" className={styles.findUserBtn} onClick={() => setPage("findId")} />
       </div>
-  )
-} 
+
+      <div className={styles.socialLoginBox}>
+        <Button txt="깃허브로 로그인(아마 아이콘)" className="githubLogin" onClick={(e) => goSocialLogin(e)} />
+        <Button txt="구글로 로그인(아마 아이콘)" className="googleLogin" onClick={(e) => goSocialLogin(e)} />
+      </div>
+    </div>
+  );
+};
 
 export default Login;
