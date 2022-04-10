@@ -39,13 +39,11 @@ const Login = ({ page, setPage, authService }) => {
         user && goToHome(user.uid);
       });
     }
-    console.log("useEffect at Login");
     return () => (value = false);
   });
   useEffect(() => {
     console.log("id: ", id);
     console.log("pw: ", pw);
-    console.log("useEffect at Login2");
   }, [id, pw]);
 
   return (

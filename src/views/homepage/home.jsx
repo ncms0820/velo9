@@ -49,7 +49,7 @@ const Home = ({ dbService, authService }) => {
     return () => {
       working = false;
     };
-  }, [userId, authService, navigate]);
+  }, [userId, authService, navigate, handleTab]);
   return (
     <div className={styles.container}>
       <Header onLogout={userId && onLogout} />
