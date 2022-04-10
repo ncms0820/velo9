@@ -34,7 +34,6 @@ const ChangePw = ( {page, setPage} ) => {
   
   return(
       <>
-
         <VerifyEmail
           testVerifyNumber={testVerifyNumber}
           setIsVerified={setIsVerified}

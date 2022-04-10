@@ -34,7 +34,7 @@ const Login = ({ page, setPage, authService }) => {
       authService.login("Google").then((data) => goToHome(data.user.uid));
     }
   };
-  
+
   useEffect(() => {
     let value = true;
     if (value) {
@@ -48,12 +48,13 @@ const Login = ({ page, setPage, authService }) => {
 
 
   return (
-    <div className={styles.columnBox}>
+    <>
+      
       <Txt txt="아이디" />
-      <Input type="text" className={styles.idInput} value={id} onChange={(e) => setId(e.target.value)} />
+      <Input type="text" value={id} onChange={(e) => setId(e.target.value)} />
       <Txt txt="비밀번호" />
-      <Input type="password" className={styles.pwInput} value={pw} onChange={(e) => setPw(e.target.value)} />
-      <Button txt="로그인" className={styles.loginBtn} onClick={() => goLogin()} />
+      <Input type="password"value={pw} onChange={(e) => setPw(e.target.value)} />
+      <Button txt="로그인" onClick={() => goLogin()} />
 
       <div className={styles.twoBtnBox}>
         <Button txt="회원가입" className={styles.joinBtn} onClick={() => setPage("signup")} />
@@ -64,7 +65,7 @@ const Login = ({ page, setPage, authService }) => {
         <Button txt="깃허브로 로그인(아마 아이콘)" className="githubLogin" onClick={(e) => goSocialLogin(e)} />
         <Button txt="구글로 로그인(아마 아이콘)" className="googleLogin" onClick={(e) => goSocialLogin(e)} />
       </div>
-    </div>
+    </>
   );
 };
 
