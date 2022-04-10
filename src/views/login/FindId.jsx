@@ -4,36 +4,57 @@ import styles from "./Login.module.scss";
 // Components
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import Txt from "../../components/Txt";
 
-const FindId = () => {
+const FindId = ( { page, setPage } ) => {
 
-  const onChangeTest = (e, param) => {
-    console.log("파라메터 없음")
+  const [email, setEmail] = useState('')
+  const [findedId, setFindedId] = useState(null)
+
+  const checkEmail = () => {
+    console.log("아이디찾기 실행됨")
+    if (email === "admin@gmail.com") {
+      setFindedId("admin")
+    } else {
+      setFindedId("")
+    }
   }
-  
-  const onChangeTestParams = (e, param) => {
-    console.log(param)
-    console.log(...param, "이게 파라메터들임")
-  }
-
 
   return(
-      <div className={styles.loginHeaderBox}>
-        <span>가입한 이메일을 입력해주세요</span>
+      <>
+        <Txt txt="가입한 이메일을 입력해주세요" />
         <Input 
           type="text"
-          className={styles.idInput}
-          onChange={onChangeTest}
-          placeholder={"아이디를 입력해주세요"}
-        />
+          onChange={(e) => setEmail(e.target.value)}
+          onEnter={checkEmail}
+          value={email}
+          placeholder="input Email"
+          />
         <Button
-          className={styles.findIdBtn}
+          onClick={checkEmail}
           txt={"아이디 찾기"}
         />
-        <span>
-          {"텍스트"}
-        </span>
-      </div>
+        <Txt 
+          txt={
+            findedId 
+            ? `가입한 아이디는 ${findedId} 입니다.` 
+            : findedId === null
+              ? null // 초기값만 아무것도 표시 안되게.
+              : `가입한 아이디가 아닙니다.`
+          } 
+        />
+
+        <div className={styles.twoBtnBox}>
+          <Button
+            txt="돌아가기"
+            onClick={() => setPage("login")}
+          />
+          <Button
+            txt="비밀번호 변경하기"
+            onClick={() => setPage("changePw")}
+          />
+        </div>
+      </>
   )
 } 
 
