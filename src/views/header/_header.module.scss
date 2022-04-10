@@ -1,3 +1,4 @@
+@import "../../common/breakpoints";
 .header {
   font-family: "Gowun Batang";
   display: flex;
@@ -5,6 +6,9 @@
   align-items: center;
   width: 100%;
   height: 4rem;
+  @include media("<=phone") {
+    padding: 0 0.7rem;
+  }
   a {
     border: none;
     outline: none;
@@ -21,6 +25,10 @@
     width: 40%;
     max-width: 13rem;
     font-size: 1.3rem;
+    @include media("<=phone") {
+      width: 45%;
+      font-size: 16px;
+    }
     & div {
       color: rgb(62, 61, 61);
       cursor: pointer;
@@ -35,6 +43,9 @@
       font-size: 1.1rem;
       color: white;
       cursor: pointer;
+      @include media("<=phone") {
+        font-size: 13px;
+      }
     }
   }
 }

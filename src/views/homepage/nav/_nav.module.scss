@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap");
 @import "/src/common/mixins";
+@import "../../../common/breakpoints";
 .nav {
   align-items: center;
   margin-top: 40px;
@@ -16,22 +17,13 @@
     .wrapper {
       height: 100%;
       width: 100%;
-      min-width: 15rem;
-      max-width: 22rem;
+      min-width: 12rem;
+      max-width: 17rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      select {
-        border: none;
-        width: 5rem;
-        font-family: "Nanum Gothic Coding", monospace;
-        height: 60%;
-        option {
-          font-family: "Nanum Gothic Coding", monospace;
-        }
-      }
-      select:focus {
-        outline: none;
+      @include media("<=phone") {
+        width: 50%;
       }
     }
   }

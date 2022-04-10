@@ -3,7 +3,7 @@ import styles from "./_nav.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowTrendUp, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
-import { useEffect, useRef, useState } from "react/cjs/react.development";
+import { useEffect, useState } from "react/cjs/react.development";
 const Nav = ({ handleTab }) => {
   const [tabSwitch, setTabSwitch] = useState(true);
   const changeTab = (event) => {
@@ -15,7 +15,12 @@ const Nav = ({ handleTab }) => {
     }
   };
   useEffect(() => {
-    handleTab(tabSwitch);
+    let value = true;
+    if (value) {
+      console.log("here is nav");
+      handleTab(tabSwitch);
+    }
+    return () => (value = false);
   }, [tabSwitch, handleTab]);
 
   return (
@@ -30,12 +35,6 @@ const Nav = ({ handleTab }) => {
             <FontAwesomeIcon icon={faClock} className={styles.fontAwesome} />
             <span>최신</span>
           </button>
-          <select type="option">
-            <option value="1">오늘</option>
-            <option value="2">이번 주</option>
-            <option value="3">이번 달</option>
-            <option value="4">올해</option>
-          </select>
         </div>
         <FontAwesomeIcon icon={faEllipsisV} size="lg" />
       </div>
