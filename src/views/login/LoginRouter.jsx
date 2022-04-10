@@ -2,14 +2,17 @@ import react, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.scss";
 
+// Components
+import Button from "../../components/Button";
+
 // page
 import ChangePw from "./ChangePw";
 import FindId from "./FindId";
 import Login from "./Login";
 import Signup from "./Signup";
 
-// Components
-import Button from "../../components/Button";
+import Test from "./Test";
+
 
 const LoginRouter = () => {
   const navigate = useNavigate();
@@ -49,6 +52,8 @@ const LoginRouter = () => {
         {page === 'changePw' && <ChangePw page={page} setPage={setPage} />}
         {page === 'signup' && <Signup page={page} setPage={setPage} />}
       </div>
+
+    <Test />
 
     </>
   )

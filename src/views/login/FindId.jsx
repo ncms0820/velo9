@@ -6,7 +6,7 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Txt from "../../components/Txt";
 
-const FindId = ( {page, setPage} ) => {
+const FindId = ( { page, setPage } ) => {
 
   const [email, setEmail] = useState('')
   const [findedId, setFindedId] = useState(null)
@@ -21,19 +21,16 @@ const FindId = ( {page, setPage} ) => {
   }
 
   return(
-      <div className={styles.columnBox}>
-
+      <>
         <Txt txt="가입한 이메일을 입력해주세요" />
         <Input 
           type="text"
-          className={styles.idInput}
           onChange={(e) => setEmail(e.target.value)}
           onEnter={checkEmail}
           value={email}
           placeholder="input Email"
           />
         <Button
-          className={styles.findIdBtn}
           onClick={checkEmail}
           txt={"아이디 찾기"}
         />
@@ -50,17 +47,14 @@ const FindId = ( {page, setPage} ) => {
         <div className={styles.twoBtnBox}>
           <Button
             txt="돌아가기"
-            className={styles.joinBtn}
             onClick={() => setPage("login")}
           />
           <Button
             txt="비밀번호 변경하기"
-            className={styles.findUserBtn}
             onClick={() => setPage("changePw")}
           />
         </div>
-
-      </div>
+      </>
   )
 } 
 

@@ -41,8 +41,7 @@ const ChangePw = ( {page, setPage} ) => {
 
 
   return(
-      <div className={styles.columnBox}>
-
+      <>
         <VerifyEmail
           testVerifyNumber={testVerifyNumber}
           setIsVerified={setIsVerified}
@@ -70,17 +69,14 @@ const ChangePw = ( {page, setPage} ) => {
         <div className={styles.twoBtnBox}>
           <Button
             txt="돌아가기"
-            className={styles.loginBtn}
             onClick={() => setPage("login")}
           />
           <Button
             txt="가입하기"
-            className={styles.loginBtn}
             onClick={() => finishSignup()}
           />
         </div>
-
-      </div>
+      </>
   )
 } 
 

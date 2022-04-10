@@ -7,9 +7,17 @@
   margin: 0 auto;
   height: 2.5rem;
 }
+
 @mixin innerSize {
   width: 80%;
   margin: 0 auto;
+}
+
+@mixin flexDefault {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin: 1rem auto;
 }
 
 // Header
@@ -19,6 +27,7 @@
   display: flex;
   justify-content: space-around;
   height: 3rem;
+  margin-bottom: 1rem;
   @include maxSize();
 
   border-bottom: 1px solid gray;
@@ -31,11 +40,6 @@
 
 // Main
 .loginContentBox{
-  @include maxSize();
-}
-
-// Find ID
-.columnBox {
   @include innerSize();
   margin-top: 1.5rem;
   display: flex;
@@ -53,48 +57,34 @@
   }
 }
 
+// input과 버튼 
 .inputAndBtn {
   display: grid;
-  grid-template-columns: auto 80px;
+  grid-template-columns: auto 100px;
   margin: .5rem 0;
-}
-
-
-
-.idPwBox {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 80%;
-  height: 12rem;
-  margin: 1rem auto;
-  
-  .idInput, .pwInput, .loginBtn {
-    margin: .5rem;
-    @include totalHeight()
+  button {
+    margin-left: .5rem;
   }
 }
 
-@mixin flexDefault {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  margin: 1rem auto;
-}
 
+// 버튼 row 두개
 .twoBtnBox {
   @include flexDefault();
   @include totalHeight();
   button {
-    width: 100%
+    width: 100%;
+    margin: .5rem;
   }
 }
 
+// 소셜로그인 (아이콘용)
 .socialLoginBox {
   @include flexDefault();
   @include totalHeight();
   button {
-    width: 100%
+    width: 100%;
+    margin: .5rem;
   }
 }
 

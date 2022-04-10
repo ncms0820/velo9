@@ -33,7 +33,7 @@ const ChangePw = ( {page, setPage} ) => {
   }
   
   return(
-      <div className={styles.columnBox}>
+      <>
 
         <VerifyEmail
           testVerifyNumber={testVerifyNumber}
@@ -65,7 +65,7 @@ const ChangePw = ( {page, setPage} ) => {
             onClick={finishChangePw}
           />
         </div>
-      </div>
+      </>
   )
 } 
 

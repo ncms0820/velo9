@@ -27,31 +27,23 @@ const Login = ( {page, setPage} ) => {
     }
   }
 
-  useEffect(() => {
-    console.log("id: ", id)
-    console.log("pw: ", pw)
-  }, [id, pw])
   
   return(
-      <div className={styles.columnBox}>
-        
+      <>
         <Txt txt="아이디" />
         <Input 
           type="text"
-          className={styles.idInput}
           value={id}
           onChange={(e) => setId(e.target.value)}
         />
         <Txt txt="비밀번호" />
         <Input 
           type="password"
-          className={styles.pwInput}
           value={pw}
           onChange={(e) => setPw(e.target.value)}
         />
         <Button
           txt="로그인"
-          className={styles.loginBtn}
           onClick={() => goLogin()}
         />
 
@@ -80,8 +72,7 @@ const Login = ( {page, setPage} ) => {
             onClick={(e) => goSocialLogin(e)}
           />
         </div>
-
-      </div>
+      </>
   )
 } 
 
