@@ -1,6 +1,6 @@
 $velogL: #2ed4a3;
-$velogN: #20C997;
-$velogD: #12B886;
+$velogN: #20c997;
+$velogD: #12b886;
 
 @mixin totalHeight {
   height: 2.5rem;
@@ -24,11 +24,11 @@ $velogD: #12B886;
   margin: 1rem auto;
 }
 
-@mixin shadow  {
+@mixin shadow {
   box-shadow: 5px 5px 15px 5px lightgrey;
 }
 @mixin shadowMini {
-  box-shadow: 1px 1px 5px 1px lightgrey
+  box-shadow: 1px 1px 5px 1px lightgrey;
 }
 
 @mixin hoverEvent {
@@ -38,9 +38,8 @@ $velogD: #12B886;
   }
 }
 
-
 // Main
-.loginContentBox{
+.loginContentBox {
   @include innerSize();
   @include shadowMini();
   position: relative;
@@ -53,7 +52,6 @@ $velogD: #12B886;
   background: white;
   z-index: 2;
 
-
   span {
     height: 2.5rem;
     line-height: 2.5rem;
@@ -61,7 +59,7 @@ $velogD: #12B886;
 
   input {
     height: 3rem;
-    margin-bottom: .75rem;
+    margin-bottom: 0.75rem;
   }
 
   button {
@@ -90,27 +88,25 @@ $velogD: #12B886;
   text-align: center;
   font-size: 1.75rem;
   font-weight: bold;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .xBtn {
   position: absolute;
   right: 1.5rem;
-  line-height: .5rem;
+  line-height: 0.5rem;
   cursor: pointer;
-  
 }
 
-// input과 버튼 
+// input과 버튼
 .inputAndBtn {
   display: grid;
   grid-template-columns: auto 100px;
   // margin: .5rem 0;
   button {
-    margin-left: .5rem;
+    margin-left: 0.5rem;
   }
 }
-
 
 // 버튼 row 두개
 .twoBtnBox {
@@ -139,7 +135,7 @@ $velogD: #12B886;
   font-size: 2rem;
   color: white;
   background: $velogN;
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: 1.75rem;
   @include hoverEvent();
 }
