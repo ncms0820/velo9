@@ -1,9 +1,10 @@
 import React from "react";
 import styles from "./_nav.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowTrendUp, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
+import { faQuestionCircle, faArrowTrendUp, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 import { useEffect, useState } from "react/cjs/react.development";
+import { Planet } from "react-planet";
 const Nav = ({ handleTab }) => {
   const [tabSwitch, setTabSwitch] = useState(true);
   const changeTab = (event) => {
@@ -36,7 +37,25 @@ const Nav = ({ handleTab }) => {
             <span>최신</span>
           </button>
         </div>
-        <FontAwesomeIcon icon={faEllipsisV} size="lg" />
+        <Planet
+          centerContent={<FontAwesomeIcon icon={faEllipsisV} size="lg" />}
+          hideOrbit
+          autoClose
+          orbitRadius={50}
+          bounceOnClose
+          rotation={30}
+          // the bounce direction is minimal visible
+          // but on close it seems the button wobbling a bit to the bottom
+          bounceDirection="BOTTOM"
+        >
+          <FontAwesomeIcon icon={faQuestionCircle} size="lg" />
+          <FontAwesomeIcon icon={faQuestionCircle} size="lg" />
+          <FontAwesomeIcon icon={faQuestionCircle} size="lg" />
+          <div />
+          <div />
+          <div />
+          <div />
+        </Planet>
       </div>
     </div>
   );

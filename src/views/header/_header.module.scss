@@ -1,5 +1,11 @@
 @import "../../common/breakpoints";
 .header {
+  position: sticky;
+  padding: 0 4rem;
+  z-index: 2;
+  background-color: whitesmoke;
+  opacity: 1;
+  top: 0px;
   font-family: "Gowun Batang";
   display: flex;
   justify-content: space-between;
@@ -22,30 +28,45 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 40%;
+    width: 100%;
     max-width: 13rem;
     font-size: 1.3rem;
     @include media("<=phone") {
       width: 45%;
       font-size: 16px;
     }
-    & div {
+    & > div {
       color: rgb(62, 61, 61);
       cursor: pointer;
     }
-    button {
-      border: none;
-      background-color: black;
-      padding: 7px;
-      width: 6rem;
-      border-radius: 2rem;
-      font-weight: lighter;
-      font-size: 1.1rem;
-      color: white;
-      cursor: pointer;
-      @include media("<=phone") {
-        font-size: 13px;
-      }
+  }
+  .nav_log {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 40%;
+    max-width: 21rem;
+    font-size: 1.3rem;
+    @include media("<=phone") {
+      width: 45%;
+      font-size: 16px;
     }
+    & > div {
+      color: rgb(62, 61, 61);
+      cursor: pointer;
+    }
+  }
+}
+
+.fontColor {
+  color: yellow;
+}
+.loggedIn {
+  width: 14rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  & div:nth-child(2) {
+    margin-top: 5px;
   }
 }

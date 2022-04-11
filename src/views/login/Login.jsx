@@ -6,6 +6,7 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Txt from "../../components/Txt";
 import { useNavigate } from "react-router-dom";
+import Test from "./Test";
 
 const Login = ({ page, setPage, authService }) => {
   const navigate = useNavigate();
@@ -63,6 +64,8 @@ const Login = ({ page, setPage, authService }) => {
         <Button txt="깃허브로 로그인(아마 아이콘)" className="githubLogin" onClick={(e) => goSocialLogin(e)} />
         <Button txt="구글로 로그인(아마 아이콘)" className="googleLogin" onClick={(e) => goSocialLogin(e)} />
       </div>
+
+      <Test />
     </div>
   );
 };
