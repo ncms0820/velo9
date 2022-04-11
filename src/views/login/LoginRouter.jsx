@@ -11,7 +11,7 @@ import Signup from "./Signup";
 // Components
 import Button from "../../components/Button";
 
-const LoginRouter = ({ authService }) => {
+const LoginRouter = ({ authService, setUserId }) => {
   const navigate = useNavigate();
   const [page, setPage] = useState("login");
 
@@ -38,7 +38,7 @@ const LoginRouter = ({ authService }) => {
       </div>
 
       <div className={styles.loginContentBox}>
-        {page === "login" && <Login page={page} setPage={setPage} authService={authService} />}
+        {page === "login" && <Login page={page} setPage={setPage} authService={authService} setUserId={setUserId} />}
         {page === "findId" && <FindId page={page} setPage={setPage} />}
         {page === "changePw" && <ChangePw page={page} setPage={setPage} />}
         {page === "signup" && <Signup page={page} setPage={setPage} />}
