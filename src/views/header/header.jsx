@@ -17,15 +17,18 @@ const Header = memo(({ onLogout, authService, setUserId, onLoginModal, setOnLogi
   const goToSearch = () => {
     navigate("/explore");
   };
+  const goToHome = () => {
+    navigate("/");
+  };
+  const tabMenu = () => {
+    setTab(!tab);
+  };
   function onMouseEnter() {
     setHighlight(true);
   }
   function onMouseLeave() {
     setHighlight(false);
   }
-  const tabMenu = () => {
-    setTab(!tab);
-  };
   useEffect(() => {
     let working = true;
     if (working) {
@@ -43,9 +46,9 @@ const Header = memo(({ onLogout, authService, setUserId, onLoginModal, setOnLogi
   }, [authService, setUserId]);
   return (
     <div className={styles.header}>
-      <a href="/" className={styles.logo}>
+      <h1 className={styles.logo} onClick={goToHome}>
         Velo9
-      </a>
+      </h1>
       <div className={onLogout ? styles.nav_log : styles.nav}>
         <div>
           <Switch checked={isDark} onChange={toggle} styling={"fluent"} onColor={"#080"} />
@@ -70,7 +73,7 @@ const Header = memo(({ onLogout, authService, setUserId, onLoginModal, setOnLogi
                 <ReactiveButton style={{ borderRadius: "5px" }} color={"violet"} idleText={"menu"} onClick={tabMenu} />
               </div>
             </div>
-            {tab && <Menu onLogout={onLogout} />}
+            {tab && <Menu onLogout={onLogout} tabMenu={tabMenu} />}
           </div>
         ) : (
           <ReactiveButton style={{ borderRadius: "5px" }} color={"dark"} idleText="Login" onClick={()=>setOnLoginModal(true)} />

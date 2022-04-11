@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./_menu.module.scss";
 import Swal from "sweetalert2";
-const Menu = ({ onLogout }) => {
+const Menu = ({ onLogout, tabMenu }) => {
+  const wrapperRef = useRef(null);
   const sweetAlert = () => {
     Swal.fire({
       title: "로그아웃 하시겠습니까?",
@@ -19,9 +20,29 @@ const Menu = ({ onLogout }) => {
       }
     });
   };
+  const useOutsideAlerter = (ref) => {
+    useEffect(() => {
+      /**
+       * Alert if clicked on outside of element
+       */
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          tabMenu();
+        }
+      }
+      // Bind the event listener
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  };
+
+  useOutsideAlerter(wrapperRef);
 
   return (
-    <div className={styles.nav}>
+    <div className={styles.nav} ref={wrapperRef}>
       <div>내 벨로그</div>
       <div>임시 저장</div>
       <div>읽기 목록</div>

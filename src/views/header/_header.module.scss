@@ -15,7 +15,7 @@
   @include media("<=phone") {
     padding: 0 0.7rem;
   }
-  a {
+  h1 {
     border: none;
     outline: none;
     color: black;
@@ -23,6 +23,7 @@
     letter-spacing: 4px;
     font-size: 1.5em;
     font-weight: bold;
+    cursor: pointer;
   }
   .nav {
     display: flex;
@@ -66,7 +67,4 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  & div:nth-child(2) {
-    margin-top: 5px;
-  }
 }
