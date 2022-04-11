@@ -23,9 +23,10 @@ const Test = ( { dbService, authService }) => {
   // 무한스크롤 하기 위한 Ref
   
   const pagination = () => {
-    const targetPost = testDb.slice(lastId, lastId + 5)
+    const targetIdx = testDb.indexOf(lastId)
+    const targetPost = testDb.slice(targetIdx, targetIdx + size)
     setPosts([...posts, ...targetPost])
-    setLastId(lastId + size) // 반영이 안되네; 
+    setLastId(lastId - size) // 반영이 안되네; 
   }
 
   useEffect(() => {
