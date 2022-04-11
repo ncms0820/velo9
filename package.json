@@ -19,11 +19,7 @@
     "react": "^17.0.2",
     "react-darkreader": "^1.5.6",
     "react-dom": "^17.0.2",
-<<<<<<< HEAD
-    "react-intersection-observer": "^8.33.1",
-=======
     "react-planet": "^1.0.1-ie11",
->>>>>>> 5c28fcfad62123fe28dfc79789be683a6ad1d99b
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
     "react-spinners": "^0.11.0",
