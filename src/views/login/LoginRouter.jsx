@@ -15,7 +15,7 @@ import Signup from "./Signup";
 import Txt from "../../components/Txt";
 
 
-const LoginRouter = ({ authService, setUserId }) => {
+const LoginRouter = ({ authService, setUserId, setOnLoginModal }) => {
   const navigate = useNavigate();
   const [page, setPage] = useState("login");
 
@@ -35,18 +35,12 @@ const LoginRouter = ({ authService, setUserId }) => {
 
   return (
     <div className={styles.loginOuter}>
-      {/* <div className={styles.loginHeaderBox}>
-        <Button txt="Velo9" onClick={() => navigate("/")} />
-        <span>{setTitle()}</span>
-        <Button className={styles.dayAndNight} txt="야간모드" />
-      </div> */}
-
       <div className={styles.loginContentBox}>
         <Txt txt={setTitle()} className={styles.loginTitle} />
         <FontAwesomeIcon
           icon={faX}
           className={styles.xBtn}
-          onClick={console.log("창닫음")}
+          onClick={()=> setOnLoginModal(false)}
         />
 
         {page === "login" && <Login page={page} setPage={setPage} authService={authService} />}

@@ -42,12 +42,13 @@ $velogD: #12B886;
 // Main
 .loginContentBox{
   @include innerSize();
-  @include shadow();
+  @include shadowMini();
   position: relative;
   margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
   max-width: 560px;
+  min-width: 360px;
   padding: 2rem;
   background: white;
   z-index: 2;
@@ -79,7 +80,7 @@ $velogD: #12B886;
   position: absolute;
   width: 100%;
   height: 100%;
-  background: rgba($color: gray, $alpha: 0.1);
+  background: rgba($color: gray, $alpha: 0.4);
   display: flex;
   justify-content: center;
   align-items: center;

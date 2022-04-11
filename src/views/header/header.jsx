@@ -7,7 +7,9 @@ import { Link, useNavigate } from "react-router-dom";
 import ReactiveButton from "reactive-button";
 import { Switch, useDarkreader } from "react-darkreader";
 import Menu from "../../components/menu/menu";
-const Header = memo(({ onLogout, authService, setUserId }) => {
+
+const Header = memo(({ onLogout, authService, setUserId, onLoginModal, setOnLoginModal }) => {
+
   const [isDark, { toggle }] = useDarkreader(false);
   const [highlight, setHighlight] = useState(false);
   const navigate = useNavigate();
@@ -71,9 +73,10 @@ const Header = memo(({ onLogout, authService, setUserId }) => {
             {tab && <Menu onLogout={onLogout} />}
           </div>
         ) : (
-          <Link to="/login">
-            <ReactiveButton style={{ borderRadius: "5px" }} color={"dark"} idleText={"Login"} />
-          </Link>
+          <ReactiveButton style={{ borderRadius: "5px" }} color={"dark"} idleText="Login" onClick={()=>setOnLoginModal(true)} />
+          // <Link to="/login">
+          //   <ReactiveButton style={{ borderRadius: "5px" }} color={"dark"} idleText={"Login"} />
+          // </Link>
         )}
       </div>
     </div>
