@@ -18,7 +18,4 @@ export default Button;
 
 
 const btnCSS = {
-  background: "none",
-  border: "none",
-  boxShadow: "2px 2px 4px gray"
 }

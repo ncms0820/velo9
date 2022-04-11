@@ -45,8 +45,6 @@ const Test = ( { dbService, authService }) => {
     };
   }, [userId, authService, navigate]);
   
-  
-  // const observerRef = useRef(); // 옵저버로 지정할 ref
   const lastListRef = useRef(null); // 마지막 요소
   InfiniteScroll(lastListRef, posts, pagination)
   

@@ -3,15 +3,16 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.scss";
 
 // Components
-import Button from "../../components/Button";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faX } from "@fortawesome/free-solid-svg-icons";
 
 // page
 import ChangePw from "./ChangePw";
 import FindId from "./FindId";
 import Login from "./Login";
 import Signup from "./Signup";
-
-import Test from "./Test";
+import Txt from "../../components/Txt";
 
 
 const LoginRouter = ({ authService }) => {
@@ -33,20 +34,27 @@ const LoginRouter = ({ authService }) => {
   };
 
   return (
-    <>
-      <div className={styles.loginHeaderBox}>
+    <div className={styles.loginOuter}>
+      {/* <div className={styles.loginHeaderBox}>
         <Button txt="Velo9" onClick={() => navigate("/")} />
         <span>{setTitle()}</span>
         <Button className={styles.dayAndNight} txt="야간모드" />
-      </div>
+      </div> */}
 
       <div className={styles.loginContentBox}>
+        <Txt txt={setTitle()} className={styles.loginTitle} />
+        <FontAwesomeIcon
+          icon={faX}
+          className={styles.xBtn}
+          onClick={console.log("창닫음")}
+        />
+
         {page === "login" && <Login page={page} setPage={setPage} authService={authService} />}
         {page === "findId" && <FindId page={page} setPage={setPage} />}
         {page === "changePw" && <ChangePw page={page} setPage={setPage} />}
         {page === "signup" && <Signup page={page} setPage={setPage} />}
       </div>
-    </>
+    </div>
   );
 };
 
