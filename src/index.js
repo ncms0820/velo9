@@ -10,7 +10,9 @@ const authService = new AuthService();
 
 ReactDOM.render(
   <React.StrictMode>
+    {/* 여기 브라우저 라우터  */}
     <App dbService={dbService} authService={authService} />
+
   </React.StrictMode>,
   document.getElementById("root")
 );
