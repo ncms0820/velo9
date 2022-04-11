@@ -15,7 +15,7 @@ import Signup from "./Signup";
 import Txt from "../../components/Txt";
 
 
-const LoginRouter = ({ authService }) => {
+const LoginRouter = ({ authService, setUserId }) => {
   const navigate = useNavigate();
   const [page, setPage] = useState("login");
 
