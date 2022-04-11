@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 
 import ReactiveButton from "reactive-button";
 
-
 const Login = ({ page, setPage, authService, setUserId }) => {
   const navigate = useNavigate();
   const [id, setId] = useState("");
@@ -52,7 +51,6 @@ const Login = ({ page, setPage, authService, setUserId }) => {
 
   return (
     <>
-    
       <Txt txt="아이디" />
       <Input type="text" value={id} onChange={(e) => setId(e.target.value)} />
       <Txt txt="비밀번호" />
@@ -64,7 +62,7 @@ const Login = ({ page, setPage, authService, setUserId }) => {
         <Button txt="아이디/비밀번호 찾기" className={styles.findUserBtn} onClick={() => setPage("findId")} />
       </div>
 
-      <div className={styles.socialLoginBox}>
+      <div className={styles.socialLoginBox} onClick={(e) => goSocialLogin(e)}>
         <FontAwesomeIcon icon={faGithub} className={styles.icons} onClick={(e) => goSocialLogin(e)} />
         <FontAwesomeIcon icon={faGoogle} className={styles.icons} onClick={(e) => goSocialLogin(e)} />
       </div>
