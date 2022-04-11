@@ -6,12 +6,17 @@ import Nav from "./nav/nav";
 import { useLocation, useNavigate } from "react-router-dom";
 import NavLogin from "./nav/nav_login";
 import Error from "../etc/error";
+import Explore from "../explore/explore";
 
 const Home = ({ dbService, authService }) => {
   const navigate = useNavigate();
   const navigateState = useLocation().state;
   const [cards, setCards] = useState();
   const [userId, setUserId] = useState(navigateState && navigateState.id);
+  const [search, setSearch] = useState("home");
+  const goToSearch = () => {
+    setSearch("search");
+  };
   const onLogout = useCallback(() => {
     authService.logout();
   }, [authService]);
@@ -51,17 +56,25 @@ const Home = ({ dbService, authService }) => {
     };
   }, [userId, authService, navigate, handleTab]);
   return (
-    <div className={styles.container}>
-      <Header onLogout={userId && onLogout} />
-      {userId ? <NavLogin /> : <Nav handleTab={handleTab} />}
-      <section className={styles.grid_container}>
-        {cards ? (
-          cards.content.map((content, index) => <Card key={index} content={content} />)
-        ) : (
-          <Error title={"loading"} />
-        )}
-      </section>
-    </div>
+    <>
+      <Header onLogout={userId && onLogout} goToSearch={goToSearch} />
+      {search === "home" ? (
+        <div>
+          <div className={styles.container}>
+            {userId ? <NavLogin /> : <Nav handleTab={handleTab} />}
+            <section className={styles.grid_container}>
+              {cards ? (
+                cards.content.map((content, index) => <Card key={index} content={content} />)
+              ) : (
+                <Error title={" Loading"} />
+              )}
+            </section>
+          </div>
+        </div>
+      ) : (
+        <Explore />
+      )}
+    </>
   );
 };
 
