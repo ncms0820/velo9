@@ -45,15 +45,12 @@ const Login = ({ page, setPage, authService, setUserId }) => {
     return () => (value = false);
   });
 
-
-
   return (
     <>
-      
       <Txt txt="아이디" />
       <Input type="text" value={id} onChange={(e) => setId(e.target.value)} />
       <Txt txt="비밀번호" />
-      <Input type="password"value={pw} onChange={(e) => setPw(e.target.value)} />
+      <Input type="password" value={pw} onChange={(e) => setPw(e.target.value)} />
       <Button txt="로그인" onClick={() => goLogin()} />
 
       <div className={styles.twoBtnBox}>
@@ -65,8 +62,6 @@ const Login = ({ page, setPage, authService, setUserId }) => {
         <Button txt="깃허브로 로그인(아마 아이콘)" className="githubLogin" onClick={(e) => goSocialLogin(e)} />
         <Button txt="구글로 로그인(아마 아이콘)" className="googleLogin" onClick={(e) => goSocialLogin(e)} />
       </div>
-
-      <Test />
     </>
   );
 };
