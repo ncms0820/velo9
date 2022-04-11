@@ -1,13 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import React from "react";
+import React, { forwardRef } from "react";
 import styles from "./_card.module.scss";
 
-const Card = ({ content }) => {
+const Card = forwardRef(({ content }, ref) => {
   const postThumbURL = content.postThumbnail.path;
   const memberURL = content.member.memberThumbnail.path;
   return (
-    <div className={styles.card}>
+    <div className={styles.card} ref={ref}>
       <div className={styles.img}>
         {postThumbURL ? <img src={postThumbURL} alt="pic" /> : <img src={"https://picsum.photos/200"} alt="pic" />}
       </div>
@@ -35,6 +35,6 @@ const Card = ({ content }) => {
       </div>
     </div>
   );
-};
+});
 
 export default Card;

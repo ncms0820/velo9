@@ -1,10 +1,10 @@
 
-const Txt = ( { txt } ) => {
+const Txt = ( { txt, className } ) => {
 
   // onClick 없을때 새로 만들어주기.
 
   return (
-    <span
+    <span className={className}
     >
       {txt}
     </span>

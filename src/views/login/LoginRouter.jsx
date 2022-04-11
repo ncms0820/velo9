@@ -3,18 +3,19 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.scss";
 
 // Components
-import Button from "../../components/Button";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faX } from "@fortawesome/free-solid-svg-icons";
 
 // page
 import ChangePw from "./ChangePw";
 import FindId from "./FindId";
 import Login from "./Login";
 import Signup from "./Signup";
+import Txt from "../../components/Txt";
 
-import Test from "./Test";
 
-
-const LoginRouter = ({ authService, setUserId }) => {
+const LoginRouter = ({ authService, setUserId, setOnLoginModal }) => {
   const navigate = useNavigate();
   const [page, setPage] = useState("login");
 
@@ -33,20 +34,21 @@ const LoginRouter = ({ authService, setUserId }) => {
   };
 
   return (
-    <>
-      <div className={styles.loginHeaderBox}>
-        <Button txt="Velo9" onClick={() => navigate("/")} />
-        <span>{setTitle()}</span>
-        <Button className={styles.dayAndNight} txt="야간모드" />
-      </div>
-
+    <div className={styles.loginOuter}>
       <div className={styles.loginContentBox}>
-        {page === "login" && <Login page={page} setPage={setPage} authService={authService} setUserId={setUserId} />}
+        <Txt txt={setTitle()} className={styles.loginTitle} />
+        <FontAwesomeIcon
+          icon={faX}
+          className={styles.xBtn}
+          onClick={()=> setOnLoginModal(false)}
+        />
+
+        {page === "login" && <Login page={page} setPage={setPage} authService={authService} />}
         {page === "findId" && <FindId page={page} setPage={setPage} />}
         {page === "changePw" && <ChangePw page={page} setPage={setPage} />}
         {page === "signup" && <Signup page={page} setPage={setPage} />}
       </div>
-    </>
+    </div>
   );
 };
 
