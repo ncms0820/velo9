@@ -23,7 +23,7 @@ function App({ dbService, authService }) {
           <LoginRouter authService={authService} setUserId={setUserId} userId={userId} setOnLoginModal={setOnLoginModal} />
         }
       <Routes>
-        <Route path="/" element={<Home dbService={dbService} authService={authService} userId={userId} />} />
+        <Route path="/" element={<Home dbService={dbService} authService={authService} userId={userId} onLoginModal={onLoginModal}/>} />
         {/* <Route
           path="/login"
           element={<LoginRouter authService={authService} setUserId={setUserId} userId={userId} />}
