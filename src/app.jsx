@@ -5,6 +5,7 @@ import Explore from "./views/explore/explore";
 import Header from "./views/header/header";
 import Home from "./views/homepage/home";
 import LoginRouter from "./views/login/LoginRouter";
+import Read from "./views/read/read";
 import Write from "./views/write/write";
 
 function App({ dbService, authService }) {
@@ -22,7 +23,8 @@ function App({ dbService, authService }) {
           element={<LoginRouter authService={authService} setUserId={setUserId} userId={userId} />}
         />
         <Route path="/explore" element={<Explore />} userId={userId} />
-        <Route path="/write" element={<Write userId={userId} />}></Route>
+        <Route path="/write" element={<Write userId={userId} />} />
+        <Route path="/read" element={<Read userId={userId} />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,0 +1,26 @@
+footer {
+  margin-top: 20px;
+  padding-left: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  div {
+    display: flex;
+    justify-content: space-around;
+    width: 20%;
+  }
+}
+.title {
+  height: 4rem;
+  width: 100%;
+  input {
+    font-size: 2rem;
+    padding: 0.5rem;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+  }
+}
+.body {
+  padding: 0 3rem;
+}
