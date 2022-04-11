@@ -8,7 +8,7 @@ import Txt from "../../components/Txt";
 import { useNavigate } from "react-router-dom";
 import Test from "./Test";
 
-const Login = ({ page, setPage, authService }) => {
+const Login = ({ page, setPage, authService, setUserId }) => {
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
@@ -19,10 +19,9 @@ const Login = ({ page, setPage, authService }) => {
   };
 
   // 로그인 후 관리 홈페이지 이동
-  const goToHome = (userId) => {
-    navigate("/", {
-      state: { id: userId },
-    });
+  const goToHome = async (userId) => {
+    await setUserId(userId);
+    navigate("/");
   };
 
   // 소셜 로그인
