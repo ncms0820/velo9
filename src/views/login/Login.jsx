@@ -30,11 +30,10 @@ const Login = ({ page, setPage, authService, setUserId }) => {
 
   // 소셜 로그인
   const goSocialLogin = (e) => {
-    const { className } = e.target;
-    console.log(className);
-    if (className === "githubLogin") {
+    const { id } = e.target;
+    if (id === "githubLogin") {
       authService.login("Github").then((data) => goToHome(data.user.uid));
-    } else if (className === "googleLogin") {
+    } else if (id === "googleLogin") {
       authService.login("Google").then((data) => goToHome(data.user.uid));
     }
   };
@@ -62,9 +61,9 @@ const Login = ({ page, setPage, authService, setUserId }) => {
         <Button txt="아이디/비밀번호 찾기" className={styles.findUserBtn} onClick={() => setPage("findId")} />
       </div>
 
-      <div className={styles.socialLoginBox} onClick={(e) => goSocialLogin(e)}>
-        <FontAwesomeIcon icon={faGithub} className={styles.icons} onClick={(e) => goSocialLogin(e)} />
-        <FontAwesomeIcon icon={faGoogle} className={styles.icons} onClick={(e) => goSocialLogin(e)} />
+      <div className={styles.socialLoginBox}>
+        <FontAwesomeIcon icon={faGithub} id="githubLogin" className={styles.icons} onClick={(e) => goSocialLogin(e)} />
+        <FontAwesomeIcon icon={faGoogle} id="googleLogin" className={styles.icons} onClick={(e) => goSocialLogin(e)} />
       </div>
       {/* <Test /> */}
     </>
