@@ -9,7 +9,6 @@ import { Switch, useDarkreader } from "react-darkreader";
 import Menu from "../../components/menu/menu";
 
 const Header = memo(({ onLogout, authService, setUserId, onLoginModal, setOnLoginModal }) => {
-
   const [isDark, { toggle }] = useDarkreader(false);
   const [highlight, setHighlight] = useState(false);
   const navigate = useNavigate();
@@ -34,6 +33,7 @@ const Header = memo(({ onLogout, authService, setUserId, onLoginModal, setOnLogi
     if (working) {
       authService.onAuthChange((user) => {
         if (user) {
+          setOnLoginModal(false);
           setUserId(user.uid);
         } else {
           setUserId(null);
@@ -43,7 +43,7 @@ const Header = memo(({ onLogout, authService, setUserId, onLoginModal, setOnLogi
     return () => {
       working = false;
     };
-  }, [authService, setUserId]);
+  }, [authService, setUserId, setOnLoginModal]);
   return (
     <div className={styles.header}>
       <h1 className={styles.logo} onClick={goToHome}>
@@ -76,7 +76,12 @@ const Header = memo(({ onLogout, authService, setUserId, onLoginModal, setOnLogi
             {tab && <Menu onLogout={onLogout} tabMenu={tabMenu} />}
           </div>
         ) : (
-          <ReactiveButton style={{ borderRadius: "5px" }} color={"dark"} idleText="Login" onClick={()=>setOnLoginModal(true)} />
+          <ReactiveButton
+            style={{ borderRadius: "5px" }}
+            color={"dark"}
+            idleText="Login"
+            onClick={() => setOnLoginModal(true)}
+          />
           // <Link to="/login">
           //   <ReactiveButton style={{ borderRadius: "5px" }} color={"dark"} idleText={"Login"} />
           // </Link>

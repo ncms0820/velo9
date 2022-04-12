@@ -29,7 +29,7 @@ const Write = (props) => {
           }}
         />
       </div>
-      <footer>
+      <footer className={styles.footer}>
         <ReactiveButton style={{ borderRadius: "5px" }} color={"dark"} idleText={"나가기"} />
         <div>
           <ReactiveButton style={{ borderRadius: "5px" }} color={"secondary"} idleText={"임시 저장"} />
