@@ -11,7 +11,7 @@ import DoubleCheckPw from "./pageCompnents/DoubleCheckPw";
 import CheckId from "./pageCompnents/CheckId";
 
 
-const ChangePw = ( {page, setPage} ) => {
+const ChangePw = ( {page, setPage, setOnLoginModal } ) => {
 
   const [nickName, setnickName] = useState(null) // 닉네임
 
@@ -36,6 +36,7 @@ const ChangePw = ( {page, setPage} ) => {
       return
     }
     console.log("가입 완료") //가입로직
+    setOnLoginModal(false)
     setPage('login')
   }
 

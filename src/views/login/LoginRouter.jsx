@@ -43,10 +43,10 @@ const LoginRouter = ({ authService, setUserId, setOnLoginModal }) => {
           onClick={()=> setOnLoginModal(false)}
         />
 
-        {page === "login" && <Login page={page} setPage={setPage} authService={authService} />}
-        {page === "findId" && <FindId page={page} setPage={setPage} />}
-        {page === "changePw" && <ChangePw page={page} setPage={setPage} />}
-        {page === "signup" && <Signup page={page} setPage={setPage} />}
+        {page === "login" && <Login page={page} setPage={setPage} authService={authService} setOnLoginModal={setOnLoginModal} />}
+        {page === "findId" && <FindId page={page} setPage={setPage} setOnLoginModal={setOnLoginModal} />}
+        {page === "changePw" && <ChangePw page={page} setPage={setPage} setOnLoginModal={setOnLoginModal} />}
+        {page === "signup" && <Signup page={page} setPage={setPage} setOnLoginModal={setOnLoginModal} />}
       </div>
     </div>
   );

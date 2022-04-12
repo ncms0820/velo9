@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 import ReactiveButton from "reactive-button";
 
-const Login = ({ page, setPage, authService, setUserId }) => {
+const Login = ({ page, setPage, authService, setUserId, setOnLoginModal }) => {
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
@@ -24,6 +24,7 @@ const Login = ({ page, setPage, authService, setUserId }) => {
 
   // 로그인 후 관리 홈페이지 이동
   const goToHome = async (userId) => {
+    setOnLoginModal(false) // 모달창 닫기
     await setUserId(userId);
     navigate("/");
   };

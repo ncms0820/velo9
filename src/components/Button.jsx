@@ -1,4 +1,5 @@
 
+
 const Button = ( { txt, className, onClick } ) => {
 
   // onClick 없을때 새로 만들어주기.
@@ -8,6 +9,7 @@ const Button = ( { txt, className, onClick } ) => {
       style={btnCSS}
       className={className}
       onClick={onClick}
+
     >
       {txt}
     </button>
