@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import styles from "./_menu.module.scss";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 const Menu = ({ onLogout, tabMenu }) => {
   const wrapperRef = useRef(null);
+  const navigate = useNavigate();
   const sweetAlert = () => {
     Swal.fire({
       title: "로그아웃 하시겠습니까?",
@@ -16,6 +18,7 @@ const Menu = ({ onLogout, tabMenu }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         onLogout();
+        navigate("/");
         Swal.fire("로그아웃", "정상적으로 로그아웃 되었습니다.", "success");
       }
     });
@@ -43,7 +46,13 @@ const Menu = ({ onLogout, tabMenu }) => {
 
   return (
     <div className={styles.nav} ref={wrapperRef}>
-      <div>내 벨로그</div>
+      <div
+        onClick={() => {
+          navigate("/mypage");
+        }}
+      >
+        내 벨로그
+      </div>
       <div>임시 저장</div>
       <div>읽기 목록</div>
       <div>설정</div>

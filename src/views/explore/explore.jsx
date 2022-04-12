@@ -8,7 +8,6 @@ const Explore = (props) => {
   const [filtered, setFiltered] = useState([]);
   const navigateState = useLocation().state;
   const data = navigateState;
-  console.log(data);
 
   // here the data is filtered as you search
   const inputHandler = (e) => {
@@ -45,7 +44,6 @@ const Explore = (props) => {
 
   // this is to close the searchlist when you click outside of it.
   const clickOutsideHandler = (e) => {
-    console.log(e.target);
     if (!e.target.closest(".ReactSearchboxAwesome")) {
       setFiltered([]);
     }
