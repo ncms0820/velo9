@@ -23,8 +23,8 @@ const Login = ({ page, setPage, authService, setUserId }) => {
   };
 
   // 로그인 후 관리 홈페이지 이동
-  const goToHome = async (userId) => {
-    await setUserId(userId);
+  const goToHome = (userId) => {
+    setUserId(userId);
     navigate("/");
   };
 

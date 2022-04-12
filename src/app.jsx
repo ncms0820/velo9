@@ -9,21 +9,35 @@ import Read from "./views/read/read";
 import Write from "./views/write/write";
 
 function App({ dbService, authService }) {
-
-  const [onLoginModal, setOnLoginModal] = useState(false)
+  const [onLoginModal, setOnLoginModal] = useState(false);
 
   const [userId, setUserId] = useState(null);
+
   const onLogout = useCallback(() => {
     authService.logout();
   }, [authService]);
   return (
     <BrowserRouter>
-      <Header onLogout={userId && onLogout} authService={authService} setUserId={setUserId} onLoginModal={onLoginModal} setOnLoginModal={setOnLoginModal} />
-        { onLoginModal &&
-          <LoginRouter authService={authService} setUserId={setUserId} userId={userId} setOnLoginModal={setOnLoginModal} />
-        }
+      <Header
+        onLogout={userId && onLogout}
+        authService={authService}
+        setUserId={setUserId}
+        onLoginModal={onLoginModal}
+        setOnLoginModal={setOnLoginModal}
+      />
+      {onLoginModal && (
+        <LoginRouter
+          authService={authService}
+          setUserId={setUserId}
+          userId={userId}
+          setOnLoginModal={setOnLoginModal}
+        />
+      )}
       <Routes>
-        <Route path="/" element={<Home dbService={dbService} authService={authService} userId={userId} onLoginModal={onLoginModal}/>} />
+        <Route
+          path="/"
+          element={<Home dbService={dbService} authService={authService} userId={userId} onLoginModal={onLoginModal} />}
+        />
         {/* <Route
           path="/login"
           element={<LoginRouter authService={authService} setUserId={setUserId} userId={userId} />}

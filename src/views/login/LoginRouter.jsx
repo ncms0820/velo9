@@ -14,7 +14,6 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Txt from "../../components/Txt";
 
-
 const LoginRouter = ({ authService, setUserId, setOnLoginModal }) => {
   const navigate = useNavigate();
   const [page, setPage] = useState("login");
@@ -37,13 +36,9 @@ const LoginRouter = ({ authService, setUserId, setOnLoginModal }) => {
     <div className={styles.loginOuter}>
       <div className={styles.loginContentBox}>
         <Txt txt={setTitle()} className={styles.loginTitle} />
-        <FontAwesomeIcon
-          icon={faX}
-          className={styles.xBtn}
-          onClick={()=> setOnLoginModal(false)}
-        />
+        <FontAwesomeIcon icon={faX} className={styles.xBtn} onClick={() => setOnLoginModal(false)} />
 
-        {page === "login" && <Login page={page} setPage={setPage} authService={authService} />}
+        {page === "login" && <Login page={page} setPage={setPage} authService={authService} setUserId={setUserId} />}
         {page === "findId" && <FindId page={page} setPage={setPage} />}
         {page === "changePw" && <ChangePw page={page} setPage={setPage} />}
         {page === "signup" && <Signup page={page} setPage={setPage} />}

@@ -1,0 +1,17 @@
+.comment {
+  border: 1px solid black;
+  .top {
+    display: flex;
+    border: 1px solid black;
+    height: fit-content;
+  }
+  .img {
+    border: 1px solid black;
+    height: 3rem;
+  }
+  .nick_name {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}

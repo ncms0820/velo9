@@ -1,0 +1,36 @@
+.read {
+  margin: 5rem 20rem 0 20rem;
+  height: 200vh;
+  .title {
+    border: 1px solid;
+    font-size: 5rem;
+  }
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 5rem;
+    border: 1px solid black;
+    div {
+      display: flex;
+    }
+  }
+  .tag {
+    border: 1px solid black;
+    height: 5rem;
+  }
+  .series {
+    height: 10rem;
+    border: 1px solid black;
+  }
+  .content {
+    margin-top: 3rem;
+    height: 20rem;
+    border: 1px solid black;
+  }
+  .thumb {
+    display: flex;
+    justify-content: end;
+  }
+}

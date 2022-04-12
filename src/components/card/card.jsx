@@ -1,15 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import React, { forwardRef } from "react";
+import React from "react";
 import styles from "./_card.module.scss";
 import { useNavigate } from "react-router-dom";
 
-const Card = forwardRef(({ content }, ref) => {
+const Card = ({ content }) => {
   const postThumbURL = content.postThumbnail.path;
   const memberURL = content.member.memberThumbnail.path;
+  const data = content;
   const navigate = useNavigate();
-  const goToDetail = (content) => {
-    navigate("/read", { state: { content: content } });
+  const goToDetail = () => {
+    navigate("/read", { state: { content: data } });
   };
   const goToProfile = () => {
     navigate("/profile");
@@ -36,13 +37,13 @@ const Card = forwardRef(({ content }, ref) => {
           <span>by</span>
           <span>{content.member.nickname}</span>
         </div>
-        <div className={styles.foot_wrapper2}>
+        <div className={styles.foot_wrapper2} onClick={goToProfile}>
           <FontAwesomeIcon icon={faHeart} />
           <span>{content.loveCount}</span>
         </div>
       </div>
     </div>
   );
-});
+};
 
 export default Card;
