@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 import ReactiveButton from "reactive-button";
 
-const Login = ({ page, setPage, authService, setUserId }) => {
+const Login = ({ page, setPage, authService, setUserId, setOnLoginModal }) => {
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
