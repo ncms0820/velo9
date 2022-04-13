@@ -53,9 +53,27 @@ const Menu = ({ onLogout, tabMenu }) => {
       >
         내 벨로그
       </div>
-      <div>임시 저장</div>
-      <div>읽기 목록</div>
-      <div>설정</div>
+      <div
+        onClick={() => {
+          navigate("/mypage");
+        }}
+      >
+        임시 저장
+      </div>
+      <div
+        onClick={() => {
+          navigate("/mypage");
+        }}
+      >
+        읽기 목록
+      </div>
+      <div
+        onClick={() => {
+          navigate("/setting");
+        }}
+      >
+        설정
+      </div>
       <div onClick={sweetAlert}>로그아웃</div>
     </div>
   );

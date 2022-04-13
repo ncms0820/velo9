@@ -1,17 +1,33 @@
 .comment {
-  border: 1px solid black;
   .top {
     display: flex;
-    border: 1px solid black;
     height: fit-content;
   }
   .img {
-    border: 1px solid black;
+    border-radius: 2rem;
+    overflow: hidden;
+    object-fit: cover;
     height: 3rem;
+    width: 3rem;
+    margin-right: 1rem;
   }
   .nick_name {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding: 0.25rem 0;
+    & > span:first-child {
+      font-weight: bold;
+    }
+  }
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+  .comment {
+    margin-left: 4rem;
+    textarea {
+      width: 100%;
+    }
   }
 }
