@@ -5,8 +5,8 @@ import styles from "./_card.module.scss";
 import { useNavigate } from "react-router-dom";
 
 const Card = ({ content }) => {
-  const postThumbURL = content.postThumbnail.path;
-  const memberURL = content.member.memberThumbnail.path;
+  const postThumbURL = content.postThumbnail;
+  const memberURL = content.member.memberThumbnail;
   const data = content;
   const navigate = useNavigate();
   const goToDetail = () => {

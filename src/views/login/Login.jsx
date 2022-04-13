@@ -9,6 +9,7 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Txt from "../../components/Txt";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = ({ page, setPage, authService, setUserId, setOnLoginModal }) => {
   const navigate = useNavigate();
@@ -27,8 +28,7 @@ const Login = ({ page, setPage, authService, setUserId, setOnLoginModal }) => {
   };
 
   // 소셜 로그인
-  const goSocialLogin = (event) => {
-    console.log(event.currenTarget);
+  const goSocialLogin = async (event) => {
     const { id } = event.target;
     if (id === "githubLogin") {
       authService.login("Github").then((data) => goToHome(data.user.uid));
