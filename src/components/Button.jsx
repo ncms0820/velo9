@@ -1,9 +1,15 @@
 
+
 const Button = ( { txt, className, onClick } ) => {
+
+  // onClick 없을때 새로 만들어주기.
+
   return (
     <button
+      style={btnCSS}
       className={className}
-      onClick={() => onClick()}
+      onClick={onClick}
+
     >
       {txt}
     </button>
@@ -11,3 +17,7 @@ const Button = ( { txt, className, onClick } ) => {
 };
 
 export default Button;
+
+
+const btnCSS = {
+}

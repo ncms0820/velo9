@@ -1,0 +1,162 @@
+$velogL: #2ed4a3;
+$velogN: #20c997;
+$velogD: #12b886;
+
+@mixin totalHeight {
+  height: 2.5rem;
+}
+
+@mixin maxSize {
+  max-width: 480px;
+  margin: 0 auto;
+  height: 2.5rem;
+}
+
+@mixin innerSize {
+  width: 80%;
+  margin: 0 auto;
+}
+
+@mixin flexDefault {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin: 1rem auto;
+}
+
+@mixin shadow {
+  box-shadow: 5px 5px 15px 5px lightgrey;
+}
+@mixin shadowMini {
+  box-shadow: 1px 1px 5px 1px lightgrey;
+}
+
+@mixin hoverEvent {
+  cursor: pointer;
+  &:hover {
+    background: $velogL;
+  }
+}
+
+@mixin buttonDefault {
+  font-weight: bold;
+  border: none;
+}
+
+
+.mypageBox {
+  display: flex;
+  flex-direction: column;
+}
+// header
+.mypageHeader {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 768px;
+  margin: 0 auto;
+
+  input[type=text] {
+    align-self: end;
+    width: 10rem;
+  }
+
+  div {
+    display: flex;
+    align-self: center;
+    span {
+      width: 8rem;
+      text-align: center;
+      font-size: 1.5rem;
+      padding: .5rem 1.5rem;
+      cursor: pointer;
+    }
+  }
+}
+
+.activeTapBtn {
+  color: $velogN;
+  border-bottom: 2px solid $velogN;
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  max-width: 768px;
+  width: 100%;
+  padding: 4rem 0;
+  border-bottom: 1px solid lightgray;
+  // @include shadow();
+
+  img {
+    height: 25rem;
+  }
+
+
+  button {
+    width: 4rem;
+    margin: .5rem;
+    height: 1.5rem;
+    border-radius: .75rem;
+    background: $velogL;
+    color: white;
+    @include buttonDefault();
+    @include shadowMini();
+  }
+  
+  .postTitle {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+  .postDesc {
+    margin-bottom: 2rem;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+  }
+  .tagBox{
+    // line-height: 1.5rem;
+    margin-bottom: 1rem;
+  }
+}
+
+
+
+// series 시리즈
+.series {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  max-width: 768px;
+  width: 100%;
+  height: 15rem;
+  padding: 1rem;
+
+  span {
+    font-weight: bold;
+    font-size: 1.5rem;
+  };
+
+  button {
+    width: 6rem;
+    margin: .5rem;
+    height: 2.5rem;
+    background: $velogL;
+    color: white;
+    @include buttonDefault();
+  }
+
+  ul {
+    margin: 0 2rem;
+  }
+
+  .seriesDeleteBtn {
+    align-self: end;
+  }
+
+  .seriesMoreviewBtn{
+    align-self: end;
+    justify-content: start;
+  }
+}
+

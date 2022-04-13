@@ -1,0 +1,18 @@
+@import "./breakpoints";
+@mixin flexCenter($value) {
+  display: flex;
+  justify-content: $value;
+  align-items: center;
+}
+@mixin button {
+  font-size: 1.4rem;
+  font-family: "Nanum Gothic Coding", monospace;
+  border: none;
+  background-color: transparent;
+  padding: 0.3em 0.3em 0.5em 0.3em;
+  justify-self: center;
+  cursor: pointer;
+  @include media("<=phone") {
+    font-size: 16px;
+  }
+}

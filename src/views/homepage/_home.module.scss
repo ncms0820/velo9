@@ -1,0 +1,21 @@
+@import "../../common/breakpoints";
+body {
+  background-color: whitesmoke;
+}
+.container {
+  padding: 0 4rem;
+  background-color: whitesmoke;
+  @include media("<=phone") {
+    padding: 0 1rem;
+    font-size: 12px;
+  }
+}
+.grid_container {
+  margin-top: 2em;
+  display: grid;
+  justify-items: center;
+  gap: 2.8rem;
+  height: fit-content;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-rows: auto;
+}

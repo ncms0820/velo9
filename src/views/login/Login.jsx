@@ -1,68 +1,74 @@
-import react, { useState } from "react";
+import react, { useState, useEffect } from "react";
 import styles from "./Login.module.scss";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 // Components
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import Txt from "../../components/Txt";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+import ReactiveButton from "reactive-button";
 
-  const onChangeTest = (e, param) => {
-    console.log("파라메터 없음")
-  }
-  
-  const onChangeTestParams = (e, param) => {
-    console.log(param)
-    console.log(...param, "이게 파라메터들임")
-  }
+const Login = ({ page, setPage, authService, setUserId, setOnLoginModal }) => {
+  const navigate = useNavigate();
+  const [id, setId] = useState("");
+  const [pw, setPw] = useState("");
 
+  // 일반 로그인
+  const goLogin = () => {
+    console.log("로그인 ");
+  };
 
-  return(
+  // 로그인 후 관리 홈페이지 이동
+  const goToHome = async (userId) => {
+    setOnLoginModal(false) // 모달창 닫기
+    await setUserId(userId);
+    navigate("/");
+  };
+
+  // 소셜 로그인
+  const goSocialLogin = (e) => {
+    const { id } = e.target;
+    if (id === "githubLogin") {
+      authService.login("Github").then((data) => goToHome(data.user.uid));
+    } else if (id === "googleLogin") {
+      authService.login("Google").then((data) => goToHome(data.user.uid));
+    }
+  };
+
+  useEffect(() => {
+    let value = true;
+    if (value) {
+      authService.onAuthChange((user) => {
+        user && goToHome(user.uid);
+      });
+    }
+    return () => (value = false);
+  });
+
+  return (
     <>
-      <div className={styles.loginHeader}>
-        <span>Logo</span>
-        <h1>로그인</h1>
-        <Button
-          txt={"야간모드버튼"}
-        />
+      <Txt txt="아이디" />
+      <Input type="text" value={id} onChange={(e) => setId(e.target.value)} />
+      <Txt txt="비밀번호" />
+      <Input type="password" value={pw} onChange={(e) => setPw(e.target.value)} />
+      <Button txt="로그인" onClick={() => goLogin()} />
+
+      <div className={styles.twoBtnBox}>
+        <Button txt="회원가입" className={styles.joinBtn} onClick={() => setPage("signup")} />
+        <Button txt="아이디/비밀번호 찾기" className={styles.findUserBtn} onClick={() => setPage("findId")} />
       </div>
 
-      <div className="loginMain">
-        {/*  type, className, onChange, eventParam  */}
-        <Input 
-          type="text"
-          className={styles.idInputEle}
-          onChange={onChangeTest}
-        />
-          <Input 
-          type="password"
-          className="pwInputEle"
-          onChange={onChangeTestParams}
-          eventParam={["t1"]}
-        />
-        <Button
-          txt="로그인"
-          className="loginBtn"
-        />
-
-        <div>
-          <Button
-            txt="회원가입"
-            className="joinBtn"
-          />
-          <Button
-            txt="아이디/비밀번호 찾기"
-            className="joinBtn"
-          />
-        </div>
-
-        <div className="socialLoginBox">
-          <button className="githubLoginBtn"></button>
-          <button className="googleLoginBtn"></button>
-        </div>
+      <div className={styles.socialLoginBox}>
+        <FontAwesomeIcon icon={faGithub} id="githubLogin" className={styles.icons} onClick={(e) => goSocialLogin(e)} />
+        <FontAwesomeIcon icon={faGoogle} id="googleLogin" className={styles.icons} onClick={(e) => goSocialLogin(e)} />
       </div>
+      {/* <Test /> */}
     </>
-  )
-} 
+  );
+};
 
 export default Login;

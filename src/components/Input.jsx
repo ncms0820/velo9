@@ -1,17 +1,20 @@
 
-const Input = ( { type, className, onChange, value, eventParam } ) => {
+const Input = ( { type, className, onChange, value, placeholder, onEnter } ) => {
   
-  const onChangeSetParam = (e, eventParam) => {
-    if (eventParam) onChange(e, ...eventParam)
-    else onChange(e)
-  } 
+  const onPressEnter = (e) => {
+    if (e.key === "Enter") {
+      return onEnter()
+    }
+  }
 
   return (
     <input type={type}
       className={className}
       value={value}
       name={type}
-      onChange={(e) => onChangeSetParam(e, eventParam)}
+      placeholder={placeholder}
+      onChange={onChange}
+      onKeyUp={ onEnter ? (e) => onPressEnter(e) : null}
     />
   );
 };
