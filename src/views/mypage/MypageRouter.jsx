@@ -20,10 +20,15 @@ const MypageRouter = ( { userId } ) => {
   const [tapState, setTapState] = useState('post') // post, series, introduce는 보류
   const [searchValue, setSearchValue] = useState('')
   const [tags, setTags] = useState([]) //태그 목록 따로 저장
-
+  const [seriesName, setSeriesName] = useState([]) // 시리즈 리스트, 따로 저장하거나 DB에서 받아오면 만들지 않아도됨.
+  
   useEffect(() => {
-    console.log("검색창 내용이 바뀔때마다 실행됨")
-  }, [searchValue])
+    // let reverse = dummyData.reverse() // 최근 hash 값부터 위로
+    let series = dummyData.map( (v) => v.series )
+    let value = series.filter( (v, i) => series.indexOf(v) === i ) // 중복값 제거
+    console.log(value)
+    setSeriesName(value)
+  }, [])
   
 
   return (
@@ -43,10 +48,10 @@ const MypageRouter = ( { userId } ) => {
       }
 
       { tapState === "series" &&
-        dummyData.map( (val, idx) => {
+        seriesName.map( (data, idx) => {
         return <Series
                  key={idx}
-                 data={val}
+                 data={data}
                 />
         })
       }
