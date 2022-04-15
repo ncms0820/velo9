@@ -63,7 +63,7 @@ $velogD: #12b886;
   flex-direction: column;
   width: 100%;
   max-width: 768px;
-  margin: 0 auto;
+  margin: 4rem auto 0;
 
   input[type=text] {
     align-self: end;
@@ -88,6 +88,22 @@ $velogD: #12b886;
   border-bottom: 2px solid $velogN;
 }
 
+.mypageContent {
+  margin: 0 auto;
+}
+// 태그 핸들러 부분
+.tagHandlerDesktopBox {
+  // position: absolute;
+  // width: 11.5rem;
+  // left: 13.5rem;
+}
+.tagHandlerDesktopOuter {
+  position: relative;
+}
+
+
+
+// 포스트 부분
 .post {
   display: flex;
   flex-direction: column;
@@ -124,8 +140,11 @@ $velogD: #12b886;
     margin-bottom: 2rem;
     margin-top: 0.5rem;
     font-size: 1rem;
-    color: #1d1f1e;
+    color: #353535;
     margin: .25rem 0;
+    line-height: 1.5rem;
+    @include overflowOpt();
+    -webkit-line-clamp: 3; /* 라인수 */
   }
   .tagBox{
     // line-height: 1.5rem;
