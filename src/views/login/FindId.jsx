@@ -1,5 +1,6 @@
 import react, { useState } from "react";
 import styles from "./Login.module.scss";
+import axios from 'axios'
 
 // Components
 import Button from "../../components/Button";
@@ -11,13 +12,19 @@ const FindId = ( { page, setPage } ) => {
   const [email, setEmail] = useState('')
   const [findedId, setFindedId] = useState(null)
 
-  const checkEmail = () => {
-    console.log("아이디찾기 실행됨")
-    if (email === "admin@gmail.com") {
-      setFindedId("admin")
-    } else {
-      setFindedId("")
+  const checkEmail = async () => {
+    const url = "http://localhost:8080/findId"
+    const body = {
+      email: email
     }
+    const res = await axios.post(url, body);
+      try {
+        // data 결과값
+        setFindedId(res.data)
+      } catch (e) {
+        setFindedId("알수없는 에러로 실패하였습니다. 다시 시도해주세요.")
+      }
+    // 이후 로직, findId에 찾은 아이디를 넣어주면 됩니다.
   }
 
   return(

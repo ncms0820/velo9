@@ -11,14 +11,14 @@ import DoubleCheckPw from "./pageCompnents/DoubleCheckPw"
 
 const ChangePw = ( {page, setPage} ) => {
 
+  const [email, setEmail] = useState('')
   const [id, setId] = useState('') // 아이디 입력
+  const [newPw, setNewPw] = useState('') // 비밀번호 
+
   const [isVerified, setIsVerified] = useState(null) // null || boolean, 인증번호 확인여부
   const [isCheckedPw, setIsCheckedPw] = useState(null) // null || boolean, 비밀번호 체크여부
 
-  // Test
-  const [testVerifyNumber, setTestVerifyNumber] = useState("") // 인증번호 생성, 임시
-
-  const finishChangePw = () => {
+  const finishChangePw = async () => {
     //아이디 확인절차 필요
     if (!isCheckedPw) {
       alert("비밀번호가 일치하지 않습니다.")
@@ -28,6 +28,16 @@ const ChangePw = ( {page, setPage} ) => {
       alert("이메일 인증이 필요합니다.")
       return
     }
+
+    const url = "http://localhost:8080"
+    
+    const body = {
+      memberId: id,
+      password: newPw,
+    }
+    
+
+
     // 비밀번호 변경 로직
     setPage("login")
   }
@@ -35,9 +45,8 @@ const ChangePw = ( {page, setPage} ) => {
   return(
       <>
         <VerifyEmail
-          testVerifyNumber={testVerifyNumber}
+          email={email} setEmail={setEmail}
           setIsVerified={setIsVerified}
-          setTestVerifyNumber={setTestVerifyNumber}
           isVerified={isVerified}
         />
 
@@ -48,7 +57,8 @@ const ChangePw = ( {page, setPage} ) => {
           onChange={(e) => setId(e.target.value)}
         />
 
-        <DoubleCheckPw 
+        <DoubleCheckPw
+          newPw={newPw} setNewPw={setNewPw} 
           isCheckedPw={isCheckedPw}
           setIsCheckedPw={setIsCheckedPw}
           page={page}

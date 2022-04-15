@@ -17,8 +17,26 @@ const Login = ({ page, setPage, authService, setUserId, setOnLoginModal }) => {
   const [pw, setPw] = useState("");
 
   // 일반 로그인
-  const goLogin = () => {
-    console.log("로그인 ");
+  const goLogin = async () => {
+    const url = "주소 넣어주세용"
+    const body = {
+      id: id,
+      pw: pw
+    }
+    const res = await axios.post(url, body)
+    try {
+      if (res.data) { // 로그인 멤버가 있으면
+        // 유저정보 넘겨주면 됩니다.
+      } else {
+        alert("가입된 정보가 없습니다.")
+        return
+      }
+    } catch (e) {
+      console.error(e)
+      alert("알 수 없는 오류가 발생했습니다. 잠시 후 다시 시도해주세요")
+      return
+    }
+    
   };
 
   // 로그인 후 관리 홈페이지 이동

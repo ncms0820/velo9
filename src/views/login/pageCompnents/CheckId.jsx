@@ -6,9 +6,8 @@ import Txt from "../../../components/Txt";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 
-const CheckId = ( { isCheckedId, setIsCheckedId } ) => {
+const CheckId = ( { id, setId, isCheckedId, setIsCheckedId } ) => {
 
-  const [id, setId] = useState('') // 아이디 입력
 
   const 아이디중복확인 = () => {
     console.log("아이디중복확인")
