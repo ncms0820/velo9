@@ -62,7 +62,10 @@ const Login = ({ page, setPage, authService, setUserId, setOnLoginModal }) => {
 
       <div className={styles.socialLoginBox}>
         <FontAwesomeIcon icon={faGithub} id="githubLogin" className={styles.icons} onClick={goSocialLogin} />
-        <FontAwesomeIcon icon={faGoogle} id="googleLogin" className={styles.icons} onClick={goSocialLogin} />
+        {/* <FontAwesomeIcon icon={faGoogle} id="googleLogin" className={styles.icons} onClick={goSocialLogin} /> */}
+        <a href="http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:3000/oauth2/redirect">
+          google
+        </a>
       </div>
       {/* <Test /> */}
     </>

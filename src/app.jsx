@@ -8,13 +8,12 @@ import LoginRouter from "./views/login/LoginRouter";
 import MypageRouter from "./views/mypage/MypageRouter";
 import Read from "./views/read/read";
 import Setting from "./views/setting/setting";
+import SocialSign from "./views/socialSign";
 import Write from "./views/write/write";
 
 function App({ dbService, authService }) {
   const [onLoginModal, setOnLoginModal] = useState(false);
-
   const [userId, setUserId] = useState(null);
-
   const onLogout = useCallback(() => {
     authService.logout();
   }, [authService]);
@@ -49,6 +48,9 @@ function App({ dbService, authService }) {
         <Route path="/read" element={<Read userId={userId} />} />
         <Route path="/setting" element={<Setting />} />
         <Route path="mypage" element={<MypageRouter userId={userId} />} />{" "}
+        <Route path="/firstLogin" element={<SocialSign />}></Route>
+        <Route path="/SignUP" element={<SocialSign />} />
+        <Route path="/login" element={<LoginRouter />}></Route>
         {/* Router 주소 수정예정, userId params로 전달 */}
       </Routes>
     </BrowserRouter>
