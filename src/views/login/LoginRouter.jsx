@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import react, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.scss";
 
@@ -13,7 +13,6 @@ import FindId from "./FindId";
 import Login from "./Login";
 import Signup from "./Signup";
 import Txt from "../../components/Txt";
-
 
 const LoginRouter = ({ authService, setUserId, setOnLoginModal }) => {
   const navigate = useNavigate();
@@ -32,21 +31,38 @@ const LoginRouter = ({ authService, setUserId, setOnLoginModal }) => {
       default:
     }
   };
+  const wrapperRef = useRef();
+  const useOutsideAlerter = (ref) => {
+    useEffect(() => {
+      /**
+       * Alert if clicked on outside of element
+       */
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          setOnLoginModal(false);
+        }
+      }
+      // Bind the event listener
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  };
+
+  useOutsideAlerter(wrapperRef);
 
   return (
     <div className={styles.loginOuter}>
-      <div className={styles.loginContentBox}>
+      <div ref={wrapperRef} className={styles.loginContentBox}>
         <Txt txt={setTitle()} className={styles.loginTitle} />
-        <FontAwesomeIcon
-          icon={faX}
-          className={styles.xBtn}
-          onClick={()=> setOnLoginModal(false)}
-        />
+        <FontAwesomeIcon icon={faX} className={styles.xBtn} onClick={() => setOnLoginModal(false)} />
 
-        {page === "login" && <Login page={page} setPage={setPage} authService={authService} setOnLoginModal={setOnLoginModal} />}
-        {page === "findId" && <FindId page={page} setPage={setPage} setOnLoginModal={setOnLoginModal} />}
-        {page === "changePw" && <ChangePw page={page} setPage={setPage} setOnLoginModal={setOnLoginModal} />}
-        {page === "signup" && <Signup page={page} setPage={setPage} setOnLoginModal={setOnLoginModal} />}
+        {page === "login" && <Login page={page} setPage={setPage} authService={authService} setUserId={setUserId} />}
+        {page === "findId" && <FindId page={page} setPage={setPage} />}
+        {page === "changePw" && <ChangePw page={page} setPage={setPage} />}
+        {page === "signup" && <Signup page={page} setPage={setPage} />}
       </div>
     </div>
   );

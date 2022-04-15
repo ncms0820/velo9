@@ -1,4 +1,4 @@
-import react, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Login.module.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,8 +9,7 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Txt from "../../components/Txt";
 import { useNavigate } from "react-router-dom";
-
-import ReactiveButton from "reactive-button";
+import axios from "axios";
 
 const Login = ({ page, setPage, authService, setUserId, setOnLoginModal }) => {
   const navigate = useNavigate();
@@ -23,15 +22,14 @@ const Login = ({ page, setPage, authService, setUserId, setOnLoginModal }) => {
   };
 
   // 로그인 후 관리 홈페이지 이동
-  const goToHome = async (userId) => {
-    setOnLoginModal(false) // 모달창 닫기
-    await setUserId(userId);
+  const goToHome = (userId) => {
+    setUserId(userId);
     navigate("/");
   };
 
   // 소셜 로그인
-  const goSocialLogin = (e) => {
-    const { id } = e.target;
+  const goSocialLogin = async (event) => {
+    const { id } = event.target;
     if (id === "githubLogin") {
       authService.login("Github").then((data) => goToHome(data.user.uid));
     } else if (id === "googleLogin") {
@@ -63,8 +61,8 @@ const Login = ({ page, setPage, authService, setUserId, setOnLoginModal }) => {
       </div>
 
       <div className={styles.socialLoginBox}>
-        <FontAwesomeIcon icon={faGithub} id="githubLogin" className={styles.icons} onClick={(e) => goSocialLogin(e)} />
-        <FontAwesomeIcon icon={faGoogle} id="googleLogin" className={styles.icons} onClick={(e) => goSocialLogin(e)} />
+        <FontAwesomeIcon icon={faGithub} id="githubLogin" className={styles.icons} onClick={goSocialLogin} />
+        <FontAwesomeIcon icon={faGoogle} id="googleLogin" className={styles.icons} onClick={goSocialLogin} />
       </div>
       {/* <Test /> */}
     </>

@@ -6,9 +6,10 @@ import Txt from "../../../components/Txt";
 import Button from "../../../components/Button";
 import Input from "../../../components/Input";
 
-const VerifyEmail = ( {testVerifyNumber, setIsVerified, setTestVerifyNumber, isVerified } ) => {
+const VerifyEmail = ( { email, setEmail, setIsVerified, isVerified } ) => {
 
-  const [email, setEmail] = useState('') // 이메일 입력 (인증번호 발송용)
+  // Test
+  const [testVerifyNumber, setTestVerifyNumber] = useState("") // 인증번호 생성, 임시
   const [verifyNumber, setVerifyNumber] = useState('') // 인증번호 입력
 
   const confirmVerifyNumber = () => {

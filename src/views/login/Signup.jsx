@@ -11,16 +11,19 @@ import DoubleCheckPw from "./pageCompnents/DoubleCheckPw";
 import CheckId from "./pageCompnents/CheckId";
 
 
-const ChangePw = ( {page, setPage, setOnLoginModal } ) => {
+const ChangePw = ( { page, setPage, setOnLoginModal } ) => {
 
+  const [email, setEmail] = useState('')
+  const [id, setId] = useState('') // 아이디 입력\
+  const [newPw, setNewPw] = useState('') // 비밀번호 
   const [nickName, setnickName] = useState(null) // 닉네임
 
   const [isCheckedId, setIsCheckedId] = useState(null) // null || boolean, 아이디 중복확인여부
   const [isVerified, setIsVerified] = useState(null) // null || boolean, 인증번호 확인여부
   const [isCheckedPw, setIsCheckedPw] = useState(null) // null || boolean, 비밀번호 체크여부
 
-  // Test
-  const [testVerifyNumber, setTestVerifyNumber] = useState("") // 인증번호 생성, 임시
+
+
 
   const finishSignup = () => {
     if (!isCheckedId) {
@@ -37,25 +40,25 @@ const ChangePw = ( {page, setPage, setOnLoginModal } ) => {
     }
     console.log("가입 완료") //가입로직
     setOnLoginModal(false)
-    setPage('login')
   }
 
 
   return(
       <>
         <VerifyEmail
-          testVerifyNumber={testVerifyNumber}
+          email={email} setEmail={setEmail}
           setIsVerified={setIsVerified}
-          setTestVerifyNumber={setTestVerifyNumber}
           isVerified={isVerified}
         />
 
         <CheckId
+          id={id} setId={setId}
           isCheckedId={isCheckedId}
           setIsCheckedId={setIsCheckedId}
         /> 
 
-        <DoubleCheckPw 
+        <DoubleCheckPw
+          newPw={newPw} setNewPw={setNewPw}
           isCheckedPw={isCheckedPw}
           setIsCheckedPw={setIsCheckedPw}
         />

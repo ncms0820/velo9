@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import styles from "./mypage.module.scss";
 
 import Txt from "../../components/Txt";
@@ -8,6 +8,13 @@ import SeriesList from "./SeriesList"
 import { dummyData } from "./dummy";
 
 const Series = ( { data } ) => {
+
+  const targetSeries = dummyData.filter((val, idx) => data === val.series );
+  // data => series 이름. 이거랑 같은 dummy를 뽑으면 된다.
+  console.log(data)
+  console.log(targetSeries)
+
+  console.log(data)
 
   return(
     <div className={styles.series}>
@@ -20,15 +27,17 @@ const Series = ( { data } ) => {
 
       <Txt
         className={styles.seriesTitle}
-        txt={data.title}
+        txt={data}
       />
       
       <ul>
-          {dummyData.map( (data, idx) => {
-            return <SeriesList
+          { //시리즈 이름이 같은것끼리 매핑.
+          targetSeries.map((data, idx) => {
+          return <SeriesList
                     data={data} 
-                    key={idx} />
-          })}
+                  />
+          })
+          }
       </ul>
 
       <Button 

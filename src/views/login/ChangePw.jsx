@@ -11,12 +11,12 @@ import DoubleCheckPw from "./pageCompnents/DoubleCheckPw"
 
 const ChangePw = ( {page, setPage} ) => {
 
+  const [email, setEmail] = useState('')
   const [id, setId] = useState('') // 아이디 입력
+  const [newPw, setNewPw] = useState('') // 비밀번호 
+
   const [isVerified, setIsVerified] = useState(null) // null || boolean, 인증번호 확인여부
   const [isCheckedPw, setIsCheckedPw] = useState(null) // null || boolean, 비밀번호 체크여부
-
-  // Test
-  const [testVerifyNumber, setTestVerifyNumber] = useState("") // 인증번호 생성, 임시
 
   const finishChangePw = () => {
     //아이디 확인절차 필요
@@ -35,9 +35,8 @@ const ChangePw = ( {page, setPage} ) => {
   return(
       <>
         <VerifyEmail
-          testVerifyNumber={testVerifyNumber}
+          email={email} setEmail={setEmail}
           setIsVerified={setIsVerified}
-          setTestVerifyNumber={setTestVerifyNumber}
           isVerified={isVerified}
         />
 
@@ -48,7 +47,8 @@ const ChangePw = ( {page, setPage} ) => {
           onChange={(e) => setId(e.target.value)}
         />
 
-        <DoubleCheckPw 
+        <DoubleCheckPw
+          newPw={newPw} setNewPw={setNewPw} 
           isCheckedPw={isCheckedPw}
           setIsCheckedPw={setIsCheckedPw}
           page={page}

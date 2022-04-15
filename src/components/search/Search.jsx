@@ -54,9 +54,13 @@ const Search = ({
 
   // attaches 'focus' eventlistener to the entire component
   useEffect(() => {
-    appRef.current.addEventListener("focusin", focusHandler);
+    if (inputRef) {
+      appRef.current.addEventListener("focusin", focusHandler);
+    }
     return () => {
-      appRef.current.removeEventListener("focusin", focusHandler);
+      if (inputRef) {
+        appRef.current.removeEventListener("focusin", focusHandler);
+      }
     };
   }, [focusHandler]);
 

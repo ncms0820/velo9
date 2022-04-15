@@ -51,7 +51,6 @@ $velogD: #12b886;
   padding: 2rem;
   background: white;
   z-index: 2;
-  
 
   span {
     height: 2.5rem;
@@ -83,6 +82,7 @@ $velogD: #12b886;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 
 .loginTitle {

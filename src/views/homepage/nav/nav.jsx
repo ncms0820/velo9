@@ -18,7 +18,6 @@ const Nav = ({ handleTab }) => {
   useEffect(() => {
     let value = true;
     if (value) {
-      console.log("here is nav");
       handleTab(tabSwitch);
     }
     return () => (value = false);

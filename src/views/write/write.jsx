@@ -9,6 +9,9 @@ const Write = (props) => {
   const navigateState = useLocation().state;
   console.log(navigate);
   console.log(navigateState);
+  const goToPrevious = () => {
+    navigate(-1);
+  };
 
   const [value, setValue] = React.useState("**Hello world!!!**");
   return (
@@ -29,8 +32,8 @@ const Write = (props) => {
           }}
         />
       </div>
-      <footer>
-        <ReactiveButton style={{ borderRadius: "5px" }} color={"dark"} idleText={"나가기"} />
+      <footer className={styles.footer}>
+        <ReactiveButton style={{ borderRadius: "5px" }} color={"dark"} idleText={"나가기"} onClick={goToPrevious} />
         <div>
           <ReactiveButton style={{ borderRadius: "5px" }} color={"secondary"} idleText={"임시 저장"} />
           <ReactiveButton style={{ borderRadius: "5px" }} color={"primary"} idleText={"저장"} />
