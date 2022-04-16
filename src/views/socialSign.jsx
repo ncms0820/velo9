@@ -11,7 +11,8 @@ const SocialSign = (props) => {
           password: "passwofdgsdsdfzxcvrd",
           nickname: "nicknsdsdffame",
         },
-        { headers: { "Content-Type": `application/json` } }
+        
+        {withCredentials: true, headers: { "Content-Type": `application/json` } }
       )
       .then((res) => {
         console.log(res);

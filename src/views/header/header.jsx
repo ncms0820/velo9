@@ -8,7 +8,7 @@ import ReactiveButton from "reactive-button";
 import { Switch, useDarkreader } from "react-darkreader";
 import Menu from "../../components/menu/menu";
 
-const Header = memo(({ onLogout, authService, setUserId, onLoginModal, setOnLoginModal }) => {
+const Header = memo(({ onLogout, setOnLoginModal }) => {
   const [isDark, { toggle }] = useDarkreader(false);
   const [highlight, setHighlight] = useState(false);
   const navigate = useNavigate();
@@ -28,22 +28,6 @@ const Header = memo(({ onLogout, authService, setUserId, onLoginModal, setOnLogi
   function onMouseLeave() {
     setHighlight(false);
   }
-  useEffect(() => {
-    let working = true;
-    if (working) {
-      authService.onAuthChange((user) => {
-        if (user) {
-          setOnLoginModal(false);
-          setUserId(user.uid);
-        } else {
-          setUserId(null);
-        }
-      });
-    }
-    return () => {
-      working = false;
-    };
-  }, [authService, setUserId, setOnLoginModal]);
   return (
     <div className={styles.header}>
       <h1 className={styles.logo} onClick={goToHome}>
