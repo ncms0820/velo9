@@ -15,55 +15,34 @@ const Login = ({ page, setPage, authService, setUserId, setOnLoginModal }) => {
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
-
+  
   // 일반 로그인
   const goLogin = async () => {
-    const url = "주소 넣어주세용"
+    const url = "http://localhost:8080/login";
     const body = {
       id: id,
-      pw: pw
-    }
-    const res = await axios.post(url, body)
-    try {
-      if (res.data) { // 로그인 멤버가 있으면
-        // 유저정보 넘겨주면 됩니다.
-      } else {
-        alert("가입된 정보가 없습니다.")
-        return
-      }
-    } catch (e) {
-      console.error(e)
-      alert("알 수 없는 오류가 발생했습니다. 잠시 후 다시 시도해주세요")
-      return
-    }
-    
-  };
-
-  // 로그인 후 관리 홈페이지 이동
-  const goToHome = (userId) => {
-    setUserId(userId);
-    navigate("/");
+      pw: pw,
+    };
+    await axios
+      .post(url, body)
+      .then(() => navigate("/"))
+      .catch(() => {
+        alert("로그인 실패");
+      });
   };
 
   // 소셜 로그인
   const goSocialLogin = async (event) => {
-    const { id } = event.target;
+    const { id } = event.currentTarget;
+    console.log(id);
     if (id === "githubLogin") {
-      authService.login("Github").then((data) => goToHome(data.user.uid));
+      window.location.href =
+        "http://localhost:8080/oauth2/authorization/github?redirect_uri=http://localhost:3000/oauth2/redirect";
     } else if (id === "googleLogin") {
-      authService.login("Google").then((data) => goToHome(data.user.uid));
+      window.location.href =
+        "http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:3000/oauth2/redirect";
     }
   };
-
-  useEffect(() => {
-    let value = true;
-    if (value) {
-      authService.onAuthChange((user) => {
-        user && goToHome(user.uid);
-      });
-    }
-    return () => (value = false);
-  });
 
   return (
     <>
