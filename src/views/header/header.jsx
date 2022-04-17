@@ -8,7 +8,7 @@ import ReactiveButton from "reactive-button";
 import { Switch, useDarkreader } from "react-darkreader";
 import Menu from "../../components/menu/menu";
 
-const Header = memo(({ onLogout, setOnLoginModal }) => {
+const Header = memo(({ onLogout, setOnLoginModal, authService, setUserId }) => {
   const [isDark, { toggle }] = useDarkreader(false);
   const [highlight, setHighlight] = useState(false);
   const navigate = useNavigate();
@@ -57,7 +57,7 @@ const Header = memo(({ onLogout, setOnLoginModal }) => {
                 <ReactiveButton style={{ borderRadius: "5px" }} color={"violet"} idleText={"menu"} onClick={tabMenu} />
               </div>
             </div>
-            {tab && <Menu onLogout={onLogout} tabMenu={tabMenu} />}
+            {tab && <Menu onLogout={onLogout} tabMenu={tabMenu} authService={authService} setUserId={setUserId} />}
           </div>
         ) : (
           <ReactiveButton

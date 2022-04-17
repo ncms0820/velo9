@@ -36,8 +36,6 @@ const ChangePw = ( {page, setPage} ) => {
       password: newPw,
     }
     
-
-
     // 비밀번호 변경 로직
     setPage("login")
   }

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import styles from "./_menu.module.scss";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-const Menu = ({ onLogout, tabMenu }) => {
+const Menu = ({ onLogout, tabMenu, authService, setUserId }) => {
   const wrapperRef = useRef(null);
   const navigate = useNavigate();
   const sweetAlert = () => {
@@ -19,6 +19,8 @@ const Menu = ({ onLogout, tabMenu }) => {
       if (result.isConfirmed) {
         onLogout();
         navigate("/");
+        authService.logout();
+        setUserId(null);
         Swal.fire("로그아웃", "정상적으로 로그아웃 되었습니다.", "success");
       }
     });

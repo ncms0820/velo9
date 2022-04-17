@@ -8,6 +8,7 @@ import MypageHeader from "./MypageHeader";
 import Post from "./Post";
 import { dummyData } from "./dummy";
 import Series from "./Series";
+import TagHandlerDesktop from "./TagHandlerDesktop";
 
 // Components
 
@@ -33,28 +34,34 @@ const MypageRouter = ( { userId } ) => {
 
   return (
     <div className={styles.mypageBox}>
+
       <MypageHeader
         setTapState={setTapState}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
       />
-      { tapState === "post" &&
-        dummyData.map( (val, idx) => {
-        return <Post
-                 key={idx}
-                 dummyData={val}
-                />
-        })
-      }
 
-      { tapState === "series" &&
-        seriesName.map( (data, idx) => {
-        return <Series
-                 key={idx}
-                 data={data}
-                />
-        })
-      }
+      <TagHandlerDesktop />
+
+      <div className={styles.mypageContent}>
+        { tapState === "post" &&
+          dummyData.map( (val, idx) => {
+          return <Post
+                  key={idx}
+                  dummyData={val}
+                  />
+          })
+        }
+
+        { tapState === "series" &&
+          seriesName.map( (data, idx) => {
+          return <Series
+                  key={idx}
+                  data={data}
+                  />
+          })
+        }
+        </div>
     </div>
   );
 };

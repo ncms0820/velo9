@@ -5,9 +5,8 @@ import styles from "../Login.module.scss";
 import Txt from "../../../components/Txt";
 import Input from "../../../components/Input";
 
-const DoubleCheckPw = ( { isCheckedPw, setIsCheckedPw, page } ) => {
+const DoubleCheckPw = ( {newPw, setNewPw,  isCheckedPw, setIsCheckedPw, page } ) => {
 
-  const [newPw, setNewPw] = useState('') // 새 비밀번호 
   const [newPwCheck, setNewPwCheck] = useState('') // 새 비밀번호 확인
 
     // 비밀번호 체크 (onChange)

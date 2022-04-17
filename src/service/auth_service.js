@@ -56,11 +56,7 @@ class AuthService {
       username,
       password,
     };
-    const data = await axios
-      .post(url, body)
-      .then(super.getUserInfo)
-      .catch(() => console.log("로그인에 실패했습니다"));
-    return data;
+    return await axios.post(url, body);
   }
 
   //////////////////////         회원가입          ///////////////////////////////////////
@@ -84,24 +80,26 @@ class AuthService {
       nickname,
       email,
     };
-    return await axios.post(url, body);
-  }
-  // username 중복 검중하기
-  async validateUsername(username) {
-    const url = `${baseURL}/validateUsername`;
-    const body = {
-      username,
+    const opt = {
+      withCredentials: true,
+      headers: { "Content-Type": `application/json` },
     };
-    return await axios.get(url, body);
+    console.log(body);
+    return await axios
+      .post(url, body, opt)
+      .then(() => console.log("성공: "))
+      .catch((e) => console.error(e));
   }
 
-  // nickname 중복 검증하기
+  // username 중복 검중하기 (id)
+  async validateUsername(username) {
+    const url = `${baseURL}/validateUsername?username=${username}`;
+    return await axios.get(url);
+  }
+  // 닉네임
   async validateNickname(nickname) {
-    const url = `${baseURL}/validateNickname`;
-    const body = {
-      nickname,
-    };
-    return await axios.get(url, body);
+    const url = `${baseURL}/validateNickname?nickname=${nickname}`;
+    return await axios.get(url);
   }
 
   //////////////////////        설정          /////////////////////////////
@@ -125,7 +123,7 @@ class AuthService {
     const body = {
       email,
     };
-    return await axios.post(url, body);
+    return await axios.post(url, body).then(() => console.log("인증메일 발송 성공"));
   }
 
   ///////////////          비밀번호 찾기            /////////////////////
@@ -147,7 +145,8 @@ class AuthService {
     };
     return await axios.post(url, body).then((memberId) => memberId);
   }
-  // boolean으로 값 일치가 전송 옵니다. -------- certifyNumber 확인하는 곳
+
+  // 이메일 인증 boolean으로 값 일치가 전송 옵니다. -------- certifyNumber 확인하는 곳
   async certify(inputNumber) {
     const url = `${baseURL}/certifyNumber`;
     const body = {
@@ -158,6 +157,7 @@ class AuthService {
       .then((result) => result)
       .catch(() => console.log("인증번호 오류"));
   }
+
   // 위 비밀번호 찾기 후 memberID를 이용하여 패스워드 변경 인증이메일 확인 꼭 하고 실행 할 것
   // 즉) memberID + 인증번호 확인 후 실행 하는 메소드 입니다.
   async changePassword(memberId, password) {
