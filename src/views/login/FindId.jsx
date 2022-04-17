@@ -7,7 +7,7 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Txt from "../../components/Txt";
 
-const FindId = ( { page, setPage } ) => {
+const FindId = ( { page, setPage, authService } ) => {
 
   const [email, setEmail] = useState('')
   const [findedId, setFindedId] = useState(null)
@@ -25,6 +25,7 @@ const FindId = ( { page, setPage } ) => {
         setFindedId("알수없는 에러로 실패하였습니다. 다시 시도해주세요.")
       }
     // 이후 로직, findId에 찾은 아이디를 넣어주면 됩니다.
+    authService.findId(email)
   }
 
   return(

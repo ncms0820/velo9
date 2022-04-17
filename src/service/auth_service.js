@@ -94,6 +94,7 @@ class AuthService {
   // username 중복 검중하기 (id)
   async validateUsername(username) {
     const url = `${baseURL}/validateUsername?username=${username}`;
+<<<<<<< HEAD
     const result = await axios
       .get(url, {
         validateStatus: function (status) {
@@ -103,10 +104,17 @@ class AuthService {
       })
       .then(() => true);
     return result;
+=======
+    const result = await axios.get(url)
+      .then(()=>true)
+      .catch(()=>false);
+    return result
+>>>>>>> b1bfe4ce619009d7b4f862ad8e694c4f013b7261
   }
   // 닉네임
   async validateNickname(nickname) {
     const url = `${baseURL}/validateNickname?nickname=${nickname}`;
+<<<<<<< HEAD
     const result = await axios
       .get(url)
       .then(() => true)
@@ -115,8 +123,13 @@ class AuthService {
         return false;
       });
     return result;
+=======
+    const result = await axios.get(url)
+      .then(() => true)
+      .catch(() => false);
+    return result
+>>>>>>> b1bfe4ce619009d7b4f862ad8e694c4f013b7261
   }
-
   //////////////////////        설정          /////////////////////////////
 
   // 로그아웃

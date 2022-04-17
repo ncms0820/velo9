@@ -9,7 +9,7 @@ import Txt from "../../components/Txt";
 import VerifyEmail from "./pageCompnents/VerifyEmail"
 import DoubleCheckPw from "./pageCompnents/DoubleCheckPw"
 
-const ChangePw = ( {page, setPage} ) => {
+const ChangePw = ( {page, setPage, authService} ) => {
 
   const [email, setEmail] = useState('')
   const [id, setId] = useState('') // 아이디 입력
@@ -20,22 +20,18 @@ const ChangePw = ( {page, setPage} ) => {
 
   const finishChangePw = async () => {
     //아이디 확인절차 필요
-    if (!isCheckedPw) {
-      alert("비밀번호가 일치하지 않습니다.")
-      return
-    }
+
+    // 임시 주석처리
+    // if (!isCheckedPw) {
+    //   alert("비밀번호가 일치하지 않습니다.")
+    //   return
+    // }
     if (!isVerified) {
       alert("이메일 인증이 필요합니다.")
       return
     }
 
-    const url = "http://localhost:8080"
-    
-    const body = {
-      memberId: id,
-      password: newPw,
-    }
-    
+  
     // 비밀번호 변경 로직
     setPage("login")
   }
@@ -46,6 +42,7 @@ const ChangePw = ( {page, setPage} ) => {
           email={email} setEmail={setEmail}
           setIsVerified={setIsVerified}
           isVerified={isVerified}
+          authService={authService}
         />
 
         <Txt txt="아이디를 입력해주세요" />
