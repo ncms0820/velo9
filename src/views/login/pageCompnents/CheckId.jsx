@@ -8,9 +8,9 @@ import Button from "../../../components/Button";
 
 const CheckId = ( { id, setId, isCheckedId, setIsCheckedId, authService } ) => {
 
-  const 아이디중복확인 = () => {
+  const 아이디중복확인 = async () => {
     console.log("아이디중복확인")
-    const checkId = authService.validateUsername(id)
+    const checkId = await authService.validateUsername(id)
     setIsCheckedId(checkId)
   }
   

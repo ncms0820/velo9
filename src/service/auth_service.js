@@ -95,14 +95,19 @@ class AuthService {
   // username 중복 검중하기 (id)
   async validateUsername(username) {
     const url = `${baseURL}/validateUsername?username=${username}`;
-    return await axios.get(url);
+    const result = await axios.get(url)
+      .then(()=>true)
+      .catch(()=>false);
+    return result
   }
   // 닉네임
   async validateNickname(nickname) {
     const url = `${baseURL}/validateNickname?nickname=${nickname}`;
-    return await axios.get(url);
+    const result = await axios.get(url)
+      .then(() => true)
+      .catch(() => false);
+    return result
   }
-
   //////////////////////        설정          /////////////////////////////
 
   // 로그아웃

@@ -50,7 +50,7 @@ const Signup = ( { page, setPage, setOnLoginModal, authService } ) => {
     console.log("가입 완료") //가입로직
     // 가입
     authService.signup(id, newPw, nickName, email)
-    // setOnLoginModal(false)
+    setOnLoginModal(false)
   }
 
 
