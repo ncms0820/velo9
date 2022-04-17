@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const baseURL = "http://localhost:8080";
 class AuthService {
@@ -10,7 +9,6 @@ class AuthService {
     const url = `${baseURL}/getHeaderInfo`;
     return await axios
       .get(url)
-      .then((data) => data)
       .catch(() => {
         return console.log("로그인 정보 가져오기 실패");
       });
@@ -58,7 +56,7 @@ class AuthService {
       username,
       password,
     };
-    return await axios.post(url, body)
+    return await axios.post(url, body).then(()=>{console.log("로그인 성공")})
   }
 
   //////////////////////         회원가입          ///////////////////////////////////////
@@ -66,12 +64,13 @@ class AuthService {
   // 소셜 회원가입은 실행후 /login으로 자동 이동 됩니다.
   async socialSignup(username, password, nickname) {
     const url = `${baseURL}/socialSignup`;
+    const opt = {withCredentials: true, headers: { "Content-Type": `application/json` } }
     const body = {
       username,
       password,
       nickname,
     };
-    return await axios.post(url, body);
+    return await axios.post(url, body, opt);
   }
   //일반 회원가입
   async signup(username, password, nickname, email) {
@@ -82,12 +81,9 @@ class AuthService {
       nickname,
       email,
     };
-    const opt =         {
-      withCredentials: true,
-      headers: {"Content-Type": `application/json`}
-    }
+
     console.log(body)
-    return await axios.post(url, body, opt)
+    return await axios.post(url, body)
     .then( () => console.log("성공: ") )
     .catch((e) => console.error(e))
   }
@@ -129,8 +125,10 @@ class AuthService {
     const body = {
       email,
     };
-    return await axios.post(url, body)
-      .then(() => console.log("인증메일 발송 성공") )
+    const result =  await axios.post(url, body)
+      .then(() => true)
+      .catch(() => false);
+      return result
   }
 
   ///////////////          비밀번호 찾기            /////////////////////
@@ -141,16 +139,21 @@ class AuthService {
     const body = {
       email,
     };
-    return await axios.post(url, body);
+    const result = await axios.post(url, body)
+      .then((data) => data)
+      .catch(() => false);;
+    console.log(result)
+    return result
   }
+  
   // 이메일과 유저네임으로 비밀번호 찾기 ------- MEMBERID 받는곳
-  async findPW(username, email) {
-    const url = `${baseURL}/findPW`;
+  async findPw(username, email) {
+    const url = `${baseURL}/findPw`;
     const body = {
       username,
       email,
     };
-    return await axios.post(url, body).then((memberId) => memberId);
+    return await axios.post(url, body).then((memberId) => memberId.data);
   }
 
   // 이메일 인증 boolean으로 값 일치가 전송 옵니다. -------- certifyNumber 확인하는 곳
@@ -173,7 +176,9 @@ class AuthService {
       memberId,
       password,
     };
-    return await axios.post(url, body);
+    return await axios.post(url, body)
+      .then(() => true)
+      .catch(() => false);
   }
 }
 

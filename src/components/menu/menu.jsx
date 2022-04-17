@@ -19,7 +19,6 @@ const Menu = ({ onLogout, tabMenu, authService, setUserId }) => {
       if (result.isConfirmed) {
         onLogout();
         navigate("/");
-        authService.logout();
         setUserId(null);
         Swal.fire("로그아웃", "정상적으로 로그아웃 되었습니다.", "success");
       }

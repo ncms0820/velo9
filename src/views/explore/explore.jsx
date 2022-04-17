@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Search from "../../components/search/Search";
 import styles from "./_explore.module.scss";
-
 import { states } from "../../service/states.data";
-import { useLocation } from "react-router-dom";
-const Explore = (props) => {
+const Explore = () => {
   const [filtered, setFiltered] = useState([]);
-  const navigateState = useLocation().state;
-  const data = navigateState;
 
   // here the data is filtered as you search
   const inputHandler = (e) => {

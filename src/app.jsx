@@ -1,5 +1,5 @@
-import { useCallback, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {  useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import "./app.scss";
 import Explore from "./views/explore/explore";
 import Header from "./views/header/header";
@@ -8,17 +8,27 @@ import LoginRouter from "./views/login/LoginRouter";
 import MypageRouter from "./views/mypage/MypageRouter";
 import Read from "./views/read/read";
 import Setting from "./views/setting/setting";
-import SocialSign from "./views/socialSign";
+import SocialSign from "./views/login/SocialSign";
 import Write from "./views/write/write";
+import Redirect from "./views/redirect";
 
 function App({ dbService, authService }) {
   const [onLoginModal, setOnLoginModal] = useState(false);
   const [userId, setUserId] = useState(null);
-  const onLogout = useCallback(() => {
+  const onLogout = () => {
     authService.logout();
-  }, [authService]);
+  }
+
+  useEffect(() => {
+    if(userId){
+      setOnLoginModal(false);
+    }
+  
+  }, [userId])
+  
+
   return (
-    <BrowserRouter>
+    <>
       <Header
         onLogout={userId && onLogout}
         authService={authService}
@@ -31,7 +41,7 @@ function App({ dbService, authService }) {
           authService={authService}
           setUserId={setUserId}
           userId={userId}
-          setOnLoginModal={setOnLoginModal}
+          setOnLoginModal={setOnLoginModal} 
         />
       )}
       <Routes>
@@ -39,21 +49,15 @@ function App({ dbService, authService }) {
           path="/"
           element={<Home dbService={dbService} authService={authService} userId={userId} onLoginModal={onLoginModal} />}
         />
-        {/* <Route
-          path="/login"
-          element={<LoginRouter authService={authService} setUserId={setUserId} userId={userId} />}
-        /> */}
-        <Route path="/explore" element={<Explore />} userId={userId} />
-        <Route path="/write" element={<Write userId={userId} />} />
-        <Route path="/read" element={<Read userId={userId} />} />
+        <Route path="/success" element={<Redirect setUserId={setUserId} authService={authService} />} />
+        <Route path="/explore" element={<Explore />} />
+        <Route path="/write" element={<Write  />} />
+        <Route path="/read" element={<Read  />} />
         <Route path="/setting" element={<Setting />} />
-        <Route path="mypage" element={<MypageRouter userId={userId} />} />{" "}
-        <Route path="/firstLogin" element={<SocialSign />}></Route>
-        <Route path="/SignUP" element={<SocialSign />} />
-        <Route path="/login" element={<LoginRouter />}></Route>
-        {/* Router 주소 수정예정, userId params로 전달 */}
+        <Route path="/mypage" element={<MypageRouter userId={userId} />} />
+        <Route path="/firstLogin" element={<SocialSign authService={authService} setUserId={setUserId} />} />
       </Routes>
-    </BrowserRouter>
+      </>
   );
 }
 

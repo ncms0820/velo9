@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "../Login.module.scss";
 
 // Components
@@ -7,7 +7,7 @@ import Button from "../../../components/Button";
 import Input from "../../../components/Input";
 import AuthService from "../../../service/auth_service";
 
-const VerifyEmail = ( { email, setEmail, setIsVerified, isVerified, authService } ) => {
+const VerifyEmail = ( { email, setEmail, setIsVerified, isVerified, authService, page } ) => {
 
   const [verifyNumber, setVerifyNumber] = useState('') // 인증번호 입력
 
@@ -18,8 +18,13 @@ const VerifyEmail = ( { email, setEmail, setIsVerified, isVerified, authService 
   
   // 테스트 인증번호 생성
   const requestVerifyNumber = async () => {
-    alert("인증번호가 발송되었습니다.")
-    await authService.sendMail(email)
+    const result  =  await authService.sendMail(email)
+    console.log(result)
+    if (page === 'changePw') { // sendEmail은 메일이 
+      result ? alert("잘못된 이메일입니다. 이메일을 확인해주세요.") : alert("인증번호가 발송되었습니다.")
+    } else if (page === 'signup') {
+      !result ? alert("이미 가입된 이메일입니다.") : alert("인증번호가 발송되었습니다.")
+    }
   }
 
   
