@@ -10,7 +10,7 @@ import DoubleCheckPw from "./pageCompnents/DoubleCheckPw";
 import CheckId from "./pageCompnents/CheckId";
 import CheckNickName from "./pageCompnents/CheckNickName";
 
-const SocialSign = ({ setPage, authService, setUserId }) => {
+const SocialSign = ({ setPage, authService, setUserId, setOnLoginModal }) => {
 
     const navigate = useNavigate();
     const [id, setId] = useState('') // 아이디 입력
@@ -37,9 +37,10 @@ const SocialSign = ({ setPage, authService, setUserId }) => {
 
       // 소셜 가입
       await authService.socialSignup(id, newPw, nickName)
-      const result = await authService.login(id, newPw).catch((e) => alert("아이디, 비밀번호를 확인해주세요.") )
-      setUserId(result)
+      // const result = await authService.login(id, newPw).catch((e) => alert("아이디, 비밀번호를 확인해주세요.") )
+      // setUserId(result)
       navigate("/")
+      setOnLoginModal(true)
     }
   
   

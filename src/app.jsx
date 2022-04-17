@@ -53,7 +53,7 @@ function App({ dbService, authService }) {
         <Route path="/read" element={<Read />} />
         <Route path="/setting" element={<Setting />} />
         <Route path="/mypage" element={<MypageRouter userId={userId} />} />
-        <Route path="/firstLogin" element={<SocialSign authService={authService} setUserId={setUserId} />} />
+        <Route path="/firstLogin" element={<SocialSign authService={authService} setUserId={setUserId} setOnLoginModal={setOnLoginModal} />} />
       </Routes>
     </>
   );
