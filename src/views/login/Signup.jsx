@@ -1,17 +1,15 @@
-import react, { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./Login.module.scss";
 
 // Components
 import Button from "../../components/Button";
-import Input from "../../components/Input";
-import Txt from "../../components/Txt";
 
 import VerifyEmail from "./pageCompnents/VerifyEmail";
 import DoubleCheckPw from "./pageCompnents/DoubleCheckPw";
 import CheckId from "./pageCompnents/CheckId";
 import CheckNickName from "./pageCompnents/CheckNickName";
 
-const Signup = ({ page, setPage, setOnLoginModal, authService }) => {
+const Signup = ({ page, setPage, authService, setUserId }) => {
   const [email, setEmail] = useState("");
   const [id, setId] = useState(""); // 아이디 입력\
   const [newPw, setNewPw] = useState(""); // 비밀번호
@@ -22,7 +20,7 @@ const Signup = ({ page, setPage, setOnLoginModal, authService }) => {
   const [isCheckedPw, setIsCheckedPw] = useState(null); // null || boolean, 비밀번호 체크여부
   const [isCheckedNickName, setIsCheckedNickName] = useState(null); // null || boolean, 비밀번호 체크여부
 
-  const finishSignup = () => {
+  const finishSignup = async () => {
     if (!isCheckedId) {
       alert("아이디 중복체크가 필요합니다.");
       return;
@@ -39,10 +37,11 @@ const Signup = ({ page, setPage, setOnLoginModal, authService }) => {
       alert("닉네임 확인이 필요합니다. 일치하지 않습니다.");
       return;
     }
-    console.log("가입 완료"); //가입로직
     // 가입
-    authService.signup(id, newPw, nickName, email);
-    setOnLoginModal(false);
+    await authService.signup(id, newPw, nickName, email); // 성공
+    await authService.login(id, newPw).catch((e) => alert("아이디, 비밀번호를 확인해주세요.")); // 로그인이 안됨.
+    const result = await authService.getUserInfo();
+    setUserId(result);
   };
 
   return (
@@ -54,6 +53,7 @@ const Signup = ({ page, setPage, setOnLoginModal, authService }) => {
         setIsVerified={setIsVerified}
         isVerified={isVerified}
         authService={authService}
+        page={page}
       />
 
       {/* 아이디 중복체크 */}

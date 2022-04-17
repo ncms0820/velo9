@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./Login.module.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,19 +8,16 @@ import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Txt from "../../components/Txt";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
-const Login = ({ page, setPage, authService, setUserId, setOnLoginModal }) => {
-  const navigate = useNavigate();
+const Login = ({ setPage, authService, setUserId }) => {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
 
   // 일반 로그인
   const goLogin = async () => {
-    const result = await authService.login(id, pw).catch((e) => alert("아이디, 비밀번호를 확인해주세요.") )
+    await authService.login(id, pw).catch((e) => alert("아이디, 비밀번호를 확인해주세요.") ) // 로그인이 안됨.
+    const result = await authService.getUserInfo();
     setUserId(result)
-    setOnLoginModal(false)
   };
 
   // 소셜 로그인

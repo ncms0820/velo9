@@ -1,4 +1,4 @@
-import react, { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./Login.module.scss";
 
 // Components
@@ -19,22 +19,20 @@ const ChangePw = ( {page, setPage, authService} ) => {
   const [isCheckedPw, setIsCheckedPw] = useState(null) // null || boolean, 비밀번호 체크여부
 
   const finishChangePw = async () => {
-    //아이디 확인절차 필요
-
-    // 임시 주석처리
-    // if (!isCheckedPw) {
-    //   alert("비밀번호가 일치하지 않습니다.")
-    //   return
-    // }
-    if (!isVerified) {
-      alert("이메일 인증이 필요합니다.")
+    if (!isCheckedPw) {
+      alert("비밀번호가 일치하지 않습니다.")
       return
     }
-
-  
-    // 비밀번호 변경 로직
-    setPage("login")
-  }
+    // 임시 주석처리
+    // if (!isVerified) {
+    //   alert("이메일 인증이 필요합니다.")
+    //   return
+    // }
+    const findedMemberId = await authService.findPw(id, email)
+    console.log(findedMemberId.data, newPw)
+    const result = await authService.changePassword(findedMemberId.data, newPw)
+    if (result) setPage("login")
+  }   
   
   return(
       <>
@@ -43,6 +41,7 @@ const ChangePw = ( {page, setPage, authService} ) => {
           setIsVerified={setIsVerified}
           isVerified={isVerified}
           authService={authService}
+          page={page}
         />
 
         <Txt txt="아이디를 입력해주세요" />

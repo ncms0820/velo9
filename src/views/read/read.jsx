@@ -6,7 +6,7 @@ import { faThumbsUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import Comment from "../../components/comment/comment";
 import ReactiveButton from "reactive-button";
 import Footer from "../../components/footer/footer";
-const Read = (props) => {
+const Read = () => {
   const [list, setList] = useState(false);
   const location = useLocation();
   const data = location.state.content;

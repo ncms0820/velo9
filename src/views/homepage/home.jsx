@@ -28,11 +28,8 @@ const Home = ({ dbService, userId, onLoginModal }) => {
   );
   useEffect(() => {
     handleTab(true);
-  }, [userId, handleTab]);
-  useEffect(() => {
-    if (onLoginModal === true) {
-    }
-  }, [onLoginModal]);
+
+  }, [ handleTab]);
   return (
     <>
       {!onLoginModal && (

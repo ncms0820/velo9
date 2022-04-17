@@ -4,7 +4,7 @@ import MDEditor from "@uiw/react-md-editor";
 import rehypeSanitize from "rehype-sanitize";
 import ReactiveButton from "reactive-button";
 import styles from "./_write.module.scss";
-const Write = (props) => {
+const Write = ({userId}) => {
   const navigate = useNavigate();
   const navigateState = useLocation().state;
   console.log(navigate);

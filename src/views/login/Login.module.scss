@@ -89,7 +89,7 @@ $velogD: #12b886;
   text-align: center;
   font-size: 1.75rem;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .xBtn {
@@ -124,7 +124,7 @@ $velogD: #12b886;
 .socialLoginBox {
   @include flexDefault();
   @include totalHeight();
-  justify-content: start;
+  justify-content: flex-start;
 
   button {
     width: 48%;

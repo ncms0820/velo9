@@ -5,6 +5,7 @@ import App from "./app";
 import DbService from "./service/db_service";
 import AuthService from "./service/auth_service";
 import FunctionService from "./service/function_service";
+import { BrowserRouter } from "react-router-dom";
 
 const dbService = new DbService();
 const authService = new AuthService();
@@ -12,8 +13,10 @@ const functionService = new FunctionService();
 
 ReactDOM.render(
   <React.StrictMode>
+    <BrowserRouter>
     {/* 여기 브라우저 라우터  */}
-    <App dbService={dbService} authService={authService} functionService={functionService} />
+      <App dbService={dbService} authService={authService} functionService={functionService} />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );

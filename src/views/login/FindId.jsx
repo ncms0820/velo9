@@ -1,31 +1,19 @@
-import react, { useState } from "react";
+import { useState } from "react";
 import styles from "./Login.module.scss";
-import axios from 'axios'
 
 // Components
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Txt from "../../components/Txt";
 
-const FindId = ( { page, setPage, authService } ) => {
+const FindId = ( { setPage, authService } ) => {
 
   const [email, setEmail] = useState('')
   const [findedId, setFindedId] = useState(null)
 
   const checkEmail = async () => {
-    const url = "http://localhost:8080/findId"
-    const body = {
-      email: email
-    }
-    const res = await axios.post(url, body);
-      try {
-        // data 결과값
-        setFindedId(res.data)
-      } catch (e) {
-        setFindedId("알수없는 에러로 실패하였습니다. 다시 시도해주세요.")
-      }
-    // 이후 로직, findId에 찾은 아이디를 넣어주면 됩니다.
-    authService.findId(email)
+    const result = await authService.findId(email)
+    setFindedId(result)
   }
 
   return(
@@ -45,7 +33,7 @@ const FindId = ( { page, setPage, authService } ) => {
         <Txt 
           txt={
             findedId 
-            ? `가입한 아이디는 ${findedId} 입니다.` 
+            ? `${email}로 가입한 아이디가 전송되었습니다.` 
             : findedId === null
               ? null // 초기값만 아무것도 표시 안되게.
               : `가입한 아이디가 아닙니다.`
