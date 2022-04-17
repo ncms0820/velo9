@@ -95,9 +95,13 @@ class AuthService {
   async validateUsername(username) {
     const url = `${baseURL}/validateUsername?username=${username}`;
     const result = await axios
-      .get(url)
-      .then(() => true)
-      .catch(() => false);
+      .get(url, {
+        validateStatus: function (status) {
+          // 상태 코드가 500 이상일 경우 거부. 나머지(500보다 작은)는 허용.
+          return status < 500;
+        },
+      })
+      .then(() => true);
     return result;
   }
   // 닉네임
@@ -106,7 +110,10 @@ class AuthService {
     const result = await axios
       .get(url)
       .then(() => true)
-      .catch(() => false);
+      .catch(() => {
+        console.warn = console.error = () => {};
+        return false;
+      });
     return result;
   }
 
