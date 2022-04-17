@@ -51,6 +51,7 @@ const LoginRouter = ({ authService, setUserId, setOnLoginModal }) => {
     }, [ref]);
   };
 
+  
   useOutsideAlerter(wrapperRef);
 
   return (
@@ -59,10 +60,10 @@ const LoginRouter = ({ authService, setUserId, setOnLoginModal }) => {
         <Txt txt={setTitle()} className={styles.loginTitle} />
         <FontAwesomeIcon icon={faX} className={styles.xBtn} onClick={() => setOnLoginModal(false)} />
 
-        {page === "login" && <Login page={page} setPage={setPage} authService={authService} setUserId={setUserId} />}
-        {page === "findId" && <FindId page={page} setPage={setPage} />}
-        {page === "changePw" && <ChangePw page={page} setPage={setPage} />}
-        {page === "signup" && <Signup page={page} setPage={setPage} />}
+        {page === "login" && <Login page={page} setPage={setPage} authService={authService} setUserId={setUserId} setOnLoginModal={setOnLoginModal} />}
+        {page === "findId" && <FindId page={page} setPage={setPage} authService={authService} />}
+        {page === "changePw" && <ChangePw page={page} setPage={setPage} authService={authService} />}
+        {page === "signup" && <Signup page={page} setPage={setPage} authService={authService} />}
       </div>
     </div>
   );

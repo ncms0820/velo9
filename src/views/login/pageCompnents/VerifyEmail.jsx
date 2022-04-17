@@ -5,35 +5,22 @@ import styles from "../Login.module.scss";
 import Txt from "../../../components/Txt";
 import Button from "../../../components/Button";
 import Input from "../../../components/Input";
+import AuthService from "../../../service/auth_service";
 
-const VerifyEmail = ( { email, setEmail, setIsVerified, isVerified } ) => {
+const VerifyEmail = ( { email, setEmail, setIsVerified, isVerified, authService } ) => {
 
-  // Test
-  const [testVerifyNumber, setTestVerifyNumber] = useState("") // 인증번호 생성, 임시
   const [verifyNumber, setVerifyNumber] = useState('') // 인증번호 입력
 
   const confirmVerifyNumber = () => {
-    if ( !testVerifyNumber || !verifyNumber) return
-    if (verifyNumber === testVerifyNumber) {
-      setIsVerified(true)
-    } else if (verifyNumber !== testVerifyNumber) {
-      setIsVerified(false)
-    } 
+    const checkEmail = AuthService.certify(verifyNumber)
+    setIsVerified(checkEmail);
   }
   
   // 테스트 인증번호 생성
-  const CreateTextVerifyNumber = () => {
-    if (!email) return // 이메일 형식 체크, 과다호출 등 방지 등 로직.
-    let Number = "";
-    for (let i = 0; i < 5; i++) {
-      Number += Math.floor(Math.random() * 10)
-    }
-    setTestVerifyNumber(Number)
+  const requestVerifyNumber = async () => {
+    alert("인증번호가 발송되었습니다.")
+    await authService.sendMail(email)
   }
-
-  useEffect(() => {
-    console.log(testVerifyNumber)
-  }, [testVerifyNumber])
 
   
   return(
@@ -44,11 +31,11 @@ const VerifyEmail = ( { email, setEmail, setIsVerified, isVerified } ) => {
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          onEnter={CreateTextVerifyNumber}
+          onEnter={requestVerifyNumber}
         />
         <Button
           txt="인증 요청"
-          onClick={CreateTextVerifyNumber}
+          onClick={requestVerifyNumber}
         />
       </div>
 

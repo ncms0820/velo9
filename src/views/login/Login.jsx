@@ -18,17 +18,9 @@ const Login = ({ page, setPage, authService, setUserId, setOnLoginModal }) => {
   
   // 일반 로그인
   const goLogin = async () => {
-    const url = "http://localhost:8080/login";
-    const body = {
-      id: id,
-      pw: pw,
-    };
-    await axios
-      .post(url, body)
-      .then(() => navigate("/"))
-      .catch(() => {
-        alert("로그인 실패");
-      });
+    const result = await authService.login(id, pw).catch((e) => alert("아이디, 비밀번호를 확인해주세요.") )
+    setUserId(result)
+    setOnLoginModal(false)
   };
 
   // 소셜 로그인
@@ -50,7 +42,7 @@ const Login = ({ page, setPage, authService, setUserId, setOnLoginModal }) => {
       <Input type="text" value={id} onChange={(e) => setId(e.target.value)} />
       <Txt txt="비밀번호" />
       <Input type="password" value={pw} onChange={(e) => setPw(e.target.value)} />
-      <Button txt="로그인" onClick={() => goLogin()} />
+      <Button txt="로그인" onClick={goLogin} />
 
       <div className={styles.twoBtnBox}>
         <Button txt="회원가입" className={styles.joinBtn} onClick={() => setPage("signup")} />

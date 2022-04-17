@@ -4,7 +4,7 @@ import styles from "./mypage.module.scss";
 const TagHandlerDesktop = () => {
 
   return(
-    <div className={styles.tagHandlerDesktopBox}>
+    <div className={styles.tagHandlerDesktopOuter}>
     <div className={styles.tagHandlerDesktopBox}>
       <h4> 태그 목록</h4>
       <ul>

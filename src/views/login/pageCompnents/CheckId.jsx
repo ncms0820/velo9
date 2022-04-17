@@ -6,12 +6,12 @@ import Txt from "../../../components/Txt";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 
-const CheckId = ( { id, setId, isCheckedId, setIsCheckedId } ) => {
-
+const CheckId = ( { id, setId, isCheckedId, setIsCheckedId, authService } ) => {
 
   const 아이디중복확인 = () => {
     console.log("아이디중복확인")
-    // setIsCheckedId()
+    const checkId = authService.validateUsername(id)
+    setIsCheckedId(checkId)
   }
   
   return(
@@ -32,10 +32,10 @@ const CheckId = ( { id, setId, isCheckedId, setIsCheckedId } ) => {
       <Txt  
       txt={
           isCheckedId 
-          ? "비밀번호가 일치합니다"
+          ? "아이디 사용이 가능합니다"
           : isCheckedId === null
             ? null // 초기값만 아무것도 표시 안되게.
-            : "비밀번호가 일치하지 않습니다."
+            : "사용이 불가능한 아이디입니다."
         } 
       />
     </>
