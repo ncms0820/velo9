@@ -47,10 +47,8 @@ function App({ dbService, authService }) {
         <Route path="/write" element={<Write userId={userId} />} />
         <Route path="/read" element={<Read userId={userId} />} />
         <Route path="/setting" element={<Setting />} />
-        <Route path="mypage" element={<MypageRouter userId={userId} />} />{" "}
-        <Route path="/firstLogin" element={<SocialSign />}></Route>
-        <Route path="/SignUP" element={<SocialSign />} />
-        <Route path="/login" element={<LoginRouter />}></Route>
+        <Route path="/mypage" element={<MypageRouter userId={userId} />} />
+        <Route path="/firstLogin" element={<SocialSign />} />
         {/* Router 주소 수정예정, userId params로 전달 */}
       </Routes>
     </BrowserRouter>

@@ -15,20 +15,12 @@ const Login = ({ page, setPage, authService, setUserId, setOnLoginModal }) => {
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
-  
+
   // 일반 로그인
   const goLogin = async () => {
-    const url = "http://localhost:8080/login";
-    const body = {
-      id: id,
-      pw: pw,
-    };
-    await axios
-      .post(url, body)
-      .then(() => navigate("/"))
-      .catch(() => {
-        alert("로그인 실패");
-      });
+    const loginInfo = await authService.login(id, pw);
+    setUserId(loginInfo).then((userId) => console.log(userId + "로그인 성공"));
+    setOnLoginModal(false);
   };
 
   // 소셜 로그인

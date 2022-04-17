@@ -1,19 +1,17 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const baseURL = "http://localhost:8080 ";
+const baseURL = "http://localhost:8080";
 class AuthService {
   //////////////           정보 가져오기          /////////////////////
 
   // 로그인 정보 가져오기
   async getUserInfo() {
     const url = `${baseURL}/getHeaderInfo`;
-    return await axios
-      .get(url)
-      .then((data) => data)
-      .catch(() => {
-        return console.log("로그인 정보 가져오기 실패");
-      });
+    const data = await axios.get(url).catch(() => {
+      return console.log("로그인 정보 가져오기 실패");
+    });
+    return data;
   }
 
   //세팅 정보 가져오기
@@ -58,10 +56,11 @@ class AuthService {
       username,
       password,
     };
-    return await axios
+    const data = await axios
       .post(url, body)
-      .then(() => useNavigate("/"))
+      .then(super.getUserInfo)
       .catch(() => console.log("로그인에 실패했습니다"));
+    return data;
   }
 
   //////////////////////         회원가입          ///////////////////////////////////////
@@ -96,6 +95,7 @@ class AuthService {
     return await axios.get(url, body);
   }
 
+  // nickname 중복 검증하기
   async validateNickname(nickname) {
     const url = `${baseURL}/validateNickname`;
     const body = {
@@ -125,7 +125,7 @@ class AuthService {
     const body = {
       email,
     };
-    return await axios.get(url, body);
+    return await axios.post(url, body);
   }
 
   ///////////////          비밀번호 찾기            /////////////////////
