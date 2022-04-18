@@ -1,23 +1,29 @@
 import { useState, useEffect } from "react";
 
+// Components
+import ArchiveCard from "./card/ArchiveCard";
+
 const RecentArchive = ( { dbService } ) => {
 
   const [recentPosts, setRecentPosts] = useState();
 
   const getRecentPost = async () => {
     const result = await dbService.getRecentPost();
-    setRecentPosts(result)
+    console.log(result.data.content)
+    setRecentPosts(result.data.content)
   }
-
 
   useEffect(() => {
     getRecentPost();
-  }, [recentPosts]);
+  }, []);
 
 
   return(
     <>
-    최근 본 목록
+      { recentPosts && 
+        recentPosts.map( (v) => {
+        return <ArchiveCard content={v} />
+      })}
     </>
   )
 }

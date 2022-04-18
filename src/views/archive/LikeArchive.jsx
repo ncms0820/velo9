@@ -1,24 +1,29 @@
 import { useState, useEffect } from "react";
 
+// components
+import ArchiveCard from "./card/ArchiveCard";
+
 const LikeArchive = ( { dbService } ) => {
 
   const [likePosts, setLikePosts] = useState();
 
   const getLikePost = async () => {
     const result = await dbService.getLikedPost();
-    setLikePosts(result)
+    console.log(result.data.content)
+    setLikePosts(result.data.content)
   }
 
 
   useEffect(() => {
     getLikePost();
-  }, [likePosts]);
+  }, []);
 
   return(
     <>
-    좋아요한 목록
-
-    <button  onClick={() => getLikePost()} ></button>
+      { likePosts && 
+        likePosts.map( (v) => {
+        return <ArchiveCard content={v} />
+      })}
     </>
   )
 }

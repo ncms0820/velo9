@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const baseURL = "http://localhost:8080";
+const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
 class DbService {
   // db 가져오기
   // 최신순 : createdDate(default 입니다)
@@ -98,14 +99,14 @@ class DbService {
   //좋아요 누른 게시글
   async getLikedPost() {
     const url = `${baseURL}/archive/like`;
-    const data = await axios.get(url);
+    const data = await axios.get(url, opt);
     return data;
   }
 
   //최근 읽은 게시글
   async getRecentPost() {
     const url = `${baseURL}/archive/recent`;
-    const data = await axios.get(url);
+    const data = await axios.get(url, opt);
     return data;
   }
 }
