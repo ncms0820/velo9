@@ -7,8 +7,9 @@ class AuthService {
   // 로그인 정보 가져오기
   async getUserInfo() {
     const url = `${baseURL}/getHeaderInfo`;
+    const opt = {withCredentials: true, headers: { "Content-Type": `application/json` }}
     return await axios
-      .get(url)
+      .get(url, opt)
       .catch(() => {
         return console.log("로그인 정보 가져오기 실패");
       });
@@ -56,7 +57,8 @@ class AuthService {
       username,
       password,
     };
-    return await axios.post(url, body).then(()=>{console.log("로그인 성공")})
+    const opt = {withCredentials: true, headers: { "Content-Type": `application/json` }}
+    return await axios.post(url, body, opt).then(()=>{console.log("로그인 성공")})
   }
 
   //////////////////////         회원가입          ///////////////////////////////////////
