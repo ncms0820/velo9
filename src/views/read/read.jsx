@@ -10,6 +10,7 @@ const Read = () => {
   const [list, setList] = useState(false);
   const location = useLocation();
   const data = location.state.content;
+  console.log(data);
   return (
     <div className={styles.read}>
       <div className={styles.title}>{data.title}</div>
@@ -28,7 +29,6 @@ const Read = () => {
         <div># Java Script</div>
       </div>
       <div className={styles.img}>
-        {console.log(data)}
         {data.postThumbnail.path ? (
           <img src={data.postThumbnail.path} alt="pic" />
         ) : (

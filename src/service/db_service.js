@@ -3,10 +3,14 @@ import axios from "axios";
 const baseURL = "http://localhost:8080";
 class DbService {
   // db 가져오기
-  async getDb(tagSelect, content, page, sort) {
+  // 최신순 : createdDate(default 입니다)
+  // 오래된순: old
+  // 조회수순: viewCount
+  // 좋아요순: loveCount
+  async getDb(tagSelect = "false", content = "", page = "1", sort = "createdDate") {
     const url = `${baseURL}/?tagSelect=${tagSelect}&content=${content}&page=${page}&sortValue=${sort}`;
     const data = await axios.get(url);
-    return data;
+    return data.data;
   }
 
   // 글 작성 아이디 없이 할경우 새글 작성, 있으면 글 수정 페이지 ----- GET

@@ -4,32 +4,26 @@ import styles from "./_home.module.scss";
 import Nav from "./nav/nav";
 import NavLogin from "./nav/nav_login";
 import Error from "../etc/error";
+import fakeDb from "../../service/fakeDb";
 
 const Home = ({ dbService, userId, onLoginModal }) => {
   const [cards, setCards] = useState();
   const handleTab = useCallback(
-    async (sort) => {
-      let value = "";
-      if (sort === true) {
-        value = "old";
-      } else if (sort === false) {
-        value = "new";
-      } else {
-        return;
-      }
+    async (sort = "createdDate") => {
       try {
-        const db = await dbService.getDb(value);
-        setCards(db);
+        const db = await dbService.getDb(undefined, undefined, undefined, sort);
+        if (db.content.length !== 0) {
+          setCards(db.data.content);
+        } else {
+          //임시 입니다.
+          setCards(fakeDb);
+        }
       } catch {
         console.log("error");
       }
     },
     [dbService]
   );
-  useEffect(() => {
-    handleTab(true);
-
-  }, [ handleTab]);
   return (
     <>
       {!onLoginModal && (
@@ -38,7 +32,7 @@ const Home = ({ dbService, userId, onLoginModal }) => {
             {userId ? <NavLogin /> : <Nav handleTab={handleTab} />}
             <section className={styles.grid_container}>
               {cards ? (
-                cards.content.map((content, index) => <Card key={index} content={content} />)
+                cards.content.map((content) => <Card key={content.postId} content={content} />)
               ) : (
                 <Error title={" Loading"} />
               )}

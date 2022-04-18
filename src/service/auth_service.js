@@ -7,9 +7,16 @@ class AuthService {
   // 로그인 정보 가져오기
   async getUserInfo() {
     const url = `${baseURL}/getHeaderInfo`;
+<<<<<<< HEAD
     const opt = {withCredentials: true, headers: { "Content-Type": `application/json` }}
     return await axios
       .get(url, opt)
+=======
+    const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
+    return await axios
+      .get(url, opt)
+      .then((data) => data.data)
+>>>>>>> d3328036f3deffd15f7433e20874ce8ce158e153
       .catch(() => {
         return console.log("로그인 정보 가져오기 실패");
       });
@@ -57,8 +64,16 @@ class AuthService {
       username,
       password,
     };
+<<<<<<< HEAD
     const opt = {withCredentials: true, headers: { "Content-Type": `application/json` }}
     return await axios.post(url, body, opt).then(()=>{console.log("로그인 성공")})
+=======
+    const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
+    const data = await axios.post(url, body, opt).then(() => {
+      return this.getUserInfo();
+    });
+    return data;
+>>>>>>> d3328036f3deffd15f7433e20874ce8ce158e153
   }
 
   //////////////////////         회원가입          ///////////////////////////////////////
@@ -66,7 +81,7 @@ class AuthService {
   // 소셜 회원가입은 실행후 /login으로 자동 이동 됩니다.
   async socialSignup(username, password, nickname) {
     const url = `${baseURL}/socialSignup`;
-    const opt = {withCredentials: true, headers: { "Content-Type": `application/json` } }
+    const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
     const body = {
       username,
       password,
@@ -84,34 +99,38 @@ class AuthService {
       email,
     };
 
-    console.log(body)
-    return await axios.post(url, body)
-    .then( () => console.log("성공: ") )
-    .catch((e) => console.error(e))
+    console.log(body);
+    return await axios
+      .post(url, body)
+      .then(() => console.log("성공: "))
+      .catch((e) => console.error(e));
   }
 
   // username 중복 검중하기 (id)
   async validateUsername(username) {
     const url = `${baseURL}/validateUsername?username=${username}`;
-    const result = await axios.get(url)
-      .then(()=>true)
-      .catch(()=>false);
-    return result
+    const result = await axios
+      .get(url)
+      .then(() => true)
+      .catch(() => false);
+    return result;
   }
   // 닉네임
   async validateNickname(nickname) {
     const url = `${baseURL}/validateNickname?nickname=${nickname}`;
-    const result = await axios.get(url)
+    const result = await axios
+      .get(url)
       .then(() => true)
       .catch(() => false);
-    return result
+    return result;
   }
   //////////////////////        설정          /////////////////////////////
 
   // 로그아웃
   async logout() {
     const url = `${baseURL}/memberLogout`;
-    return await axios.get(url);
+    const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
+    return await axios.get(url, opt);
   }
   //회원 탈퇴
   async withdraw(oldPassword) {
@@ -127,10 +146,12 @@ class AuthService {
     const body = {
       email,
     };
-    const result =  await axios.post(url, body)
+    const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
+    const result = await axios
+      .post(url, body, opt)
       .then(() => true)
       .catch(() => false);
-      return result
+    return result;
   }
 
   ///////////////          비밀번호 찾기            /////////////////////
@@ -141,13 +162,14 @@ class AuthService {
     const body = {
       email,
     };
-    const result = await axios.post(url, body)
+    const result = await axios
+      .post(url, body)
       .then((data) => data)
-      .catch(() => false);;
-    console.log(result)
-    return result
+      .catch(() => false);
+    console.log(result);
+    return result;
   }
-  
+
   // 이메일과 유저네임으로 비밀번호 찾기 ------- MEMBERID 받는곳
   async findPw(username, email) {
     const url = `${baseURL}/findPw`;
@@ -178,7 +200,8 @@ class AuthService {
       memberId,
       password,
     };
-    return await axios.post(url, body)
+    return await axios
+      .post(url, body)
       .then(() => true)
       .catch(() => false);
   }

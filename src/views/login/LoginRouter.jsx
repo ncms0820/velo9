@@ -13,7 +13,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Txt from "../../components/Txt";
 
-const LoginRouter = ({ authService, setUserId, setOnLoginModal }) => {
+const LoginRouter = ({ authService, setOnLoginModal,setLoginInfo }) => {
   const [page, setPage] = useState("login");
 
   const setTitle = () => {
@@ -36,10 +36,10 @@ const LoginRouter = ({ authService, setUserId, setOnLoginModal }) => {
         <Txt txt={setTitle()} className={styles.loginTitle} />
         <FontAwesomeIcon icon={faX} className={styles.xBtn} onClick={() => setOnLoginModal(false)} />
 
-        {page === "login" && <Login setPage={setPage} authService={authService} setUserId={setUserId}/>}
+        {page === "login" && <Login setPage={setPage} authService={authService} setLoginInfo={setLoginInfo}/>}
         {page === "findId" && <FindId setPage={setPage} authService={authService} />}
         {page === "changePw" && <ChangePw page={page} setPage={setPage} authService={authService} />}
-        {page === "signup" && <Signup page={page} setPage={setPage} authService={authService} setUserId={setUserId}  />}
+        {page === "signup" && <Signup page={page} setPage={setPage} authService={authService} setLoginInfo={setLoginInfo}  />}
       </div>
     </div>
   );

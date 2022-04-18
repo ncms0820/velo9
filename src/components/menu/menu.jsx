@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import styles from "./_menu.module.scss";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-const Menu = ({ onLogout, tabMenu, authService, setUserId }) => {
+const Menu = ({ tabMenu, authService, setLoginInfo }) => {
   const wrapperRef = useRef(null);
   const navigate = useNavigate();
   const sweetAlert = () => {
@@ -15,11 +15,12 @@ const Menu = ({ onLogout, tabMenu, authService, setUserId }) => {
       cancelButtonColor: "#d33",
       confirmButtonText: "예",
       cancelButtonText: "아니오",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        onLogout();
+        await authService.logout().then(() => {
+          setLoginInfo();
+        });
         navigate("/");
-        setUserId(null);
         Swal.fire("로그아웃", "정상적으로 로그아웃 되었습니다.", "success");
       }
     });
