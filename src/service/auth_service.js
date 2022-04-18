@@ -7,9 +7,13 @@ class AuthService {
   // 로그인 정보 가져오기
   async getUserInfo() {
     const url = `${baseURL}/getHeaderInfo`;
-    return await axios.get(url).catch(() => {
-      return console.log("로그인 정보 가져오기 실패");
-    });
+    const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
+    return await axios
+      .get(url, opt)
+      .then((data) => data.data)
+      .catch(() => {
+        return console.log("로그인 정보 가져오기 실패");
+      });
   }
 
   //세팅 정보 가져오기
@@ -54,9 +58,11 @@ class AuthService {
       username,
       password,
     };
-    return await axios.post(url, body).then(() => {
-      console.log("로그인 성공");
+    const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
+    const data = await axios.post(url, body, opt).then(() => {
+      return this.getUserInfo();
     });
+    return data;
   }
 
   //////////////////////         회원가입          ///////////////////////////////////////
@@ -112,7 +118,8 @@ class AuthService {
   // 로그아웃
   async logout() {
     const url = `${baseURL}/memberLogout`;
-    return await axios.get(url);
+    const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
+    return await axios.get(url, opt);
   }
   //회원 탈퇴
   async withdraw(oldPassword) {
@@ -128,8 +135,9 @@ class AuthService {
     const body = {
       email,
     };
+    const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
     const result = await axios
-      .post(url, body)
+      .post(url, body, opt)
       .then(() => true)
       .catch(() => false);
     return result;

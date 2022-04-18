@@ -9,7 +9,7 @@ import DoubleCheckPw from "./pageCompnents/DoubleCheckPw";
 import CheckId from "./pageCompnents/CheckId";
 import CheckNickName from "./pageCompnents/CheckNickName";
 
-const Signup = ({ page, setPage, authService, setUserId }) => {
+const Signup = ({ page, setPage, authService, setLoginInfo }) => {
   const [email, setEmail] = useState("");
   const [id, setId] = useState(""); // 아이디 입력\
   const [newPw, setNewPw] = useState(""); // 비밀번호
@@ -37,11 +37,15 @@ const Signup = ({ page, setPage, authService, setUserId }) => {
       alert("닉네임 확인이 필요합니다. 일치하지 않습니다.");
       return;
     }
-    // 가입
-    await authService.signup(id, newPw, nickName, email); // 성공
-    await authService.login(id, newPw).catch((e) => alert("아이디, 비밀번호를 확인해주세요.")); // 로그인이 안됨.
-    const result = await authService.getUserInfo();
-    setUserId(result);
+    // 가입 및 로그인
+    await authService.signup(id, newPw, nickName, email).then(() => {
+      authService
+        .login(id, newPw)
+        .then((result) => {
+          setLoginInfo(result);
+        })
+        .catch((e) => alert("아이디, 비밀번호를 확인해주세요."));
+    });
   };
 
   return (

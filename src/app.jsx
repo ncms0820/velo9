@@ -12,32 +12,44 @@ import SocialSign from "./views/login/SocialSign";
 import Write from "./views/write/write";
 import Redirect from "./views/redirect";
 
-function App({ dbService, authService }) {
+function App({ dbService, authService, functionService }) {
   const [onLoginModal, setOnLoginModal] = useState(false);
   const [userId, setUserId] = useState(null);
-  const onLogout = () => {
-    authService.logout();
+  const setLoginInfo = (result) => {
+    if (result) {
+      setUserId(result);
+      localStorage.setItem("userId", JSON.stringify(result));
+    } else {
+      setUserId(null);
+      localStorage.removeItem("userId");
+    }
   };
-
   useEffect(() => {
     if (userId) {
       setOnLoginModal(false);
+    } else if (userId === null) {
+      let user;
+      try {
+        user = localStorage.getItem("userId");
+      } catch {
+        user = null;
+      }
+      setUserId(user);
     }
-  }, [userId]);
+  }, [userId, authService]);
 
   return (
     <>
       <Header
-        onLogout={userId && onLogout}
         authService={authService}
-        setUserId={setUserId}
-        onLoginModal={onLoginModal}
+        userId={userId}
+        setLoginInfo={setLoginInfo}
         setOnLoginModal={setOnLoginModal}
       />
       {onLoginModal && (
         <LoginRouter
           authService={authService}
-          setUserId={setUserId}
+          setLoginInfo={setLoginInfo}
           userId={userId}
           setOnLoginModal={setOnLoginModal}
         />
@@ -47,13 +59,16 @@ function App({ dbService, authService }) {
           path="/"
           element={<Home dbService={dbService} authService={authService} userId={userId} onLoginModal={onLoginModal} />}
         />
-        <Route path="/success" element={<Redirect setUserId={setUserId} authService={authService} />} />
+        <Route path="/success" element={<Redirect setLoginInfo={setLoginInfo} authService={authService} />} />
         <Route path="/explore" element={<Explore />} />
         <Route path="/write" element={<Write />} />
         <Route path="/read" element={<Read />} />
         <Route path="/setting" element={<Setting />} />
         <Route path="/mypage" element={<MypageRouter userId={userId} />} />
-        <Route path="/firstLogin" element={<SocialSign authService={authService} setUserId={setUserId} setOnLoginModal={setOnLoginModal} />} />
+        <Route
+          path="/firstLogin"
+          element={<SocialSign authService={authService} setOnLoginModal={setOnLoginModal} />}
+        />
       </Routes>
     </>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./_header.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
@@ -8,7 +8,7 @@ import ReactiveButton from "reactive-button";
 import { Switch, useDarkreader } from "react-darkreader";
 import Menu from "../../components/menu/menu";
 
-const Header = memo(({ onLogout, setOnLoginModal, authService, setUserId }) => {
+const Header = memo(({ setOnLoginModal, authService, setLoginInfo, userId }) => {
   const [isDark, { toggle }] = useDarkreader(false);
   const [highlight, setHighlight] = useState(false);
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ const Header = memo(({ onLogout, setOnLoginModal, authService, setUserId }) => {
       <h1 className={styles.logo} onClick={goToHome}>
         Velo9
       </h1>
-      <div className={onLogout ? styles.nav_log : styles.nav}>
+      <div className={userId ? styles.nav_log : styles.nav}>
         <div>
           <Switch checked={isDark} onChange={toggle} styling={"fluent"} onColor={"#080"} />
         </div>
@@ -45,7 +45,7 @@ const Header = memo(({ onLogout, setOnLoginModal, authService, setUserId }) => {
             style={highlight && { color: "#FED000" }}
           />
         </div>
-        {onLogout ? (
+        {userId ? (
           <div>
             <div className={styles.loggedIn}>
               <div>
@@ -57,7 +57,7 @@ const Header = memo(({ onLogout, setOnLoginModal, authService, setUserId }) => {
                 <ReactiveButton style={{ borderRadius: "5px" }} color={"violet"} idleText={"menu"} onClick={tabMenu} />
               </div>
             </div>
-            {tab && <Menu onLogout={onLogout} tabMenu={tabMenu} authService={authService} setUserId={setUserId} />}
+            {tab && <Menu onLogout={userId} tabMenu={tabMenu} authService={authService} setLoginInfo={setLoginInfo} />}
           </div>
         ) : (
           <ReactiveButton
@@ -66,9 +66,6 @@ const Header = memo(({ onLogout, setOnLoginModal, authService, setUserId }) => {
             idleText="Login"
             onClick={() => setOnLoginModal(true)}
           />
-          // <Link to="/login">
-          //   <ReactiveButton style={{ borderRadius: "5px" }} color={"dark"} idleText={"Login"} />
-          // </Link>
         )}
       </div>
     </div>

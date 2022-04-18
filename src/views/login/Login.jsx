@@ -9,15 +9,14 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Txt from "../../components/Txt";
 
-const Login = ({ setPage, authService, setUserId }) => {
+const Login = ({ setPage, authService, setLoginInfo }) => {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
 
   // 일반 로그인
   const goLogin = async () => {
-    await authService.login(id, pw).catch((e) => alert("아이디, 비밀번호를 확인해주세요.") ) // 로그인이 안됨.
-    const result = await authService.getUserInfo();
-    setUserId(result)
+    const result = await authService.login(id, pw).catch(() => alert("아이디, 비밀번호를 확인해주세요."));
+    setLoginInfo(result);
   };
 
   // 소셜 로그인
@@ -36,29 +35,14 @@ const Login = ({ setPage, authService, setUserId }) => {
   return (
     <>
       <Txt txt="아이디" />
-      <Input type="text" 
-        value={id} 
-        onChange={(e) => setId(e.target.value)} 
-      />
+      <Input type="text" value={id} onChange={(e) => setId(e.target.value)} />
       <Txt txt="비밀번호" />
-      <Input type="password" 
-        value={pw} 
-        onChange={(e) => setPw(e.target.value)}
-        onEnter={goLogin}
-      />
+      <Input type="password" value={pw} onChange={(e) => setPw(e.target.value)} onEnter={goLogin} />
       <Button txt="로그인" onClick={goLogin} />
 
       <div className={styles.twoBtnBox}>
-        <Button 
-          txt="회원가입" 
-          className={styles.joinBtn} 
-          onClick={() => setPage("signup")} 
-        />
-        <Button 
-          txt="아이디/비밀번호 찾기" 
-          className={styles.findUserBtn} 
-          onClick={() => setPage("findId")} 
-        />
+        <Button txt="회원가입" className={styles.joinBtn} onClick={() => setPage("signup")} />
+        <Button txt="아이디/비밀번호 찾기" className={styles.findUserBtn} onClick={() => setPage("findId")} />
       </div>
 
       <div className={styles.socialLoginBox}>
