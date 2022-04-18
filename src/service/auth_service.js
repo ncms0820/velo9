@@ -7,16 +7,10 @@ class AuthService {
   // 로그인 정보 가져오기
   async getUserInfo() {
     const url = `${baseURL}/getHeaderInfo`;
-<<<<<<< HEAD
-    const opt = {withCredentials: true, headers: { "Content-Type": `application/json` }}
-    return await axios
-      .get(url, opt)
-=======
     const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
     return await axios
       .get(url, opt)
       .then((data) => data.data)
->>>>>>> d3328036f3deffd15f7433e20874ce8ce158e153
       .catch(() => {
         return console.log("로그인 정보 가져오기 실패");
       });
@@ -64,16 +58,11 @@ class AuthService {
       username,
       password,
     };
-<<<<<<< HEAD
-    const opt = {withCredentials: true, headers: { "Content-Type": `application/json` }}
-    return await axios.post(url, body, opt).then(()=>{console.log("로그인 성공")})
-=======
     const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
     const data = await axios.post(url, body, opt).then(() => {
       return this.getUserInfo();
     });
     return data;
->>>>>>> d3328036f3deffd15f7433e20874ce8ce158e153
   }
 
   //////////////////////         회원가입          ///////////////////////////////////////
