@@ -6,13 +6,13 @@ import { faClock } from "@fortawesome/free-regular-svg-icons";
 import { useEffect, useState } from "react/cjs/react.development";
 import { Planet } from "react-planet";
 const Nav = ({ handleTab }) => {
-  const [tabSwitch, setTabSwitch] = useState(true);
+  const [tabSwitch, setTabSwitch] = useState("createdDate");
   const changeTab = (event) => {
     const current = event.currentTarget.id;
-    if (current === "trend") {
-      setTabSwitch(true);
+    if (current === "createdDate") {
+      setTabSwitch("createdDate");
     } else {
-      setTabSwitch(false);
+      setTabSwitch("old");
     }
   };
   useEffect(() => {
@@ -27,11 +27,11 @@ const Nav = ({ handleTab }) => {
     <div className={styles.nav}>
       <div>
         <div className={styles.wrapper}>
-          <button id="trend" className={tabSwitch ? "highlight" : "btn"} onClick={changeTab}>
+          <button id="createdDate" className={tabSwitch === "createdDate" ? "highlight" : "btn"} onClick={changeTab}>
             <FontAwesomeIcon icon={faArrowTrendUp} className={styles.fontAwesome} />
             <span>트랜딩</span>
           </button>
-          <button id="newly" className={!tabSwitch ? "highlight" : "btn"} onClick={changeTab}>
+          <button id="old" className={tabSwitch === "old" ? "highlight" : "btn"} onClick={changeTab}>
             <FontAwesomeIcon icon={faClock} className={styles.fontAwesome} />
             <span>최신</span>
           </button>
@@ -43,8 +43,6 @@ const Nav = ({ handleTab }) => {
           orbitRadius={50}
           bounceOnClose
           rotation={30}
-          // the bounce direction is minimal visible
-          // but on close it seems the button wobbling a bit to the bottom
           bounceDirection="BOTTOM"
         >
           <FontAwesomeIcon icon={faQuestionCircle} size="lg" />
