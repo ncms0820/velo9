@@ -8,6 +8,8 @@ import fakeDb from "../../service/fakeDb";
 
 const Home = ({ dbService, userId, onLoginModal }) => {
   const [cards, setCards] = useState();
+
+  
   const handleTab = useCallback(
     async (sort = "createdDate") => {
       try {
@@ -23,7 +25,12 @@ const Home = ({ dbService, userId, onLoginModal }) => {
       }
     },
     [dbService]
-  );
+    );
+    
+    useEffect(() => {
+      handleTab();
+    }, [handleTab]);
+  
   return (
     <>
       {!onLoginModal && (

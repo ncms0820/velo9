@@ -1,0 +1,29 @@
+@import "../../common/breakpoints";
+
+.archiveBox {
+  padding: 0 4rem;
+}
+
+.archiveHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  // max-width: 1200px;
+  margin: 4rem auto 0;
+
+  input[type=text] {
+    align-self: end;
+    width: 10rem;
+  }
+
+  div {
+    display: flex;
+    align-self: center;
+    span {
+      text-align: center;
+      font-size: 1rem;
+      padding: .5rem 1rem;
+      cursor: pointer;
+    }
+  }
+}
