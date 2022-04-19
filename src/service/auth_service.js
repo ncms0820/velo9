@@ -1,13 +1,13 @@
 import axios from "axios";
 
 const baseURL = "http://localhost:8080";
+const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
 class AuthService {
   //////////////           정보 가져오기          /////////////////////
 
   // 로그인 정보 가져오기
   async getUserInfo() {
     const url = `${baseURL}/getHeaderInfo`;
-    const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
     return await axios
       .get(url, opt)
       .then((data) => data.data)
@@ -58,7 +58,6 @@ class AuthService {
       username,
       password,
     };
-    const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
     const data = await axios.post(url, body, opt).then(() => {
       return this.getUserInfo();
     });
@@ -70,7 +69,6 @@ class AuthService {
   // 소셜 회원가입은 실행후 /login으로 자동 이동 됩니다.
   async socialSignup(username, password, nickname) {
     const url = `${baseURL}/socialSignup`;
-    const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
     const body = {
       username,
       password,
@@ -118,7 +116,6 @@ class AuthService {
   // 로그아웃
   async logout() {
     const url = `${baseURL}/memberLogout`;
-    const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
     return await axios.get(url, opt);
   }
   //회원 탈퇴
@@ -135,7 +132,6 @@ class AuthService {
     const body = {
       email,
     };
-    const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
     const result = await axios
       .post(url, body, opt)
       .then(() => true)

@@ -1,0 +1,45 @@
+@import "../../common/breakpoints";
+
+.archiveBox {
+  
+  padding: 0 4rem;
+  background-color: whitesmoke;
+  @include media("<=phone") {
+    padding: 0 1rem;
+    font-size: 12px;
+  }
+  .archiveContent {
+    margin-top: 2em;
+    display: grid;
+    justify-items: center;
+    gap: 2.8rem;
+    height: fit-content;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-rows: auto;
+
+    }
+}
+
+.archiveHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  // max-width: 1200px;
+  margin: 4rem auto 0;
+
+  input[type=text] {
+    align-self: end;
+    width: 10rem;
+  }
+
+  div {
+    display: flex;
+    align-self: center;
+    span {
+      text-align: center;
+      font-size: 1rem;
+      padding: .5rem 1rem;
+      cursor: pointer;
+    }
+  }
+}

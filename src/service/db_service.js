@@ -106,7 +106,7 @@ class DbService {
   //최근 읽은 게시글
   async getRecentPost() {
     const url = `${baseURL}/archive/recent`;
-    const data = await axios.get(url);
+    const data = await axios.get(url, opt);
     return data;
   }
 }

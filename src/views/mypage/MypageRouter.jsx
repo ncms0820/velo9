@@ -30,6 +30,8 @@ const MypageRouter = ( { userId } ) => {
     console.log(value)
     setSeriesName(value)
   }, [])
+
+  console.log(userId.nickname)
   
 
   return (
