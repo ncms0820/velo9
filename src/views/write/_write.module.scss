@@ -1,3 +1,4 @@
+@import "node_modules/@pathofdev/react-tag-input/src/styles/index.scss";
 .footer {
   margin-top: 20px;
   padding-left: 1rem;
@@ -23,4 +24,42 @@
 }
 .body {
   padding: 0 3rem;
+}
+.meta_info {
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem;
+  .image_field {
+    border: 1px solid black;
+    width: 100%;
+    h1 {
+      font-weight: bold;
+    }
+    .img {
+      border: 1px solid black;
+      width: 70%;
+      height: 6rem;
+      margin: 1rem 0rem;
+    }
+  }
+  .access {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 60%;
+    h1 {
+      font-weight: bold;
+    }
+  }
+  .series_field {
+    border: 1px solid black;
+    width: 50%;
+    overflow: scroll;
+    h1 {
+      font-weight: bold;
+    }
+  }
 }

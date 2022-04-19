@@ -1,20 +1,47 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./_read.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import Comment from "../../components/comment/comment";
+import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+// import Comment from "../../components/comment/comment";
 import ReactiveButton from "reactive-button";
 import Footer from "../../components/footer/footer";
 import Error from "../etc/error";
-const Read = ({ dbService }) => {
-  const [list, setList] = useState(false);
+import Swal from "sweetalert2";
+
+
+const Read = ({ dbService, userId, functionService }) => {
   const [cardInfo, setCardInfo] = useState("");
   const [createdDate, setCreatedDate] = useState();
+  const [manage, setManage] = useState(false);
+  const [love, setLove] = useState(false);
+  const navigate = useNavigate();
   const location = useLocation();
   const data = location.state.content;
   const nickname = data.member.nickname;
   const id = data.postId;
+  const onDelete = () => {
+    Swal.fire({
+      title: "삭제하시겠습니까?",
+      text: "신중하셔야 하옵니다.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "예",
+      cancelButtonText: "아니오",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await dbService.postDelete(cardInfo.id);
+        navigate("/");
+        Swal.fire("삭제 완료", "정상적으로 삭제 되었습니다.", "success");
+      }
+    });
+  };
+  const onLove = async () => {
+    await functionService.love(cardInfo.id);
+    setLove(!love);
+  };
   useEffect(() => {
     const promise = new Promise((resolve, reject) => {
       const data = dbService.getPostDetail(nickname, id);
@@ -27,7 +54,16 @@ const Read = ({ dbService }) => {
       setCardInfo(data);
       return;
     });
-  }, [dbService, nickname, id]);
+  }, [dbService, nickname, id, love]);
+  useEffect(() => {
+    if (userId) {
+      if (userId.nickname === nickname) {
+        setManage(true);
+      } else {
+        setManage(false);
+      }
+    }
+  }, [userId, nickname]);
   return (
     <>
       {cardInfo ? (
@@ -39,10 +75,12 @@ const Read = ({ dbService }) => {
               <span>&nbsp;·&nbsp;</span>
               <div>{createdDate}</div>
             </div>
-            <div className={styles.meta_button}>
-              <ReactiveButton style={{ borderRadius: "5px" }} color={"primary"} idleText={"수정"} />
-              <ReactiveButton style={{ borderRadius: "5px" }} color={"red"} idleText={"삭제"} />
-            </div>
+            {manage && (
+              <div className={styles.meta_button}>
+                <ReactiveButton style={{ borderRadius: "5px" }} color={"primary"} idleText={"수정"} />
+                <ReactiveButton style={{ borderRadius: "5px" }} color={"red"} idleText={"삭제"} onClick={onDelete} />
+              </div>
+            )}
           </div>
           <div className={styles.tag}>
             {cardInfo.tags.map((data) => (
@@ -57,12 +95,7 @@ const Read = ({ dbService }) => {
             )}
           </div>
           <div className={styles.series}>
-            <h1>Spring</h1>
-            <div onClick={() => setList(!list)}>
-              <FontAwesomeIcon icon={faCaretDown} />
-              <span>목록 보기</span>
-            </div>
-            {list && <div> hi</div>}
+            <h1>{cardInfo.seriesName}</h1>
           </div>
           <div className={styles.content}>
             <h1>{cardInfo.content}</h1>
@@ -70,7 +103,9 @@ const Read = ({ dbService }) => {
           <div className={styles.thumb}>
             <div>
               <span>도움 돼요!</span>
-              <FontAwesomeIcon icon={faThumbsUp} size={"2x"} color={"#f73939"} />
+              <div onClick={onLove} className={styles.thumbsUp}>
+                <FontAwesomeIcon icon={faThumbsUp} size={"2x"} color={"#f73939"} />
+              </div>
               <span>{cardInfo.loveCount}</span>
             </div>
           </div>

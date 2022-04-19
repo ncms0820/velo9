@@ -30,7 +30,7 @@ function App({ dbService, authService, functionService }) {
     } else if (userId === null) {
       let user;
       try {
-        user = localStorage.getItem("userId");
+        user = JSON.parse(localStorage.getItem("userId"));
       } catch {
         user = null;
       }
@@ -40,12 +40,7 @@ function App({ dbService, authService, functionService }) {
 
   return (
     <>
-      <Header
-        authService={authService}
-        userId={userId}
-        setLoginInfo={setLoginInfo}
-        setOnLoginModal={setOnLoginModal}
-      />
+      <Header authService={authService} userId={userId} setLoginInfo={setLoginInfo} setOnLoginModal={setOnLoginModal} />
       {onLoginModal && (
         <LoginRouter
           authService={authService}
@@ -62,7 +57,10 @@ function App({ dbService, authService, functionService }) {
         <Route path="/success" element={<Redirect setLoginInfo={setLoginInfo} authService={authService} />} />
         <Route path="/explore" element={<Explore />} />
         <Route path="/write" element={<Write />} />
-        <Route path="/read" element={<Read dbService={dbService}/>} />
+        <Route
+          path="/read"
+          element={<Read dbService={dbService} userId={userId} functionService={functionService} />}
+        />
         <Route path="/setting" element={<Setting />} />
         <Route path="/mypage" element={<MypageRouter userId={userId} />} />
         <Route

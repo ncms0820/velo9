@@ -1,13 +1,14 @@
 import axios from "axios";
 
 const baseURL = "http://localhost:8080";
+const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
 class FunctionService {
   async love(postId) {
     const url = `${baseURL}/love`;
     const body = {
       postId,
     };
-    await axios.post(url, body);
+    await axios.post(url, body, opt);
   }
 
   async addSeries(name) {
