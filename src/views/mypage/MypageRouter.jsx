@@ -18,8 +18,8 @@ import TagHandlerMobile from "./TagHandlerMobile";
 
 const MypageRouter = ( { userId, dbService } ) => {
   const navigate = useNavigate();
-  const userNickname = JSON.parse(userId).nickname // 이걸 따로 빼서 줄수있으면 좋을듯, 혹은 parsing한 이후 전달.
 
+  const [nickname, setNickname] = useState(userId.nickname)
   const [tapState, setTapState] = useState('post') // post, series, introduce는 보류
   const [searchValue, setSearchValue] = useState('')
   const [tags, setTags] = useState([]) //태그 목록 따로 저장
@@ -37,8 +37,7 @@ const MypageRouter = ( { userId, dbService } ) => {
   }, [])
   
   const test = async () => {
-    console.log(userNickname)
-    const result = await dbService.memberMain(userNickname, 0)
+    const result = await dbService.memberMain(nickname, 0)
     console.log(result.data.data.content)
     setPosts(result.data.data.content)
   }
@@ -46,9 +45,6 @@ const MypageRouter = ( { userId, dbService } ) => {
   useEffect(() => {
     test()
   }, [])
-  
-
-  console.log(userId.nickname)
   
 
   return (

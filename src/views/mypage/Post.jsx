@@ -7,7 +7,7 @@ import Button from "../../components/Button";
 const Post = ( {dummyData} ) => {
 
   console.log(dummyData.thumbnail)
-  
+
   return(
     <div className={styles.post}>
       {dummyData.thumbnail &&
@@ -20,7 +20,7 @@ const Post = ( {dummyData} ) => {
       />
 
       <Txt
-        className={styles.postDesc}
+        className={styles.postIntro}
         txt={dummyData.introduce}
       />
 
@@ -39,10 +39,10 @@ const Post = ( {dummyData} ) => {
           className={styles.postDate}
           txt={dummyData.createdDate + " · "} // 날짜 계산식 적용
         />
-        <Txt
+        {/* <Txt
           className={styles.postComments}
           txt={dummyData.comments.length + "개의 댓글"} // 날짜 계산식 적용
-        />
+        /> */}
       </div>
     </div>
   )
