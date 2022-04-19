@@ -19,7 +19,7 @@
     }
     .meta_data {
       width: 30%;
-      max-width: 12rem;
+      max-width: 15rem;
       display: flex;
       justify-content: space-between;
       color: grey;
@@ -80,6 +80,11 @@
       align-items: center;
       width: 30%;
       max-width: 10rem;
+    }
+    .thumbsUp {
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }

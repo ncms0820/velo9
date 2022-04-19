@@ -17,6 +17,7 @@ const Header = memo(({ setOnLoginModal, authService, setLoginInfo, userId }) => 
     navigate("/explore");
   };
   const goToHome = () => {
+    setOnLoginModal(false);
     navigate("/");
   };
   const tabMenu = () => {
@@ -54,7 +55,7 @@ const Header = memo(({ setOnLoginModal, authService, setLoginInfo, userId }) => 
                 </Link>
               </div>
               <div>
-                <ReactiveButton style={{ borderRadius: "5px" }} color={"violet"} idleText={"menu"} onClick={tabMenu} />
+                <ReactiveButton style={{ borderRadius: "5px" }} color={"green"} idleText={"menu"} onClick={tabMenu} />
               </div>
             </div>
             {tab && <Menu onLogout={userId} tabMenu={tabMenu} authService={authService} setLoginInfo={setLoginInfo} />}

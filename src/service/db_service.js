@@ -77,12 +77,12 @@ class DbService {
   async getPostDetail(nickname, postId) {
     const url = `${baseURL}/${nickname}/read/${postId}`;
     const data = await axios.get(url);
-    return data;
+    return data.data;
   }
 
   //글 삭제하기
   async postDelete(id) {
-    const url = `${baseURL}/delete`;
+    const url = `${baseURL}/delete?id=${id}`;
     const body = {
       id,
     };
