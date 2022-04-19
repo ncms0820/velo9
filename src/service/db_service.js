@@ -76,7 +76,7 @@ class DbService {
   async getPostDetail(nickname, postId) {
     const url = `${baseURL}/${nickname}/read/${postId}`;
     const data = await axios.get(url);
-    return data;
+    return data.data;
   }
 
   //글 삭제하기
@@ -98,7 +98,8 @@ class DbService {
   //좋아요 누른 게시글
   async getLikedPost() {
     const url = `${baseURL}/archive/like`;
-    const data = await axios.get(url);
+    const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
+    const data = await axios.get(url, opt);
     return data;
   }
 

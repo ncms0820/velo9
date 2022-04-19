@@ -8,12 +8,10 @@ const fakeDb = {
       member: {
         nickname: "admin",
         memberThumbnail: {
-          fileName: "null\\s_null_null",
+          fileName: null,
         },
       },
-      postThumbnail: {
-        fileName: "null\\s_null_null",
-      },
+      postThumbnail: null,
     },
     {
       postId: 2,
@@ -23,7 +21,7 @@ const fakeDb = {
       member: {
         nickname: "admin",
         memberThumbnail: {
-          fileName: "null\\s_null_null",
+          fileName: null,
         },
       },
       postThumbnail: null,
@@ -36,7 +34,7 @@ const fakeDb = {
       member: {
         nickname: "admin",
         memberThumbnail: {
-          fileName: "null\\s_null_null",
+          fileName: null,
         },
       },
       postThumbnail: null,
@@ -49,7 +47,7 @@ const fakeDb = {
       member: {
         nickname: "admin",
         memberThumbnail: {
-          fileName: "null\\s_null_null",
+          fileName: null,
         },
       },
       postThumbnail: null,

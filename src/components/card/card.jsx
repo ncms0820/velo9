@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const Card = ({ content }) => {
   const postThumbURL = content.postThumbnail;
-  const memberURL = content.member.memberThumbnail;
+  const memberURL = content.member.memberThumbnail.path;
   const data = content;
   const navigate = useNavigate();
   const goToDetail = () => {

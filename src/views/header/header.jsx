@@ -17,6 +17,7 @@ const Header = memo(({ setOnLoginModal, authService, setLoginInfo, userId }) => 
     navigate("/explore");
   };
   const goToHome = () => {
+    setOnLoginModal(false);
     navigate("/");
   };
   const tabMenu = () => {

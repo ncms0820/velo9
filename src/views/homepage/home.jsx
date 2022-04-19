@@ -15,7 +15,6 @@ const Home = ({ dbService, userId, onLoginModal }) => {
         if (db.content.length !== 0) {
           setCards(db.data.content);
         } else {
-          //임시 입니다.
           setCards(fakeDb);
         }
       } catch {
@@ -24,6 +23,9 @@ const Home = ({ dbService, userId, onLoginModal }) => {
     },
     [dbService]
   );
+  useEffect(() => {
+    handleTab();
+  }, [handleTab]);
   return (
     <>
       {!onLoginModal && (

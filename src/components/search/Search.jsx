@@ -39,7 +39,7 @@ const Search = ({
   // input EventListener
   useEffect(() => {
     inputRef.current.addEventListener("input", onInput);
-    return () => inputRef.current.removeEventListener("input", onInput);
+    return () => inputRef.current && inputRef.current.removeEventListener("input", onInput);
   }, [onInput]);
 
   // focuses on input field
@@ -59,7 +59,7 @@ const Search = ({
     }
     return () => {
       if (inputRef) {
-        appRef.current.removeEventListener("focusin", focusHandler);
+        appRef.current && appRef.current.removeEventListener("focusin", focusHandler);
       }
     };
   }, [focusHandler]);
