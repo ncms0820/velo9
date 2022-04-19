@@ -31,13 +31,13 @@ const Series = ( { data } ) => {
       />
       
       <ul>
-          { //시리즈 이름이 같은것끼리 매핑.
+        { //시리즈 이름이 같은것끼리 매핑.
           targetSeries.map((data, idx) => {
           return <SeriesList
                     data={data} 
                   />
-          })
-          }
+        })
+        }
       </ul>
 
       <Button 

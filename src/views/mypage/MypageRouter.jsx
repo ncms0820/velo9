@@ -9,20 +9,25 @@ import Post from "./Post";
 import { dummyData } from "./dummy";
 import Series from "./Series";
 import TagHandlerDesktop from "./TagHandlerDesktop";
+import TagHandlerMobile from "./TagHandlerMobile";
 
 // Components
 
 // page
 
 
-const MypageRouter = ( { userId } ) => {
+const MypageRouter = ( { userId, dbService } ) => {
   const navigate = useNavigate();
+  const userNickname = JSON.parse(userId).nickname // 이걸 따로 빼서 줄수있으면 좋을듯, 혹은 parsing한 이후 전달.
 
   const [tapState, setTapState] = useState('post') // post, series, introduce는 보류
   const [searchValue, setSearchValue] = useState('')
   const [tags, setTags] = useState([]) //태그 목록 따로 저장
   const [seriesName, setSeriesName] = useState([]) // 시리즈 리스트, 따로 저장하거나 DB에서 받아오면 만들지 않아도됨.
   
+  const [posts, setPosts] = useState([])
+
+
   useEffect(() => {
     // let reverse = dummyData.reverse() // 최근 hash 값부터 위로
     let series = dummyData.map( (v) => v.series )
@@ -30,6 +35,18 @@ const MypageRouter = ( { userId } ) => {
     console.log(value)
     setSeriesName(value)
   }, [])
+  
+  const test = async () => {
+    console.log(userNickname)
+    const result = await dbService.memberMain(userNickname, 0)
+    console.log(result.data.data.content)
+    setPosts(result.data.data.content)
+  }
+  
+  useEffect(() => {
+    test()
+  }, [])
+  
 
   console.log(userId.nickname)
   
@@ -43,18 +60,23 @@ const MypageRouter = ( { userId } ) => {
         setSearchValue={setSearchValue}
       />
 
-      <TagHandlerDesktop />
+      {/* <TagHandlerDesktop /> */}
+      <TagHandlerMobile
+        dbService={dbService}
+      />
 
       <div className={styles.mypageContent}>
-        { tapState === "post" &&
-          dummyData.map( (val, idx) => {
+
+        {/* 포스트일때 */}
+        { tapState === "post" && posts.length &&
+          posts.map( (val, idx) => {
           return <Post
                   key={idx}
                   dummyData={val}
                   />
           })
         }
-
+        {/* 시리즈일때 */}
         { tapState === "series" &&
           seriesName.map( (data, idx) => {
           return <Series
@@ -63,7 +85,8 @@ const MypageRouter = ( { userId } ) => {
                   />
           })
         }
-        </div>
+
+      </div>
     </div>
   );
 };

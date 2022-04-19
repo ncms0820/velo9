@@ -64,7 +64,7 @@ const Menu = ({ tabMenu, authService, setLoginInfo }) => {
       </div>
       <div
         onClick={() => {
-          navigate("/mypage");
+          navigate("/archive");
         }}
       >
         읽기 목록
