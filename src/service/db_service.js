@@ -67,8 +67,8 @@ class DbService {
   }
 
   //시리즈에 속한 글들 보기
-  async getSeriesDetail(nickname, seriesName) {
-    const url = `${baseURL}/series/${seriesName}`;
+  async getSeriesDetail(nickname, seriesName) { // url 수정, `${baseURL}/series/${seriesName}` 에서 변경
+    const url = `${baseURL}/${nickname}/series/${seriesName}`;
     const data = await axios.get(url);
     return data;
   }

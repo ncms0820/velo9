@@ -27,6 +27,8 @@ const MypageRouter = ( { userId, dbService } ) => {
   
   const [posts, setPosts] = useState([])
 
+  const [serieses, setSerieses] = useState([])
+
 
   useEffect(() => {
     // let reverse = dummyData.reverse() // 최근 hash 값부터 위로
@@ -36,15 +38,30 @@ const MypageRouter = ( { userId, dbService } ) => {
     setSeriesName(value)
   }, [])
   
-  const test = async () => {
+  const getMyPosts = async () => {
     const result = await dbService.memberMain(nickname, 0)
     console.log(result.data.data.content)
     setPosts(result.data.data.content)
   }
   
+  const getMySeries = async() => {
+    const result = await dbService.getSeries(nickname)
+    console.log("시리즈보기 리턴: ", result.data.subData)
+    setSerieses(result.data.subData)
+    // const test = await dbService.getSeriesDetail(nickname)
+  }
+
   useEffect(() => {
-    test()
-  }, [])
+    console.log(serieses)
+  }, [serieses])
+  
+  
+  useEffect(() => {
+    setNickname(userId.nickname)
+    console.log(userId.nickname, nickname)
+    getMyPosts()
+    getMySeries()
+  }, [nickname])
   
 
   return (
@@ -73,11 +90,13 @@ const MypageRouter = ( { userId, dbService } ) => {
           })
         }
         {/* 시리즈일때 */}
-        { tapState === "series" &&
-          seriesName.map( (data, idx) => {
+        { tapState === "series" && serieses.length &&
+          serieses.map( (data, idx) => {
           return <Series
-                  key={idx}
-                  data={data}
+                    key={idx}
+                    data={data.seriesName}
+                    dbService={dbService}
+                    nickname={nickname}
                   />
           })
         }

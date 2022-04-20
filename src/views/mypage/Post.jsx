@@ -38,7 +38,7 @@ const Post = ( {dummyData} ) => {
         />
         {/* <Txt
           className={styles.postComments}
-          txt={dummyData.comments.length + "개의 댓글"} // 날짜 계산식 적용
+          txt={dummyData.comments.length + "개의 댓글"} // 댓글은 따로 불러오나??
         /> */}
       </div>
     </div>
