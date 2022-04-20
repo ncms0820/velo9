@@ -14,11 +14,11 @@ class DbService {
     return data.data;
   }
 
-  // 글 작성 아이디 없이 할경우 새글 작성, 있으면 글 수정 페이지 ----- GET
+  // 글 작성 아이디 없이 할경우 새글 작성, 있으면 글 수정 페이지 ----- GET 번호 받기!
   async getWrite(id) {
     const url = `${baseURL}/write?id=${id}`;
-    const data = await axios.get(url);
-    return data;
+    const data = await axios.get(url, opt);
+    return data.data;
   }
 
   //글 작성하기  ----- POST
@@ -34,7 +34,7 @@ class DbService {
       tags,
       thumbnailFileName,
     };
-    const id = await axios.post(url, body);
+    const id = await axios.post(url, body, opt);
     return id;
   }
 
@@ -46,7 +46,7 @@ class DbService {
       title,
       content,
     };
-    const resultId = await axios.post(url, body);
+    const resultId = await axios.post(url, body, opt);
     return resultId;
   }
 
@@ -108,6 +108,17 @@ class DbService {
     const url = `${baseURL}/archive/recent`;
     const data = await axios.get(url);
     return data;
+  }
+
+  async postThumbnamil(formData) {
+    const url = `${baseURL}/uploadPostThumbnail`;
+    const data = await axios.post(url, formData);
+    const thumbnail = `${baseURL}/displayPostThumbnail?fileName=${encodeURIComponent(data.data.fileName)}`;
+    const fileName = data.data.fileName;
+    return {
+      thumbnail,
+      fileName,
+    };
   }
 }
 

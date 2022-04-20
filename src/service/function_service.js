@@ -16,14 +16,21 @@ class FunctionService {
     const body = {
       name,
     };
-    await axios.post(url, body);
+    await axios.post(url, body, opt);
   }
+
+  async getSeriesList() {
+    const url = `${baseURL}/getSeriesList`;
+    const data = await axios.get(url, opt);
+    return data.data;
+  }
+
   async deleteSeries(id) {
     const url = `${baseURL}/deleteSeries`;
     const body = {
       id,
     };
-    await axios.post(url, body);
+    await axios.post(url, body, opt);
   }
 }
 
