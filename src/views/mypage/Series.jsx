@@ -22,7 +22,14 @@ const Series = ( { data, nickname, dbService } ) => {
   useEffect(() => {
     getSeriesContents()
   }, [])
+
   
+  const testGoReadPage = (post) => {
+    console.log("클릭됨")
+    navigate("/read", {
+      state: { content: { member: { nickname: nickname }, postId: post.id } },
+    });
+  }
 
   return(
     <div className={styles.series}>
@@ -43,7 +50,8 @@ const Series = ( { data, nickname, dbService } ) => {
           seriesContents &&
           seriesContents.slice(seriesContents.length -3, seriesContents.length).map((data, idx) => {
           return <SeriesContent
-                    data={data} 
+                    data={data}
+                    onClick={(data) => testGoReadPage(data)}
                   />
         })
         }

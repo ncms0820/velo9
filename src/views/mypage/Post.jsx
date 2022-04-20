@@ -4,26 +4,25 @@ import styles from "./mypage.module.scss";
 import Txt from "../../components/Txt";
 import Button from "../../components/Button";
 
-const Post = ( {dummyData} ) => {
-
-  console.log(dummyData.thumbnail)
+const Post = ( { post, onClick } ) => {
 
   return(
-    <div className={styles.post}>
-      {dummyData.thumbnail &&
-        <img src={dummyData.thumbnail} alt="" />
+    <div className={styles.post} onClick={onClick}>
+      {post.thumbnail &&
+        <img src={post.thumbnail} alt="" />
       }
       <Txt
         className={styles.postTitle}
-        txt={dummyData.title}
+        txt={post.title}
       />
       <Txt
         className={styles.postIntro}
-        txt={dummyData.introduce}
+        txt={post.introduce}
       />
-      {dummyData.tags.length &&
+
+      {post.tags.length &&
         <div className={styles.tagBox}>
-          {dummyData.tags.map( (val) => {
+          {post.tags.map( (val) => {
               return <Button 
                       onClick={() => console.log(val)}
                       txt={val}
@@ -34,11 +33,11 @@ const Post = ( {dummyData} ) => {
       <div>
         <Txt
           className={styles.postDate}
-          txt={dummyData.createdDate + " · "} // 날짜 계산식 적용
+          txt={post.createdDate + " · "} // 날짜 계산식 적용
         />
         {/* <Txt
           className={styles.postComments}
-          txt={dummyData.comments.length + "개의 댓글"} // 댓글은 따로 불러오나??
+          txt={post.comments.length + "개의 댓글"} // 댓글은 따로 불러오나??
         /> */}
       </div>
     </div>
