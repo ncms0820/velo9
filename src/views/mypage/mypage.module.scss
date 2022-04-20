@@ -195,10 +195,11 @@ $velogD: #12b886;
   }
 
   .seriesTitle {
-    margin: 0.5rem 0;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
   }
 
-  .seriesListBox {
+  .SeriesContentBox {
     display: flex;
     margin: .5rem 0;
 
@@ -207,18 +208,18 @@ $velogD: #12b886;
       margin-right: .5rem;
     }
     
-    .seriesListTxtBox {
+    .SeriesContentTxtBox {
       display: flex;
       flex-direction: column;
       margin: .5rem 0;
       width: 60%;
 
-      .seriesListTitle {
+      .SeriesContentTitle {
         @include overflowOpt();
         font-size: 1.25rem;
         margin: .25rem 0;
       }
-      .seriesListDesc {
+      .SeriesContentDesc {
         @include overflowOpt();
         font-size: 1rem;
       }
