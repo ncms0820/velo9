@@ -13,17 +13,14 @@ const Post = ( {dummyData} ) => {
       {dummyData.thumbnail &&
         <img src={dummyData.thumbnail} alt="" />
       }
-
       <Txt
         className={styles.postTitle}
         txt={dummyData.title}
       />
-
       <Txt
         className={styles.postIntro}
         txt={dummyData.introduce}
       />
-
       {dummyData.tags.length &&
         <div className={styles.tagBox}>
           {dummyData.tags.map( (val) => {
