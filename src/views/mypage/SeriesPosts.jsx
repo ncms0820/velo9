@@ -8,7 +8,7 @@ import Txt from "../../components/Txt";
 import Post from "./Post";
 
 
-const MypageRouter = ( { userId, dbService } ) => {
+const SeriesPosts = ( { userId, dbService } ) => {
 
   const { username, seriesName } = useParams();
   const navigate = useNavigate();
@@ -24,6 +24,13 @@ const MypageRouter = ( { userId, dbService } ) => {
     getMyPosts()
   }, [username])
   
+  const testGoReadPage = (post) => {
+    console.log("클릭됨")
+    navigate("/read", {
+      state: { content: { member: { nickname: userId.nickname }, postId: post.id } },
+    });
+  }
+
 
   return (
     <div className={styles.mypageBox}>
@@ -34,10 +41,11 @@ const MypageRouter = ( { userId, dbService } ) => {
       <div className={styles.mypageContent}>
         {/* 포스트일때 */}
         { posts.length &&
-          posts.map( (val, idx) => {
+          posts.map( (post, idx) => {
           return <Post
                     key={idx}
-                    dummyData={val}
+                    post={post}
+                    onClick={ (post) => testGoReadPage(post)}
                   />
           })
         }
@@ -46,4 +54,4 @@ const MypageRouter = ( { userId, dbService } ) => {
   );
 };
 
-export default MypageRouter;
+export default SeriesPosts;

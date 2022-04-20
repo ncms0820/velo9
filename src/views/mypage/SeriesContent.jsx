@@ -4,19 +4,22 @@ import styles from "./mypage.module.scss";
 
 import { dummyData } from "./dummy";
 
-const SeriesContent = ({ data }) => {
+const SeriesContent = ({ data, onClick }) => {
 
   return(
-    <li className={styles.SeriesContentBox} >
+    <li 
+      className={styles.seriesContentBox}
+      onClick={onClick} 
+    >
       <img src={data.imgUrl ? data.imgUrl : "test_img.png"} alt="" />
 
-      <div className={styles.SeriesContentTxtBox} >
+      <div className={styles.seriesContentTxtBox} >
         <Txt
-          className={styles.SeriesContentTitle}
+          className={styles.seriesContentTitle}
           txt={data.title}
         />
         <Txt
-          className={styles.SeriesContentDesc}
+          className={styles.seriesContentDesc}
           txt={data.introduce}
         />
       </div>
