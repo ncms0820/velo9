@@ -12,6 +12,8 @@ import SocialSign from "./views/login/SocialSign";
 import Write from "./views/write/write";
 import Redirect from "./views/redirect";
 import ArchiveRouter from "./views/archive/ArchiveRouter";
+import SeriesPost from './views/mypage/SeriesPosts'
+
 
 function App({ dbService, authService, functionService }) {
   const [onLoginModal, setOnLoginModal] = useState(false);
@@ -63,7 +65,10 @@ function App({ dbService, authService, functionService }) {
           element={<Read dbService={dbService} userId={userId} functionService={functionService} />}
         />
         <Route path="/setting" element={<Setting />} />
-        <Route path="/mypage" element={<MypageRouter userId={userId} dbService={dbService} />} />
+        <Route path="/:username">
+          <Route path="main" element={<MypageRouter userId={userId} dbService={dbService} />} />
+          <Route path="series/:seriesName" element={<SeriesPost userId={userId} dbService={dbService} />} />
+        </Route>
         <Route path="/archive" element={<ArchiveRouter userId={userId} dbService={dbService} />} />
         <Route
           path="/firstLogin"
