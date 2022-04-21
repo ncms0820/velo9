@@ -6,6 +6,34 @@ import Button from "../../components/Button";
 
 const Post = ( { post, onClick } ) => {
 
+
+// Test
+// const onSaveData = () => {
+//   return new Promise((resolve, reject) => {
+//     const editorInstance = editorRef.current.getInstance();
+//     const getContent_md = editorInstance.getMarkdown();
+//     const titleValue = titleRef.current.value;
+//     const introduceValue = introduceRef.current.value;
+//     const data = {
+//       getContent_md,
+//       titleValue,
+//       introduceValue,
+//     };
+//     resolve(data);
+//   });
+// };
+
+// const onSaveButton = async() => {
+//   const data = await onSaveData();
+//   setTitle(data.titleValue)
+//   setContnet(data.getContent_md)
+//   setIntroduce(data.introduceValue)
+// }
+
+
+
+
+
   return(
     <div className={styles.post} onClick={onClick}>
       {post.thumbnail &&
