@@ -57,9 +57,22 @@
   .series_field {
     border: 1px solid black;
     width: 50%;
+    height: 15rem;
     overflow: scroll;
     h1 {
       font-weight: bold;
+    }
+    .series_header {
+      display: flex;
+      justify-content: space-between;
+    }
+    .series_card {
+      border: 1px solid black;
+      height: 4rem;
+      margin-top: 0.5rem;
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }

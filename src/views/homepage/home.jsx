@@ -12,9 +12,9 @@ const Home = ({ dbService, userId, onLoginModal }) => {
   console.log(cards)
   
   const handleTab = useCallback(
-    async (sort = "createdDate") => {
+    async (tag = undefined, content = undefined, page= undefined,sort = "createdDate") => {
       try {
-        const db = await dbService.getDb(undefined, undefined, undefined, sort);
+        const db = await dbService.getDb(tag, content, page, sort);
         if (db.content.length !== 0) {
           setCards(db.data.content);
         } else {
@@ -36,7 +36,7 @@ const Home = ({ dbService, userId, onLoginModal }) => {
       {!onLoginModal && (
         <div>
           <div className={styles.container}>
-            {userId ? <NavLogin /> : <Nav handleTab={handleTab} />}
+            {userId ? <NavLogin handleTab={handleTab} /> : <Nav handleTab={handleTab} />}
             <section className={styles.grid_container}>
               {cards ? (
                 cards.content.map((content) => <Card key={content.postId} content={content} />)
