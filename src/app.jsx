@@ -59,7 +59,10 @@ function App({ dbService, authService, functionService }) {
         />
         <Route path="/success" element={<Redirect setLoginInfo={setLoginInfo} authService={authService} />} />
         <Route path="/explore" element={<Explore />} />
-        <Route path="/write" element={<Write />} />
+        <Route
+          path="/write"
+          element={<Write dbService={dbService} functionService={functionService} userId={userId} />}
+        />
         <Route
           path="/read"
           element={<Read dbService={dbService} userId={userId} functionService={functionService} />}

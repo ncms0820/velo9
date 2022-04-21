@@ -3,12 +3,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./_read.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
-// import Comment from "../../components/comment/comment";
 import ReactiveButton from "reactive-button";
 import Footer from "../../components/footer/footer";
 import Error from "../etc/error";
 import Swal from "sweetalert2";
-
 
 const Read = ({ dbService, userId, functionService }) => {
   const [cardInfo, setCardInfo] = useState("");
@@ -37,6 +35,10 @@ const Read = ({ dbService, userId, functionService }) => {
         Swal.fire("삭제 완료", "정상적으로 삭제 되었습니다.", "success");
       }
     });
+  };
+
+  const goToWrite = async () => {
+    navigate("/write", { state: { postId: id } });
   };
   const onLove = async () => {
     await functionService.love(cardInfo.id);
@@ -77,7 +79,12 @@ const Read = ({ dbService, userId, functionService }) => {
             </div>
             {manage && (
               <div className={styles.meta_button}>
-                <ReactiveButton style={{ borderRadius: "5px" }} color={"primary"} idleText={"수정"} />
+                <ReactiveButton
+                  style={{ borderRadius: "5px" }}
+                  color={"primary"}
+                  idleText={"수정"}
+                  onClick={goToWrite}
+                />
                 <ReactiveButton style={{ borderRadius: "5px" }} color={"red"} idleText={"삭제"} onClick={onDelete} />
               </div>
             )}
