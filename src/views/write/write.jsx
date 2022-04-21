@@ -20,6 +20,8 @@ import uml from "@toast-ui/editor-plugin-uml";
 
 //TOGGLE SWITCH
 import Toggle from "react-toggle";
+import { unstable_batchedUpdates } from "react-dom";
+import Error from "../etc/error";
 
 const Write = ({ dbService, functionService, userId }) => {
   const navigate = useNavigate();
@@ -41,10 +43,11 @@ const Write = ({ dbService, functionService, userId }) => {
   const [thumbnailFileName, setThumbnailFileName] = useState(null);
   ////
   const [preview, setPreview] = useState(" ");
-  const [toggle, setToggle] = useState();
+  const [toggle, setToggle] = useState(false);
   const [seriesToggle, setSeriesToggle] = useState(false);
   const [seriesList, setSeriesList] = useState();
   const [oneTimeChecker, setOneTimeChecker] = useState(true);
+  const [loading, setLoading] = useState(true);
   //
   const goToPrevious = () => {
     navigate(-1);
@@ -97,33 +100,32 @@ const Write = ({ dbService, functionService, userId }) => {
     getSeriesInfo();
   };
 
-  const fetching = useCallback(async () => {
+  const fetching = () => {
     if (state) {
-      const fetchingData = await dbService.getWrite(state.postId);
-      const fetchingDataThumbnail = fetchingData.thumbnail;
-      console.log(fetchingData);
-      setInitialData(fetchingData);
-      setPostId(fetchingData.postId);
-      setTitle(fetchingData.title);
-      setIntroduce(fetchingData.introduce);
-      setContent(fetchingData.content);
-      setAccess(fetchingData.access);
-      setSeriesId(fetchingData.series.sereisId);
-      setTags(fetchingData.tags);
-      if (fetchingDataThumbnail !== null) {
-        setThumbnailFileName(fetchingDataThumbnail);
-      }
+      unstable_batchedUpdates(async () => {
+        const fetchingData = await dbService.getWrite(state.postId);
+        const fetchingDataThumbnail = fetchingData.thumbnail;
+        setInitialData(fetchingData);
+        setPostId(fetchingData.postId);
+        setTitle(fetchingData.title);
+        setIntroduce(fetchingData.introduce);
+        setContent(fetchingData.content);
+        setAccess(fetchingData.access);
+        setSeriesId(fetchingData.series.sereisId);
+        setTags(fetchingData.tags);
+        if (fetchingDataThumbnail !== null) {
+          setThumbnailFileName(fetchingDataThumbnail);
+        }
 
-      if (fetchingData.access === "PUBLIC") {
-        setToggle(true);
-        console.log("yes");
-        console.log(toggle);
-      } else {
-        setToggle(false);
-      }
+        if (fetchingData.access === "PUBLIC") {
+          setToggle(true);
+        } else {
+          setToggle(false);
+        }
+      });
     }
-    console.log("fetched!!");
-  });
+    setTimeout(() => setLoading(false), 1000);
+  };
   const sendPost = async (data) => {
     const savedId = await dbService.postWrite(
       postId,
@@ -184,91 +186,105 @@ const Write = ({ dbService, functionService, userId }) => {
     console.log(oneTimeChecker);
     await dbService.writeTemporary(savedId, title, content);
     console.log("success");
-    console.log(postId);
   };
   useEffect(() => {
     getSeriesInfo();
     fetching();
   }, []);
+  useEffect(() => {
+    console.log(loading);
+    setContent(content);
+  }, [loading]);
   return (
-    <div className={styles.body}>
-      <div className={styles.title}>
-        <input type="text" placeholder="제목을 입력해 주세요.." defaultValue={title} ref={titleRef} />
-      </div>
-      <hr />
-      <ReactTagInput
-        tags={tags}
-        placeholder="Tags... (type and press enter)"
-        maxTags={10}
-        editable={true}
-        readOnly={false}
-        removeOnBackspace={true}
-        onChange={(newTags) => setTags(newTags)}
-      />
-      <div className="container">
-        <Editor
-          ref={editorRef}
-          initialValue={content}
-          height="35rem"
-          previewStyle="vertical"
-          plugins={[chart, codeSyntaxHighlight, colorSyntax, tableMergedCell, uml]}
-        />
-      </div>
-      <div className={styles.meta_info}>
-        <div>
-          <div className={styles.image_field}>
-            <h1>포스트 썸네일</h1>
-            <div className={styles.img}>
-              <img src={preview} alt="none" />
-            </div>
-            <input type="file" name="uploadFile" onChange={uploadFile} />
+    <>
+      {!loading ? (
+        <div className={styles.body}>
+          <div className={styles.title}>
+            <input type="text" placeholder="제목을 입력해 주세요.." defaultValue={title} ref={titleRef} />
           </div>
-          <div className={styles.access}>
-            <h1>공개 설정</h1>
-            <Toggle onClick={switchToggle} defaultChecked={toggle} />
-          </div>
-        </div>
-        <div>
-          <h1>INTRODUCE</h1>
-          <textarea ref={introduceRef} defaultValue={introduce} cols="30" rows="10"></textarea>
-        </div>
-        <div className={styles.series_field}>
-          <div className={styles.series_header}>
-            <h1>시리즈 목록</h1>
-            <button onClick={() => setSeriesToggle(!seriesToggle)}>시리즈 추가하기</button>
-          </div>
-          {seriesToggle && (
-            <div className={styles.series_add}>
-              <input ref={seriesAddRef} type="text" />
-              <button onClick={onAddSeries}>추가하기</button>
-            </div>
-          )}
-          {seriesList &&
-            seriesList.data.map((card) => (
-              <div
-                key={card.seriesId}
-                id={card.seriesId}
-                className={`${styles.series_card} series_list_write`}
-                onClick={findSeriesId}
-              >
-                <h2>{card.seriesName}</h2>
-              </div>
-            ))}
-        </div>
-      </div>
-      <footer className={styles.footer}>
-        <ReactiveButton style={{ borderRadius: "5px" }} color={"dark"} idleText={"나가기"} onClick={goToPrevious} />
-        <div>
-          <ReactiveButton
-            style={{ borderRadius: "5px" }}
-            color={"secondary"}
-            idleText={"임시 저장"}
-            onClick={onSaveButtonTemp}
+          <hr />
+          <ReactTagInput
+            tags={tags}
+            placeholder="Tags... (type and press enter)"
+            maxTags={10}
+            editable={true}
+            readOnly={false}
+            removeOnBackspace={true}
+            onChange={(newTags) => setTags(newTags)}
           />
-          <ReactiveButton style={{ borderRadius: "5px" }} color={"green"} idleText={"저장"} onClick={onSaveButton} />
+          <div className="container">
+            <Editor
+              ref={editorRef}
+              initialValue={content}
+              height="35rem"
+              previewStyle="vertical"
+              plugins={[chart, codeSyntaxHighlight, colorSyntax, tableMergedCell, uml]}
+            />
+          </div>
+          <div className={styles.meta_info}>
+            <div>
+              <div className={styles.image_field}>
+                <h1>포스트 썸네일</h1>
+                <div className={styles.img}>
+                  <img src={preview} alt="none" />
+                </div>
+                <input type="file" name="uploadFile" onChange={uploadFile} />
+              </div>
+              <div className={styles.access}>
+                <h1>공개 설정</h1>
+                <Toggle onClick={switchToggle} defaultChecked={toggle} />
+              </div>
+            </div>
+            <div>
+              <h1>INTRODUCE</h1>
+              <textarea ref={introduceRef} defaultValue={introduce} cols="30" rows="10"></textarea>
+            </div>
+            <div className={styles.series_field}>
+              <div className={styles.series_header}>
+                <h1>시리즈 목록</h1>
+                <button onClick={() => setSeriesToggle(!seriesToggle)}>시리즈 추가하기</button>
+              </div>
+              {seriesToggle && (
+                <div className={styles.series_add}>
+                  <input ref={seriesAddRef} type="text" />
+                  <button onClick={onAddSeries}>추가하기</button>
+                </div>
+              )}
+              {seriesList &&
+                seriesList.data.map((card) => (
+                  <div
+                    key={card.seriesId}
+                    id={card.seriesId}
+                    className={`${styles.series_card} series_list_write`}
+                    onClick={findSeriesId}
+                  >
+                    <h2>{card.seriesName}</h2>
+                  </div>
+                ))}
+            </div>
+          </div>
+          <footer className={styles.footer}>
+            <ReactiveButton style={{ borderRadius: "5px" }} color={"dark"} idleText={"나가기"} onClick={goToPrevious} />
+            <div>
+              <ReactiveButton
+                style={{ borderRadius: "5px" }}
+                color={"secondary"}
+                idleText={"임시 저장"}
+                onClick={onSaveButtonTemp}
+              />
+              <ReactiveButton
+                style={{ borderRadius: "5px" }}
+                color={"green"}
+                idleText={"저장"}
+                onClick={onSaveButton}
+              />
+            </div>
+          </footer>
         </div>
-      </footer>
-    </div>
+      ) : (
+        <Error title={"Loading"} />
+      )}
+    </>
   );
 };
 
