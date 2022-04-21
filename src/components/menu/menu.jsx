@@ -57,7 +57,7 @@ console.log(userId)
       </div>
       <div
         onClick={() => {
-          navigate('/mypage');
+          navigate('/temp');
         }}
       >
         임시 저장

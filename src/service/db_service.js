@@ -2,6 +2,7 @@ import axios from "axios";
 
 const baseURL = "http://localhost:8080";
 const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
+
 class DbService {
   // db 가져오기
   // 최신순 : createdDate(default 입니다)

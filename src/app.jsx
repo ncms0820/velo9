@@ -13,6 +13,7 @@ import Write from "./views/write/write";
 import Redirect from "./views/redirect";
 import ArchiveRouter from "./views/archive/ArchiveRouter";
 import SeriesPost from './views/mypage/SeriesPosts'
+import TempPost from "./views/mypage/TempPost";
 
 
 function App({ dbService, authService, functionService }) {
@@ -73,6 +74,7 @@ function App({ dbService, authService, functionService }) {
           <Route path="series/:seriesName" element={<SeriesPost userId={userId} dbService={dbService} />} />
         </Route>
         <Route path="/archive" element={<ArchiveRouter userId={userId} dbService={dbService} />} />
+        <Route path="/temp" element={<TempPost userId={userId} dbService={dbService} />} />
         <Route
           path="/firstLogin"
           element={<SocialSign authService={authService} setOnLoginModal={setOnLoginModal} />}

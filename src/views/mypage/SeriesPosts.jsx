@@ -35,7 +35,7 @@ const SeriesPosts = ( { userId, dbService } ) => {
   return (
     <div className={styles.mypageBox}>
       <Txt
-        txt={seriesName}
+        txt={seriesName + "의 글"}
         className={styles.seriesPostTitle}
       />
       <div className={styles.mypageContent}>
