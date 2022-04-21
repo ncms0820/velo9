@@ -15,13 +15,15 @@ const LikeArchive = ( { dbService } ) => {
 
 
   useEffect(() => {
+    console.log("실행됨");
     getLikePost();
   }, []);
 
+  
   return(
     <>
       { likePosts && 
-        likePosts.map( (v) => {
+        likePosts.map((v) => {
         return <ArchiveCard content={v} />
       })}
     </>

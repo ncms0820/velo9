@@ -88,9 +88,6 @@ $velogD: #12b886;
   border-bottom: 2px solid $velogN;
 }
 
-.mypageContent {
-  margin: 0 auto;
-}
 // 태그 핸들러 부분
 .tagHandlerDesktopBox {
   // position: absolute;
@@ -102,16 +99,20 @@ $velogD: #12b886;
 }
 
 
+.mypageContent {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 768px;
+}
 
 // 포스트 부분
 .post {
   display: flex;
   flex-direction: column;
   align-self: center;
-  max-width: 768px;
-  width: 100%;
   padding: 4rem 0;
   border-bottom: 1px solid lightgray;
+  cursor: pointer;
   // @include shadow();
 
   img {
@@ -136,7 +137,7 @@ $velogD: #12b886;
     font-size: 1.5rem;
     margin: .5rem 0;
   }
-  .postDesc {
+  .postIntro {
     margin-bottom: 2rem;
     margin-top: 0.5rem;
     font-size: 1rem;
@@ -160,8 +161,6 @@ $velogD: #12b886;
   flex-direction: column;
   align-self: center;
   position: relative;
-  max-width: 768px;
-  width: 100%;
   // height: 15rem;
   padding: 2.5rem 1rem;
   border-bottom: 1px solid lightgray;
@@ -197,30 +196,37 @@ $velogD: #12b886;
   }
 
   .seriesTitle {
-    margin: 0.5rem 0;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
   }
 
-  .seriesListBox {
+  .seriesContentBox {
     display: flex;
     margin: .5rem 0;
+    cursor: pointer;
+
+    &:hover {
+      transition-duration: .5s;
+      background: rgb(233, 233, 233);
+    }
 
     img {
       width: 5rem;
       margin-right: .5rem;
     }
     
-    .seriesListTxtBox {
+    .seriesContentTxtBox {
       display: flex;
       flex-direction: column;
       margin: .5rem 0;
       width: 60%;
 
-      .seriesListTitle {
+      .seriesContentTitle {
         @include overflowOpt();
         font-size: 1.25rem;
         margin: .25rem 0;
       }
-      .seriesListDesc {
+      .seriesContentDesc {
         @include overflowOpt();
         font-size: 1rem;
       }
@@ -228,3 +234,11 @@ $velogD: #12b886;
   }
 }
 
+.seriesPostTitle {
+  width: 100%;
+  max-width: 768px;
+  margin: 4rem auto;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+}

@@ -58,7 +58,7 @@ const Header = memo(({ setOnLoginModal, authService, setLoginInfo, userId }) => 
                 <ReactiveButton style={{ borderRadius: "5px" }} color={"green"} idleText={"menu"} onClick={tabMenu} />
               </div>
             </div>
-            {tab && <Menu onLogout={userId} tabMenu={tabMenu} authService={authService} setLoginInfo={setLoginInfo} />}
+            {tab && <Menu userId={userId} tabMenu={tabMenu} authService={authService} setLoginInfo={setLoginInfo} />}
           </div>
         ) : (
           <ReactiveButton

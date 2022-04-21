@@ -54,7 +54,7 @@ class DbService {
 
   async memberMain(nickname, page) {
     const url = `${baseURL}/${nickname}/main?page=${page}`;
-    const data = await axios.get(url);
+    const data = await axios.get(url, opt);
     return data;
   }
 
@@ -67,8 +67,8 @@ class DbService {
   }
 
   //시리즈에 속한 글들 보기
-  async getSeriesDetail(nickname, seriesName) {
-    const url = `${baseURL}/series/${seriesName}`;
+  async getSeriesDetail(nickname, seriesName) { // url 수정, `${baseURL}/series/${seriesName}` 에서 변경
+    const url = `${baseURL}/${nickname}/series/${seriesName}`;
     const data = await axios.get(url);
     return data;
   }
@@ -92,7 +92,7 @@ class DbService {
   // 임시 저장 글 목록 (요약정보들이 있습니다)
   async getTemp() {
     const url = `${baseURL}/temp`;
-    const data = await axios.get(url);
+    const data = await axios.get(url, opt);
     return data;
   }
 

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import styles from "./_menu.module.scss";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-const Menu = ({ tabMenu, authService, setLoginInfo }) => {
+const Menu = ({ tabMenu, authService, setLoginInfo, userId }) => {
   const wrapperRef = useRef(null);
   const navigate = useNavigate();
   const sweetAlert = () => {
@@ -45,26 +45,26 @@ const Menu = ({ tabMenu, authService, setLoginInfo }) => {
   };
 
   useOutsideAlerter(wrapperRef);
-
+console.log(userId)
   return (
     <div className={styles.nav} ref={wrapperRef}>
       <div
         onClick={() => {
-          navigate("/mypage");
+          navigate(`/${userId.nickname}/main`);
         }}
       >
         내 벨로그
       </div>
       <div
         onClick={() => {
-          navigate("/mypage");
+          navigate('/mypage');
         }}
       >
         임시 저장
       </div>
       <div
         onClick={() => {
-          navigate("/mypage");
+          navigate("/archive");
         }}
       >
         읽기 목록

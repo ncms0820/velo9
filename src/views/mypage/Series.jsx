@@ -3,18 +3,33 @@ import styles from "./mypage.module.scss";
 
 import Txt from "../../components/Txt";
 import Button from "../../components/Button";
-import SeriesList from "./SeriesList"
+import SeriesContent from "./SeriesContent"
 
 import { dummyData } from "./dummy";
+import { useNavigate } from "react-router-dom";
 
-const Series = ( { data } ) => {
+const Series = ( { data, nickname, dbService } ) => {
 
-  const targetSeries = dummyData.filter((val, idx) => data === val.series );
-  // data => series 이름. 이거랑 같은 dummy를 뽑으면 된다.
-  console.log(data)
-  console.log(targetSeries)
+  const navigate = useNavigate();
+  const [seriesContents, setSeriesContents] = useState([])
 
-  console.log(data)
+  const getSeriesContents = async() => {
+    const result = await dbService.getSeriesDetail(nickname, data)
+    console.log("시리즈 내용물", result.data.content)
+    setSeriesContents(result.data.content)
+  }
+
+  useEffect(() => {
+    getSeriesContents()
+  }, [])
+
+  
+  const testGoReadPage = (post) => {
+    console.log("클릭됨")
+    navigate("/read", {
+      state: { content: { member: { nickname: nickname }, postId: post.id } },
+    });
+  }
 
   return(
     <div className={styles.series}>
@@ -31,20 +46,25 @@ const Series = ( { data } ) => {
       />
       
       <ul>
-          { //시리즈 이름이 같은것끼리 매핑.
-          targetSeries.map((data, idx) => {
-          return <SeriesList
-                    data={data} 
+        {
+          seriesContents &&
+          seriesContents.slice(seriesContents.length -3, seriesContents.length).map((data, idx) => {
+          return <SeriesContent
+                    data={data}
+                    onClick={(data) => testGoReadPage(data)}
                   />
-          })
-          }
+        })
+        }
       </ul>
 
-      <Button 
-        txt="시리즈 전체보기"
-        className={styles.seriesMoreviewBtn}
-        onClick={() => console.log("시리즈 전체보기 이벤트")}
-      />
+        {
+          seriesContents.length !== 0 &&
+          <Button 
+            txt="시리즈 전체보기"
+            className={styles.seriesMoreviewBtn}
+            onClick={() => navigate(`/${nickname}/series/${data}`) }
+          />
+        }
 
     </div>
   )
