@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:8080";
+const baseURL = "http://3.39.104.213:8080";
 const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
 
 class DbService {
@@ -11,6 +11,7 @@ class DbService {
   // 좋아요순: loveCount
   async getDb(tagSelect = "false", content = "", page = "1", sort = "createdDate") {
     const url = `${baseURL}/?tagSelect=${tagSelect}&content=${content}&page=${page}&sortValue=${sort}`;
+    console.log(url);
     const data = await axios.get(url);
     return data.data;
   }
@@ -68,7 +69,8 @@ class DbService {
   }
 
   //시리즈에 속한 글들 보기
-  async getSeriesDetail(nickname, seriesName) { // url 수정, `${baseURL}/series/${seriesName}` 에서 변경
+  async getSeriesDetail(nickname, seriesName) {
+    // url 수정, `${baseURL}/series/${seriesName}` 에서 변경
     const url = `${baseURL}/${nickname}/series/${seriesName}`;
     const data = await axios.get(url);
     return data;

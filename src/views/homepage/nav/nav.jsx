@@ -18,7 +18,7 @@ const Nav = ({ handleTab }) => {
   useEffect(() => {
     let value = true;
     if (value) {
-      handleTab(tabSwitch);
+      handleTab(undefined, undefined, undefined, tabSwitch);
     }
     return () => (value = false);
   }, [tabSwitch, handleTab]);

@@ -8,29 +8,27 @@ import fakeDb from "../../service/fakeDb";
 
 const Home = ({ dbService, userId, onLoginModal }) => {
   const [cards, setCards] = useState();
-
-  console.log(cards)
-  
   const handleTab = useCallback(
-    async (tag = undefined, content = undefined, page= undefined,sort = "createdDate") => {
+    async (tag = undefined, content = undefined, page = undefined, sort = "createdDate") => {
       try {
         const db = await dbService.getDb(tag, content, page, sort);
         if (db.content.length !== 0) {
-          setCards(db.data.content);
+          console.log(db.content);
+          setCards(db);
         } else {
-          setCards(fakeDb);
+          setCards();
         }
-      } catch {
-        console.log("error");
+      } catch (err) {
+        console.log(err);
       }
     },
     [dbService]
-    );
-    
-    useEffect(() => {
-      handleTab();
-    }, [handleTab]);
-  
+  );
+
+  useEffect(() => {
+    handleTab();
+  }, [handleTab]);
+
   return (
     <>
       {!onLoginModal && (
@@ -41,7 +39,7 @@ const Home = ({ dbService, userId, onLoginModal }) => {
               {cards ? (
                 cards.content.map((content) => <Card key={content.postId} content={content} />)
               ) : (
-                <Error title={" Loading"} />
+                <Error title={" No data found"} />
               )}
             </section>
           </div>

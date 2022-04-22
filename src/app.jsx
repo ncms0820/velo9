@@ -12,9 +12,8 @@ import SocialSign from "./views/login/SocialSign";
 import Write from "./views/write/write";
 import Redirect from "./views/redirect";
 import ArchiveRouter from "./views/archive/ArchiveRouter";
-import SeriesPost from './views/mypage/SeriesPosts'
+import SeriesPost from "./views/mypage/SeriesPosts";
 import TempPost from "./views/mypage/TempPost";
-
 
 function App({ dbService, authService, functionService }) {
   const [onLoginModal, setOnLoginModal] = useState(false);
@@ -59,7 +58,7 @@ function App({ dbService, authService, functionService }) {
           element={<Home dbService={dbService} authService={authService} userId={userId} onLoginModal={onLoginModal} />}
         />
         <Route path="/success" element={<Redirect setLoginInfo={setLoginInfo} authService={authService} />} />
-        <Route path="/explore" element={<Explore />} />
+        <Route path="/explore" element={<Explore dbService={dbService} />} />
         <Route
           path="/write"
           element={<Write dbService={dbService} functionService={functionService} userId={userId} />}

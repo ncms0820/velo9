@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Search from "../../components/search/Search";
 import styles from "./_explore.module.scss";
-import { states } from "../../service/states.data";
-const Explore = () => {
-  const [filtered, setFiltered] = useState([]);
+const Explore = ({ dbService }) => {
+  // util
+  const navigate = useNavigate();
 
+  const [filtered, setFiltered] = useState([]);
+  const [states, setStates] = useState();
   // here the data is filtered as you search
   const inputHandler = (e) => {
     const input = e.target.value.toLowerCase();
@@ -12,7 +15,7 @@ const Explore = () => {
       setFiltered([]);
     } else {
       const result = states.filter((obj) => {
-        return obj.name.toLowerCase().includes(input);
+        return obj.title.toLowerCase().includes(input);
       });
       setFiltered(result);
     }
@@ -25,6 +28,9 @@ const Explore = () => {
   const enterHandler = (e) => {
     const searchitem = JSON.parse(e.target.dataset.searchitem);
     console.log("Enter pressed", searchitem);
+    navigate("/read", {
+      state: { content: searchitem },
+    });
   };
 
   // same as above
@@ -49,6 +55,13 @@ const Explore = () => {
     document.addEventListener("click", clickOutsideHandler);
     return () => document.removeEventListener("click", clickOutsideHandler);
   }, []);
+  useEffect(() => {
+    const promise = new Promise((resolve) => {
+      const db = dbService.getDb();
+      resolve(db);
+    });
+    promise.then((data) => setStates(data.content));
+  }, [dbService]);
 
   /* the style defined here is passed to child elements
   note: children inherit some styles like font size, color, line-height...
@@ -82,7 +95,7 @@ const Explore = () => {
     <div className={styles.explore}>
       <Search
         data={filtered} // array of the objects is passed here. []{title: string}. each object is saved in dataset of the correspondent element.
-        mapping={{ title: "name" }} // when they don't correspond, allows to map the title of the search item and the name property in the filtered data.
+        mapping={{ title: "title" }} // when they don't correspond, allows to map the title of the search item and the name property in the filtered data.
         style={style1} // child elements inherit some styles.
         activeStyle={activeStyle2} // hover, focus, active color.
         placeholder={"Search..."} // input placeholder.

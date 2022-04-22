@@ -51,6 +51,7 @@ const Read = ({ dbService, userId, functionService }) => {
       reject("카드 정보 가져오기 실패");
     });
     promise.then((data) => {
+      console.log(data);
       const time = data.createdDate.split("-");
       setCreatedDate(`${time[0]}년 ${time[1]}월 ${time[2]}일`);
       setCardInfo(data);
