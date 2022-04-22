@@ -6,13 +6,12 @@ import { useNavigate } from "react-router-dom";
 
 const Card = ({ content }) => {
   const postThumbURL = content.postThumbnail;
-  const memberURL = postThumbURL && content.member.memberThumbnail.path;
+  const memberURL = content.member.memberThumbnail;
   const data = content;
   const [thumbnail, setThumbnail] = useState();
   const encoder = (pic) => {
     const baseURL = "http://localhost:8080";
     const thumbnail = `${baseURL}/displayPostThumbnail?fileName=${encodeURIComponent(pic)}`;
-    console.log(thumbnail);
     return setThumbnail(thumbnail);
   };
   const navigate = useNavigate();
