@@ -113,15 +113,23 @@ class DbService {
     return data;
   }
 
+  //섬네일
   async postThumbnamil(formData) {
     const url = `${baseURL}/uploadPostThumbnail`;
     const data = await axios.post(url, formData);
     const thumbnail = `${baseURL}/displayPostThumbnail?fileName=${encodeURIComponent(data.data.fileName)}`;
+    console.log(data.data.fileName);
     const fileName = data.data.fileName;
     return {
       thumbnail,
       fileName,
     };
+  }
+
+  //섬네일 encoder
+  async encoderThumbnail(fileName) {
+    const thumbnail = `${baseURL}/displayPostThumbnail?fileName=${encodeURIComponent(fileName)}`;
+    return thumbnail;
   }
 }
 

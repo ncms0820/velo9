@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./_card.module.scss";
 import { useNavigate } from "react-router-dom";
 
@@ -8,6 +8,13 @@ const Card = ({ content }) => {
   const postThumbURL = content.postThumbnail;
   const memberURL = postThumbURL && content.member.memberThumbnail.path;
   const data = content;
+  const [thumbnail, setThumbnail] = useState();
+  const encoder = (pic) => {
+    const baseURL = "http://localhost:8080";
+    const thumbnail = `${baseURL}/displayPostThumbnail?fileName=${encodeURIComponent(pic)}`;
+    console.log(thumbnail);
+    return setThumbnail(thumbnail);
+  };
   const navigate = useNavigate();
   const goToDetail = () => {
     navigate("/read", { state: { content: data } });
@@ -15,10 +22,15 @@ const Card = ({ content }) => {
   const goToProfile = () => {
     navigate("/profile");
   };
+  useEffect(() => {
+    if (postThumbURL) {
+      encoder(postThumbURL.fileName);
+    }
+  }, []);
   return (
     <div className={styles.card}>
       <div className={styles.img} onClick={goToDetail}>
-        {postThumbURL ? <img src={postThumbURL} alt="pic" /> : <img src={"https://picsum.photos/200"} alt="pic" />}
+        {postThumbURL ? <img src={thumbnail} alt="pic" /> : <img src={"https://picsum.photos/200"} alt="pic" />}
       </div>
       <div className={styles.body} onClick={goToDetail}>
         <div>
