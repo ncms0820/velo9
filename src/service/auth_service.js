@@ -1,5 +1,6 @@
 import axios from "axios";
 
+//http://3.39.104.213:8080
 const baseURL = "http://localhost:8080";
 const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
 class AuthService {
@@ -11,7 +12,8 @@ class AuthService {
     return await axios
       .get(url, opt)
       .then((data) => data.data)
-      .catch(() => {
+      .catch((e) => {
+        console.log(e);
         return console.log("로그인 정보 가져오기 실패");
       });
   }
@@ -58,7 +60,9 @@ class AuthService {
       username,
       password,
     };
-    const data = await axios.post(url, body, opt).then(() => {
+    const data = await axios.post(url, body, opt).then((e) => {
+      console.log(e);
+      console.log("성공?");
       return this.getUserInfo();
     });
     return data;

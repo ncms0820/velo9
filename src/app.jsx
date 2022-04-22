@@ -57,6 +57,10 @@ function App({ dbService, authService, functionService }) {
           path="/"
           element={<Home dbService={dbService} authService={authService} userId={userId} onLoginModal={onLoginModal} />}
         />
+        <Route
+          path="/home"
+          element={<Home dbService={dbService} authService={authService} userId={userId} onLoginModal={onLoginModal} />}
+        />
         <Route path="/success" element={<Redirect setLoginInfo={setLoginInfo} authService={authService} />} />
         <Route path="/explore" element={<Explore dbService={dbService} />} />
         <Route

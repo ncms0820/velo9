@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./_nav_login.module.scss";
 import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,6 +7,7 @@ import "react-toggle/style.css";
 import ReactiveButton from "reactive-button";
 const NavLogin = ({ handleTab }) => {
   const [toggle, setToggle] = useState(false);
+  const formRef = useRef();
   // 검색 조건
   const inputRef = useRef();
   const [cheese, setCheese] = useState(false); // tag info
@@ -25,6 +26,12 @@ const NavLogin = ({ handleTab }) => {
     handleTab(cheese, content, 0, sort);
   };
 
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onSearch();
+    }
+  };
+
   return (
     <div>
       <div className={styles.nav}>
@@ -37,10 +44,10 @@ const NavLogin = ({ handleTab }) => {
       </div>
       {toggle && (
         <div className={styles.toggle}>
-          <form>
+          <div>
             <div>
               <div className={styles.form_input}>
-                <input ref={inputRef} type="text" />
+                <input ref={inputRef} onKeyPress={onKeyPress} type="text" />
                 <ReactiveButton
                   style={{ borderRadius: "5px", width: "5rem" }}
                   color={"dark"}
@@ -67,7 +74,7 @@ const NavLogin = ({ handleTab }) => {
               <option value="viewCount">조회수</option>
               <option value="loveCount">좋아요 순</option>
             </select>
-          </form>
+          </div>
         </div>
       )}
     </div>

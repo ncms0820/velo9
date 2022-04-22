@@ -13,10 +13,9 @@ const Home = ({ dbService, userId, onLoginModal }) => {
       try {
         const db = await dbService.getDb(tag, content, page, sort);
         if (db.content.length !== 0) {
-          console.log(db.content);
           setCards(db);
         } else {
-          setCards();
+          setCards(fakeDb);
         }
       } catch (err) {
         console.log(err);
@@ -39,7 +38,7 @@ const Home = ({ dbService, userId, onLoginModal }) => {
               {cards ? (
                 cards.content.map((content) => <Card key={content.postId} content={content} />)
               ) : (
-                <Error title={" No data found"} />
+                <Error title={" No data found"} handleTab={handleTab} />
               )}
             </section>
           </div>
