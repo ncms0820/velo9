@@ -24,7 +24,7 @@ const SeriesPosts = ( { userId, dbService } ) => {
     getMyPosts()
   }, [username])
   
-  const testGoReadPage = (post) => {
+  const GoReadPage = (post) => {
     console.log("클릭됨")
     navigate("/read", {
       state: { content: { member: { nickname: userId.nickname }, postId: post.id } },
@@ -39,13 +39,12 @@ const SeriesPosts = ( { userId, dbService } ) => {
         className={styles.seriesPostTitle}
       />
       <div className={styles.mypageContent}>
-        {/* 포스트일때 */}
         { posts.length &&
           posts.map( (post, idx) => {
           return <Post
                     key={idx}
                     post={post}
-                    onClick={ (post) => testGoReadPage(post)}
+                    onClick={ () => GoReadPage(post)}
                   />
           })
         }

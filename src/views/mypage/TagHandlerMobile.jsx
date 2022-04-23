@@ -1,43 +1,29 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Button from "../../components/Button";
 import Txt from "../../components/Txt";
 import styles from "./mypage.module.scss";
 
-const TagHandlerMobile = ( {posts} ) => {
+const TagHandlerMobile = ( {setSearchValue, tags} ) => {
 
-  const [tags, setTags] = useState() //태그 목록 따로 저장, object Array
-
-  const getTags = () => {
-    const newTags = new Object();
-    if (!posts.length) return
-    for (let post of posts) {
-      for(let tag of post.tags) {
-        if (!newTags.hasOwnProperty(tag)) {
-          newTags[tag] = 1
-        } else {
-          newTags[tag]++
-        }
-      }
-    }
-    setTags(newTags)
+  const onClickTag = (e) => {
+    setSearchValue(e.target.name)
   }
 
-  useEffect(() => {
-    console.log(tags)
-    getTags()
-  }, [posts])
-
   return(
-    <div className={styles.tagBox}>
+    <div className={styles.tagHandlerBox}>
       <Button
-        txt={`전체보기 (${posts.length})`}
+        txt={`전체보기`} // (${posts.length}) 전체 글 길이를 알아야하는데, 따로 tags를 받아오지 않는이상 힘들듯하다.
         className={styles.tagBtn}
+        onClick={() => setSearchValue("")}
       />
       { tags &&
         Object.entries(tags).map((tag) => {
           return <Button
+                  key={tag[0]}
                   txt={`${tag[0]} (${tag[1]})`}
                   className={styles.tagBtn}
+                  name={tag[0]}
+                  onClick={ (e) => onClickTag(e)}
                   />
         }  )
       }
