@@ -1,39 +1,41 @@
 import React, { useState, useRef, useEffect } from "react"
 import styles from "./mypage.module.scss";
 
+import { tapChageCss } from "./mypageService"
 // Components
 import Input from "../../components/Input";
 import Txt from "../../components/Txt";
 
 
 
-const MypageHeader = ( { setTapState, searchValue, setSearchValue } ) => {
+const MypageHeader = ( { setTapState, setSearchValue, tapState } ) => {
 
   const postTapBtnRef = useRef(null)
   const seriesTapBtnRef = useRef(null)
+  const [inputValue, setInputValue] = useState('')
 
   useEffect(() => {
     tapChageCss(postTapBtnRef, seriesTapBtnRef)
   }, [])
   
-
-  const tapChageCss = (activeRef, unactiveRef) => {
-    activeRef.current.style.color = "#20c997"
-    activeRef.current.style.borderBottom = "2px solid #20c997"
-    unactiveRef.current.style.color = "black"
-    unactiveRef.current.style.borderBottom = "none"
-  }
-
   const onClickTapBtn = (e) => {
     const type = e.target.innerText
     if (type === "글") {
-      setTapState("post")
       tapChageCss(postTapBtnRef, seriesTapBtnRef)
+      setTapState("post")
     } else if (type === "시리즈") {
       tapChageCss(seriesTapBtnRef, postTapBtnRef)
       setTapState("series")
     }
   }
+
+  useEffect(()=>{
+    let timer = setTimeout(()=>{ 
+      setSearchValue(inputValue)
+     }, 500);
+    return ()=>{ clearTimeout(timer) }
+  }, [inputValue]);
+
 
 
   return (
@@ -41,8 +43,9 @@ const MypageHeader = ( { setTapState, searchValue, setSearchValue } ) => {
       <Input
         className={styles.testInput}
         type="text"
-        onChange={ (e) => setSearchValue(e.target.value) }
-        value={searchValue}
+        onChange={ (e) => setInputValue(e.target.value) }
+        value={inputValue}
+        placeholder={tapState === "post" ? "제목, 소개, 태그로 검색하세요" : "시리즈 명으로 검색하세요"}
       />
 
       <div>

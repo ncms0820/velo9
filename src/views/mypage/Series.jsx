@@ -7,15 +7,15 @@ import SeriesContent from "./SeriesContent"
 
 import { dummyData } from "./dummy";
 import { useNavigate } from "react-router-dom";
+import { getMySeries } from "./mypageService";
 
-const Series = ( { data, nickname, dbService } ) => {
+const Series = ( { series, nickname, dbService, functionService, searchValue, setSerieses } ) => {
 
   const navigate = useNavigate();
   const [seriesContents, setSeriesContents] = useState([])
 
   const getSeriesContents = async() => {
-    const result = await dbService.getSeriesDetail(nickname, data)
-    console.log("시리즈 내용물", result.data.content)
+    const result = await dbService.getSeriesDetail(nickname, series.seriesName)
     setSeriesContents(result.data.content)
   }
 
@@ -23,9 +23,17 @@ const Series = ( { data, nickname, dbService } ) => {
     getSeriesContents()
   }, [])
 
-  
-  const testGoReadPage = (post) => {
-    console.log("클릭됨")
+  // 현재 에러남
+  const onClickDeleteSeries = async() => {
+    const confirm = window.confirm("시리즈를 삭제할까요?")
+    if(!confirm) return
+    await functionService.deleteSeries(series.seriesId)
+    const result = await dbService.getSeries(nickname)
+    const newSeries = getMySeries(result, searchValue);
+    setSerieses(newSeries)
+  }
+
+  const GoReadPage = (post) => {
     navigate("/read", {
       state: { content: { member: { nickname: nickname }, postId: post.id } },
     });
@@ -37,32 +45,31 @@ const Series = ( { data, nickname, dbService } ) => {
       <Button 
         txt="시리즈 삭제"
         className={styles.seriesDeleteBtn}
-        onClick={() => console.log("시리즈 삭제 이벤트")}
+        onClick={() => onClickDeleteSeries()}
       />
 
       <Txt
         className={styles.seriesTitle}
-        txt={data}
+        txt={series.seriesName}
       />
-      
       <ul>
         {
           seriesContents &&
-          seriesContents.slice(seriesContents.length -3, seriesContents.length).map((data, idx) => {
-          return <SeriesContent
-                    data={data}
-                    onClick={(data) => testGoReadPage(data)}
+          seriesContents.slice(seriesContents.length -3, seriesContents.length).map((post, idx) => {
+            return <SeriesContent
+                    key={idx}
+                    post={post}
+                    onClick={() => GoReadPage(post)}
                   />
         })
         }
       </ul>
-
         {
           seriesContents.length !== 0 &&
           <Button 
             txt="시리즈 전체보기"
             className={styles.seriesMoreviewBtn}
-            onClick={() => navigate(`/${nickname}/series/${data}`) }
+            onClick={() => navigate(`/${nickname}/series/${series.seriesName}`) }
           />
         }
 

@@ -20,7 +20,7 @@ const Post = ( { post, onClick } ) => {
         txt={post.introduce}
       />
 
-      {/* {post.tags.length &&
+      { post.tags.length &&
         <div className={styles.tagBox}>
           {post.tags.map( (val) => {
               return <Button 
@@ -30,7 +30,7 @@ const Post = ( { post, onClick } ) => {
                     />
             })}
         </div>
-      } */}
+      }
       <div>
         <Txt
           className={styles.postDate}

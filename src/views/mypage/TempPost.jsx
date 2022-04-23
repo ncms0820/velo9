@@ -24,9 +24,9 @@ const TempPost = ( { userId, dbService } ) => {
   
   const testGoReadPage = (post) => {
     console.log("클릭됨, 임시작성 -> 실제작성으로")
-    // navigate("/read", {
-    //   state: { content: { member: { nickname: userId.nickname }, postId: post.id } },
-    // });
+    navigate("/read", {
+      state: { content: { member: { nickname: userId.nickname }, postId: post.id } },
+    });
   }
 
 

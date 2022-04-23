@@ -5,84 +5,104 @@ import styles from "./mypage.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 
-// Components
-import Button from "../../components/Button";
 
 // page
 import MypageHeader from "./MypageHeader";
 import Post from "./Post";
 import Series from "./Series";
 import TagHandlerMobile from "./TagHandlerMobile";
-import TagHandlerDesktop from "./TagHandlerDesktop";
+
+import { getMyPosts, getMySeries, getTags } from "./mypageService";
 
 
-const MypageRouter = ( { userId, dbService } ) => {
+const MypageRouter = ( { userId, dbService, functionService } ) => {
   const navigate = useNavigate();
 
   const [nickname, setNickname] = useState(userId.nickname)
   const [tapState, setTapState] = useState('post') // post, series, introduce는 보류
   const [searchValue, setSearchValue] = useState('')
+  const [posts, setPosts] = useState([]);
+  const [serieses, setSerieses] = useState([]);
 
-  const [posts, setPosts] = useState([])
-  const [serieses, setSerieses] = useState([])
-  
-  const getMyPosts = async () => {
-    const result = await dbService.memberMain(nickname, 0)
-    setPosts(result.data.data.content)
-    console.log(result.data.data.content)
+  const [tags, setTags] = useState(null)
+
+  const getContents = async () => {
+    if (tapState === 'post') {
+      const result = await dbService.memberMain(nickname, 0)
+      const newPost = getMyPosts(result, searchValue);
+      setPosts(newPost)
+    } else if (tapState === 'series') {
+      const result = await dbService.getSeries(nickname)
+      const newSeries = getMySeries(result, searchValue);
+      setSerieses(newSeries)
+    }
   }
-  
-  const getMySeries = async() => {
-    const result = await dbService.getSeries(nickname)
-    setSerieses(result.data.subData)
-  }
-  
+
+  // posts는 모든 글에서 받아온 기준으로!
   useEffect(() => {
-    setNickname(userId.nickname)
-    getMyPosts()
-    getMySeries()
-  }, [nickname])
+    // if (!posts.length) return
+    if( !posts.length || tags !== null) return
+    const newTags = getTags(posts);
+    setTags(newTags)
+  }, [posts])
+  
 
-  const testGoReadPage = (post) => {
-    console.log("클릭됨")
+  /*검색어에 따른 posts filter조건*/ 
+  useEffect(() => {
+    getContents()
+  }, [tapState, searchValue])
+
+  useEffect(() => {
+    setSearchValue("")
+  }, [tapState])
+  
+  
+  const GoReadPage = (post) => {
     navigate("/read", {
-      state: { content: { member: { nickname: userId.nickname }, postId: post.id } },
+      state: { content: { member: { nickname: nickname }, postId: post.id } },
     });
   }
+  
 
   return (
     <div className={styles.mypageBox}>
 
       <MypageHeader
         setTapState={setTapState}
-        searchValue={searchValue}
+        tapState={tapState}
         setSearchValue={setSearchValue}
       />
 
-      <TagHandlerMobile
-        dbService={dbService}
-        posts={posts}
-      />
+      { tapState === "post" &&
+        <TagHandlerMobile
+          tags={tags}
+          setSearchValue={setSearchValue}
+        />
+      }
 
       <div className={styles.mypageContent}>
         {/* 포스트일때 */}
-        { tapState === "post" && posts.length &&
-          posts.map( (val, idx) => {
+        { tapState === "post" && posts.length !== 0 &&
+          posts.map( (post, idx) => {
           return <Post
                     key={idx}
-                    post={val}
-                    onClick={ (post) => testGoReadPage(post)}
+                    post={post}
+                    onClick={ () => GoReadPage(post)}
                   />
           })
         }
+
         {/* 시리즈일때 */}
-        { tapState === "series" && serieses.length &&
-          serieses.map( (data, idx) => {
+        { tapState === "series" && serieses.length !==0  &&
+          serieses.map( (series, idx) => {
           return <Series
                     key={idx}
-                    data={data.seriesName}
-                    dbService={dbService}
+                    series={series}
                     nickname={nickname}
+                    dbService={dbService}
+                    functionService={functionService}
+                    searchValue={searchValue}
+                    setSerieses={setSerieses}
                   />
           })
         }

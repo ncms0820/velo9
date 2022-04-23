@@ -26,7 +26,7 @@ class FunctionService {
   }
 
   async deleteSeries(id) {
-    const url = `${baseURL}/deleteSeries`;
+    const url = `${baseURL}/deleteSeries?id=${id}`;  // ?id=${id}
     const body = {
       id,
     };
