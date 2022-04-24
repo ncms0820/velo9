@@ -1,8 +1,128 @@
 .setting {
-  border: 1px solid black;
-  padding: 0px 10rem;
+  padding: 5rem 10rem;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   .main {
-    border: 1px solid black;
     height: 40rem;
+    .top {
+      height: 40%;
+
+      display: flex;
+      .profile_field {
+        width: 30%;
+        padding-right: 5%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        .img {
+          height: 55%;
+          width: 50%;
+          border-radius: 50%;
+          overflow: hidden;
+          background-color: grey;
+        }
+        .upload,
+        .remove {
+          font-size: 0.8rem;
+          height: 16%;
+          width: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 0.8rem;
+          background-color: rgb(206, 205, 205);
+          transition: all linear 0.5s;
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.315);
+            color: white;
+          }
+        }
+      }
+      .nickname_field {
+        width: 70%;
+
+        display: flex;
+        flex-direction: column;
+        .nickname {
+          border: 0px;
+          font-size: 2rem;
+          background-color: transparent;
+          height: 20%;
+          margin-bottom: 1rem;
+        }
+        .introduce {
+          height: 80%;
+          text-align: start;
+          resize: none;
+        }
+      }
+    }
+    .middle {
+      margin-top: 1rem;
+      height: 40%;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      div {
+        height: 25%;
+        display: flex;
+        align-items: center;
+        padding: 0 0 0 5rem;
+        justify-content: space-between;
+      }
+      label {
+        font-weight: bold;
+        margin-right: 10px;
+        width: 15%;
+      }
+      input {
+        height: 60%;
+        width: 75%;
+        cursor: pointer;
+      }
+      .withdraw {
+        display: flex;
+        justify-content: space-between;
+        div {
+          margin-top: 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          width: 75%;
+          input {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            height: 60%;
+            width: 35%;
+            color: white;
+            background-color: rgba(177, 42, 42, 0.705);
+            border-radius: 0.5rem;
+          }
+        }
+      }
+    }
+    .bottom {
+      margin-top: 1rem;
+      height: 20%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20%;
+        height: 30%;
+        border-radius: 0.5rem;
+        font-size: 0.8rem;
+        background-color: rgb(206, 205, 205);
+        cursor: pointer;
+      }
+    }
   }
 }
