@@ -69,6 +69,7 @@ const MypageRouter = ( { userId, dbService, functionService } ) => {
 
       <MypageProfile
         dbService={dbService}
+        nickname={nickname}
         userId={userId}
       />
 

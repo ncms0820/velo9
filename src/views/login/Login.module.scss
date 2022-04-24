@@ -2,6 +2,8 @@ $velogL: #2ed4a3;
 $velogN: #20c997;
 $velogD: #12b886;
 
+@import "../../common/colors.scss";
+
 @mixin totalHeight {
   height: 2.5rem;
 }
@@ -34,7 +36,7 @@ $velogD: #12b886;
 @mixin hoverEvent {
   cursor: pointer;
   &:hover {
-    background: $velogL;
+    background: $lightBlue;
   }
 }
 
@@ -67,7 +69,7 @@ $velogD: #12b886;
     background: none;
     font-weight: bold;
     border: none;
-    background: $velogN;
+    background: $mainBlue;
     color: white;
     @include shadowMini();
     @include hoverEvent();
@@ -135,7 +137,7 @@ $velogD: #12b886;
   margin: 0 1rem;
   font-size: 2rem;
   color: white;
-  background: $velogN;
+  background: $mainBlue;
   padding: 0.5rem;
   border-radius: 1.75rem;
   @include hoverEvent();

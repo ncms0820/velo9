@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-  
+
 //  post 받아오기
 export const getMyPosts = (result, searchValue ) => {
   const newPosts = result.data.data.content;
@@ -46,8 +46,8 @@ export const getMySeries = (result, searchValue ) => {
   }
 
   export const tapChageCss = (activeRef, unactiveRef) => {
-    activeRef.current.style.color = "#20c997"
-    activeRef.current.style.borderBottom = "2px solid #20c997"
+    activeRef.current.style.color = "#055CF5"
+    activeRef.current.style.borderBottom = "2px solid #055CF5"
     unactiveRef.current.style.color = "black"
     unactiveRef.current.style.borderBottom = "none"
   }

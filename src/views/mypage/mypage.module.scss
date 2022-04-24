@@ -2,6 +2,8 @@ $velogL: #2ed4a3;
 $velogN: #20c997;
 $velogD: #12b886;
 
+@import "../../common/colors.scss";
+
 @mixin totalHeight {
   height: 2.5rem;
 }
@@ -34,7 +36,7 @@ $velogD: #12b886;
 @mixin hoverEvent {
   cursor: pointer;
   &:hover {
-    background: $velogL;
+    background: $mainBlue;
   }
 }
 
@@ -78,7 +80,7 @@ $velogD: #12b886;
   .infoBox {
     display: flex;
     justify-content: center;
-    margin-left: 1rem;
+    // margin-left: 1rem;
 
     span {
       font-size: 1.5rem;
@@ -87,10 +89,10 @@ $velogD: #12b886;
 
       &:first-child {
         font-weight: bold;
-        border-right: 1px solid lightgray;
+        // border-right: 1px solid lightgray;
         }
       &:last-child {
-        padding-left: 1rem;
+        // padding-left: 1rem;
       }
     }
   }
@@ -124,8 +126,8 @@ $velogD: #12b886;
 }
 
 .activeTapBtn {
-  color: $velogN;
-  border-bottom: 2px solid $velogN;
+  color: $mainBlue;
+  border-bottom: 2px solid $mainBlue;
 }
 
 
@@ -189,7 +191,7 @@ $velogD: #12b886;
   margin: .5rem .25rem;
   height: 1.5rem;
   border-radius: .75rem;
-  background: $velogL;
+  background: $mainBlue;
   color: white;
   @include buttonDefault();
   @include shadowMini();
@@ -215,7 +217,7 @@ $velogD: #12b886;
     width: 6rem;
     margin: .5rem;
     height: 2.5rem;
-    background: $velogL;
+    background: $mainBlue;
     color: white;
     @include buttonDefault();
   }

@@ -1,11 +1,13 @@
 import React from "react"
+// import { useParams } from "react-router-dom";
 import Txt from "../../components/Txt";
 import styles from "./mypage.module.scss";
 
-const MypageProfile = ( { userId, dbService } ) => {
+const MypageProfile = ( {nickname, userId, dbService } ) => {
 
-  
+  // const { nickname } =  useParams();
 
+  // console.log(nickname)
 
   return(
     <>
@@ -19,12 +21,12 @@ const MypageProfile = ( { userId, dbService } ) => {
           <div className={styles.infoBox}>
           <Txt 
             className={styles.infonickname}
-            txt={userId.nickname}
+            txt={nickname}
           />
-          <Txt 
+          {/* <Txt 
             className={styles.infoBlogTitle}
             txt={userId.blogTitle}
-          />
+          /> */}
         </div>
       </div>
     }
