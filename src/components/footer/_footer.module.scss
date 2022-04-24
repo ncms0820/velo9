@@ -4,7 +4,9 @@
   justify-content: space-between;
   height: 4rem;
   .left {
-    background-color: rgba(235, 232, 232, 0.685);
+    border-radius: 1rem;
+    background-color: rgba(240, 239, 239, 0.952);
+    max-width: 20rem;
     height: 100%;
     width: 40%;
     display: flex;
@@ -23,7 +25,9 @@
     }
   }
   .right {
-    background-color: rgba(235, 232, 232, 0.685);
+    border-radius: 1rem;
+    background-color: rgba(240, 239, 239, 0.952);
+    max-width: 20rem;
     height: 100%;
     width: 40%;
     display: flex;

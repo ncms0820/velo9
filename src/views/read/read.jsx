@@ -18,8 +18,9 @@ const Read = ({ dbService, userId, functionService }) => {
   const [thumbnail, setThumbnail] = useState();
   const navigate = useNavigate();
   const location = useLocation();
+  console.log("location", location.state);
   const data = location.state.content;
-  console.log(location);
+  const memberThumbnail = data.member.memberThumbnail && data.member.memberThumbnail.fileName;
   const nickname = data.member.nickname;
   const id = data.postId;
   const onDelete = () => {
@@ -55,9 +56,15 @@ const Read = ({ dbService, userId, functionService }) => {
     setLove(!love);
   };
 
-  const goToProfile = () => {};
+  const goToProfile = () => {
+    console.log(memberThumbnail, "여ㅣ기ㅣㅣㅣㅣㅣㅣㅣ");
+    return navigate(`/${nickname}/main`, { state: { memberThumbnail: memberThumbnail && memberThumbnail } });
+  };
 
-  const goToSeries = () => {};
+  const goToSeries = () => {
+    const seriesName = cardInfo.seriesName;
+    return navigate(`/${nickname}/series/${seriesName}`);
+  };
 
   useEffect(() => {
     const promise = new Promise((resolve, reject) => {
@@ -94,39 +101,43 @@ const Read = ({ dbService, userId, functionService }) => {
     <>
       {cardInfo ? (
         <div className={styles.read}>
-          <div className={styles.title}>{cardInfo.title}</div>
-          <div className={styles.meta}>
-            <div className={styles.meta_data}>
-              <div>{cardInfo.memberInfo.name}</div>
-              <span>&nbsp;·&nbsp;</span>
-              <div>{createdDate}</div>
+          <div className={styles.title}>
+            <div>{cardInfo.title}</div>
+            <div className={styles.img}>
+              {data.postThumbnail ? (
+                <img src={thumbnail} alt="pic" />
+              ) : (
+                <img src={"https://picsum.photos/200"} alt="pic" />
+              )}
             </div>
-            {manage && (
-              <div className={styles.meta_button}>
-                <ReactiveButton
-                  style={{ borderRadius: "5px" }}
-                  color={"primary"}
-                  idleText={"수정"}
-                  onClick={goToWrite}
-                />
-                <ReactiveButton style={{ borderRadius: "5px" }} color={"red"} idleText={"삭제"} onClick={onDelete} />
+          </div>
+          <div className={styles.meta_wrapper}>
+            <div className={styles.meta}>
+              <div className={styles.meta_data}>
+                <div onClick={goToProfile}>{cardInfo.memberInfo.name}</div>
+                <span>&nbsp;·&nbsp;</span>
+                <div>{createdDate}</div>
               </div>
-            )}
-          </div>
-          <div className={styles.tag}>
-            {cardInfo.tags.map((data) => (
-              <div># {data}</div>
-            ))}
-          </div>
-          <div className={styles.img}>
-            {data.postThumbnail ? (
-              <img src={thumbnail} alt="pic" />
-            ) : (
-              <img src={"https://picsum.photos/200"} alt="pic" />
-            )}
+              {manage && (
+                <div className={styles.meta_button}>
+                  <ReactiveButton
+                    style={{ borderRadius: "5px" }}
+                    color={"primary"}
+                    idleText={"수정"}
+                    onClick={goToWrite}
+                  />
+                  <ReactiveButton style={{ borderRadius: "5px" }} color={"red"} idleText={"삭제"} onClick={onDelete} />
+                </div>
+              )}
+            </div>
+            <div className={styles.tag}>
+              {cardInfo.tags.map((data) => (
+                <div># {data}</div>
+              ))}
+            </div>
           </div>
           <div className={styles.series}>
-            <h1>{cardInfo.seriesName}</h1>
+            <h1 onClick={goToSeries}>{cardInfo.seriesName}</h1>
           </div>
           <div className={styles.content}>
             <Viewer initialValue={cardInfo.content} />
@@ -135,7 +146,7 @@ const Read = ({ dbService, userId, functionService }) => {
             <div>
               <span>도움 돼요!</span>
               <div onClick={onLove} className={styles.thumbsUp}>
-                <FontAwesomeIcon icon={faThumbsUp} size={"2x"} color={"#f73939"} />
+                <FontAwesomeIcon icon={faThumbsUp} size={"2x"} />
               </div>
               <span>{cardInfo.loveCount}</span>
             </div>
