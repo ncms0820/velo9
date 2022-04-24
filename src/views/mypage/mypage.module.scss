@@ -36,7 +36,7 @@ $velogD: #12b886;
 @mixin hoverEvent {
   cursor: pointer;
   &:hover {
-    background: $mainBlue;
+    background: $mainColor;
   }
 }
 
@@ -126,8 +126,8 @@ $velogD: #12b886;
 }
 
 .activeTapBtn {
-  color: $mainBlue;
-  border-bottom: 2px solid $mainBlue;
+  color: $mainColor;
+  border-bottom: 2px solid $mainColor;
 }
 
 
@@ -191,7 +191,7 @@ $velogD: #12b886;
   margin: .5rem .25rem;
   height: 1.5rem;
   border-radius: .75rem;
-  background: $mainBlue;
+  background: $mainColor;
   color: white;
   @include buttonDefault();
   @include shadowMini();
@@ -217,7 +217,7 @@ $velogD: #12b886;
     width: 6rem;
     margin: .5rem;
     height: 2.5rem;
-    background: $mainBlue;
+    background: $mainColor;
     color: white;
     @include buttonDefault();
   }
@@ -281,8 +281,10 @@ $velogD: #12b886;
 .seriesPostTitle {
   width: 100%;
   max-width: 768px;
-  margin: 4rem auto;
+  width: 100%;
+  margin: 0 auto;
+  padding: 3rem 0 1rem;
   font-size: 2rem;
   font-weight: bold;
-  text-align: center;
+  border-bottom: 1px solid lightgray;
 }

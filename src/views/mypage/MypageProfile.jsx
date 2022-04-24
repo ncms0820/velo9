@@ -3,34 +3,24 @@ import React from "react"
 import Txt from "../../components/Txt";
 import styles from "./mypage.module.scss";
 
-const MypageProfile = ( {nickname, userId, dbService } ) => {
+const MypageProfile = ( {nickname, thumbnail, dbService } ) => {
 
-  // const { nickname } =  useParams();
-
-  // console.log(nickname)
 
   return(
     <>
-    { userId &&
       <div className={styles.profileBox}>
-        {/* { userId.thumbnail
-          ? <img src={dbService.encoderThumbnail(userId.thumbnail.fileName)} alt="" />
+        { thumbnail
+          ? <img src={dbService.encoderThumbnail(thumbnail)} alt="" />
           : <img src="/test_img.png" alt="" />
-        } */}
-          <img src="/test_img.png" alt="" />  {/* 임시값  */}
+        }
           <div className={styles.infoBox}>
           <Txt 
             className={styles.infonickname}
             txt={nickname}
           />
-          {/* <Txt 
-            className={styles.infoBlogTitle}
-            txt={userId.blogTitle}
-          /> */}
         </div>
       </div>
-    }
-  </>
+    </>
   )
 }
 
