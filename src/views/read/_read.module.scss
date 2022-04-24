@@ -83,11 +83,12 @@
     height: 2rem;
     font-size: 0.95rem;
     div {
+      margin-right: 0.5rem;
       border-radius: 1rem;
       font-weight: bold;
       padding: 0.53rem 0.53rem 0.53rem 0.4rem;
       background-color: rgba(206, 198, 198, 0.445);
-      color: rgb(145, 141, 144);
+      color: #6435c998;
     }
   }
   .content {
@@ -109,8 +110,9 @@
       max-width: 10rem;
     }
     .thumbsUp {
-      color: rgb(167, 103, 103);
+      color: grey;
       &:hover {
+        color: #6435c998;
         cursor: pointer;
       }
     }
