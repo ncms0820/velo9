@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styles from "./mypage.module.scss";
 
 // Components
 import Txt from "../../components/Txt";
 // page
 import Post from "./Post";
+import MypageProfile from "./MypageProfile";
 
 
 const SeriesPosts = ( { dbService } ) => {
 
   const { nickname, seriesName } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
   const [posts, setPosts] = useState([])
   
@@ -34,8 +36,15 @@ const SeriesPosts = ( { dbService } ) => {
 
   return (
     <div className={styles.mypageBox}>
+
+      <MypageProfile 
+        dbService={dbService}
+        nickname={nickname}
+        thumbnail={location.state?.thumbnail}
+      />
+
       <Txt
-        txt={seriesName + "의 글"}
+        txt={ "Series: " + seriesName}
         className={styles.seriesPostTitle}
       />
       <div className={styles.mypageContent}>

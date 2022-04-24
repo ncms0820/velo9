@@ -12,6 +12,7 @@ const Home = ({ dbService, userId, onLoginModal }) => {
     async (tag = undefined, content = undefined, page = undefined, sort = "createdDate") => {
       try {
         const db = await dbService.getDb(tag, content, page, sort);
+        console.log(db)
         if (db.content.length !== 0) {
           setCards(db);
         } else {

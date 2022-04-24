@@ -10,13 +10,12 @@ import MypageHeader from "./MypageHeader";
 import Post from "./Post";
 import Series from "./Series";
 import TagHandlerMobile from "./TagHandlerMobile";
-
 import { getMyPosts, getMySeries, getTags } from "./mypageService";
+import MypageProfile from "./MypageProfile";
 
 const MypageRouter = ({ dbService, functionService }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.state);
   const { nickname } = useParams();
   const [tapState, setTapState] = useState("post"); // post, series, introduce는 보류
   const [searchValue, setSearchValue] = useState("");
@@ -62,9 +61,20 @@ const MypageRouter = ({ dbService, functionService }) => {
 
   return (
     <div className={styles.mypageBox}>
-      <MypageHeader setTapState={setTapState} tapState={tapState} setSearchValue={setSearchValue} />
+      
+      <MypageProfile
+        dbService={dbService}
+        nickname={nickname}
+        thumbnail={location.state?.thumbnail}
+      />
 
-      {tapState === "post" && (
+      <MypageHeader
+        setTapState={setTapState}
+        tapState={tapState}
+        setSearchValue={setSearchValue}
+      />
+
+      { tapState === "post" &&
         <TagHandlerMobile
           dbService={dbService}
           tags={tags}
@@ -73,7 +83,7 @@ const MypageRouter = ({ dbService, functionService }) => {
           setSearchValue={setSearchValue}
           setPosts={setPosts}
         />
-      )}
+      }
 
       <div className={styles.mypageContent}>
         {/* 포스트일때 */}

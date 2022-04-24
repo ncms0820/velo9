@@ -6,8 +6,7 @@ import Button from "../../components/Button";
 
 const Post = ( { dbService, post, onClick } ) => {
 
-  console.log(dbService.encoderThumbnail(post.thumbnail?.fileName))
-
+  
   return(
     <div className={styles.post} onClick={onClick}>
       {post.thumbnail &&
