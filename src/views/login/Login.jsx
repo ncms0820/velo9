@@ -34,14 +34,28 @@ const Login = ({ setPage, authService, setLoginInfo }) => {
 
   return (
     <>
-      <Txt txt="아이디" />
-      <Input type="text" value={id} onChange={(e) => setId(e.target.value)} />
-      <Txt txt="비밀번호" />
-      <Input type="password" value={pw} onChange={(e) => setPw(e.target.value)} onEnter={goLogin} />
+      {/* <Txt txt="아이디" /> */}
+      <Input type="text"
+        className={styles.loginInput}
+        value={id} 
+        onChange={(e) => setId(e.target.value)}
+        placeholder="ID"
+      />
+      {/* <Txt txt="비밀번호" /> */}
+      <Input type="password"
+        className={styles.loginInput}
+        value={pw} 
+        onChange={(e) => setPw(e.target.value)} 
+        onEnter={goLogin}
+        placeholder="PASSWARD"
+      />
       <Button txt="로그인" onClick={goLogin} />
 
       <div className={styles.twoBtnBox}>
-        <Button txt="회원가입" className={styles.joinBtn} onClick={() => setPage("signup")} />
+        <Button txt="회원가입" 
+          className={styles.joinBtn} 
+          onClick={() => setPage("signup")} 
+        />
         <Button txt="아이디/비밀번호 찾기" className={styles.findUserBtn} onClick={() => setPage("findId")} />
       </div>
 

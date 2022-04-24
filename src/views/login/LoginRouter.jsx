@@ -19,7 +19,7 @@ const LoginRouter = ({ authService, setOnLoginModal,setLoginInfo }) => {
   const setTitle = () => {
     switch (page) {
       case "login":
-        return "로그인";
+        return "LOGIN";
       case "findId":
         return "아이디 찾기";
       case "changePw":

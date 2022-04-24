@@ -36,8 +36,12 @@ $velogD: #12b886;
 @mixin hoverEvent {
   cursor: pointer;
   &:hover {
-    background: $lightBlue;
+    background: $LColor;
   }
+}
+
+.loginInput {
+  margin-bottom: 1rem;
 }
 
 // Main
@@ -63,13 +67,18 @@ $velogD: #12b886;
     height: 3rem;
     margin-bottom: 0.75rem;
   }
+  .loginInput {
+    margin-bottom: 1.5rem;
+  }
+  
 
   button {
     height: 3rem;
     background: none;
     font-weight: bold;
     border: none;
-    background:black;
+    background: $mainColor;
+    border-radius: .25rem;
     color: white;
     @include shadowMini();
     @include hoverEvent();
@@ -119,6 +128,10 @@ $velogD: #12b886;
 
   button {
     width: 48%;
+    background-color: $LLColor;
+    &:hover {
+      background: $mainColor;
+    }
   }
 }
 
@@ -137,8 +150,10 @@ $velogD: #12b886;
   margin: 0 1rem;
   font-size: 2rem;
   color: white;
-  background:rgba(0, 0, 0, 0.37);
+  background: $mainColor;
   padding: 0.5rem;
   border-radius: 1.75rem;
   @include hoverEvent();
+
 }
+

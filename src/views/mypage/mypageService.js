@@ -46,9 +46,9 @@ export const getMySeries = (result, searchValue ) => {
   }
 
   export const tapChageCss = (activeRef, unactiveRef) => {
-    activeRef.current.style.color = "#055CF5"
-    activeRef.current.style.borderBottom = "2px solid #055CF5"
-    unactiveRef.current.style.color = "black"
+    activeRef.current.style.color = "black"
+    activeRef.current.style.borderBottom = "2px solid black"
+    unactiveRef.current.style.color = "gray"
     unactiveRef.current.style.borderBottom = "none"
   }
 

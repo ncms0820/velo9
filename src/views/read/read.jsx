@@ -121,7 +121,7 @@ const Read = ({ dbService, userId, functionService }) => {
                 <div className={styles.meta_button}>
                   <ReactiveButton
                     style={{ borderRadius: "5px" }}
-                    color={"light"}
+                    color={"dark"}
                     idleText={"수정"}
                     onClick={goToWrite}
                   />
