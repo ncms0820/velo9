@@ -7,7 +7,7 @@ import Home from "./views/homepage/home";
 import LoginRouter from "./views/login/LoginRouter";
 import MypageRouter from "./views/mypage/MypageRouter";
 import Read from "./views/read/read";
-import Setting from "./views/setting/setting";
+import Setting from "./views/SettingPage/setting";
 import SocialSign from "./views/login/SocialSign";
 import Write from "./views/write/write";
 import Redirect from "./views/redirect";
@@ -73,7 +73,10 @@ function App({ dbService, authService, functionService }) {
         />
         <Route path="/setting" element={<Setting />} />
         <Route path="/:username">
-          <Route path="main" element={<MypageRouter userId={userId} dbService={dbService} functionService={functionService} />} />
+          <Route
+            path="main"
+            element={<MypageRouter userId={userId} dbService={dbService} functionService={functionService} />}
+          />
           <Route path="series/:seriesName" element={<SeriesPost userId={userId} dbService={dbService} />} />
         </Route>
         <Route path="/archive" element={<ArchiveRouter userId={userId} dbService={dbService} />} />

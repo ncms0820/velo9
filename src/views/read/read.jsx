@@ -88,7 +88,7 @@ const Read = ({ dbService, userId, functionService }) => {
   }, [userId, nickname]);
   useEffect(() => {
     encoder();
-  }, [data, encoder]);
+  }, [data]);
   return (
     <>
       {cardInfo ? (
