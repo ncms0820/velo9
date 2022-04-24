@@ -57,6 +57,46 @@ $velogD: #12b886;
   display: flex;
   flex-direction: column;
 }
+
+.profileBox {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  max-width: 768px;
+  // width: 100%;
+  margin: 4rem auto 0;
+  padding: 0 0 1rem; 
+  border-bottom: 1px solid lightgray;
+
+  img {
+    align-self: center;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .infoBox {
+    display: flex;
+    justify-content: center;
+    margin-left: 1rem;
+
+    span {
+      font-size: 1.5rem;
+      margin: 1rem 0;
+      padding: 0 .5rem;
+
+      &:first-child {
+        font-weight: bold;
+        border-right: 1px solid lightgray;
+        }
+      &:last-child {
+        padding-left: 1rem;
+      }
+    }
+  }
+  
+}
+
 // header
 .mypageHeader {
   display: flex;

@@ -13,9 +13,20 @@ const ArchiveCard = ({ content }) => {
   const goToDetail = () => {
     navigate("/read", { state: { content: data } });
   };
+
+  // const GoReadPage = (post) => {
+  //   console.log("클릭됨")
+  //   navigate("/read", {
+  //     state: { content: { member: { nickname: nickname }, postId: post.id } },
+  //   });
+  // }
+
   const goToProfile = () => {
     navigate("/profile");
   };
+
+  console.log(content)
+
   return (
     <div className={styles.card}>
       {/* <div className={styles.img} onClick={goToDetail}>

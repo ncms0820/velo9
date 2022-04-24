@@ -5,17 +5,16 @@ import styles from "./mypage.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 
-
 // page
 import MypageHeader from "./MypageHeader";
 import Post from "./Post";
 import Series from "./Series";
 import TagHandlerMobile from "./TagHandlerMobile";
-
 import { getMyPosts, getMySeries, getTags } from "./mypageService";
+import MypageProfile from "./MypageProfile";
 
 
-const MypageRouter = ( { dbService, functionService } ) => {
+const MypageRouter = ( { userId, dbService, functionService } ) => {
   const navigate = useNavigate();
   const { nickname } = useParams();
   const [tapState, setTapState] = useState('post') // post, series, introduce는 보류
@@ -25,7 +24,6 @@ const MypageRouter = ( { dbService, functionService } ) => {
 
   const [tags, setTags] = useState(null)
 
-  
 
 
   const getContents = async () => {
@@ -68,6 +66,11 @@ const MypageRouter = ( { dbService, functionService } ) => {
 
   return (
     <div className={styles.mypageBox}>
+
+      <MypageProfile
+        dbService={dbService}
+        userId={userId}
+      />
 
       <MypageHeader
         setTapState={setTapState}
