@@ -27,6 +27,7 @@ const MypageRouter = ({ dbService, functionService }) => {
   const getContents = async () => {
     if (tapState === "post") {
       const result = await dbService.memberMain(nickname, 0);
+      console.log(result)
       const newPost = getMyPosts(result, searchValue);
       setPosts(newPost);
     } else if (tapState === "series") {
@@ -59,6 +60,11 @@ const MypageRouter = ({ dbService, functionService }) => {
     });
   };
 
+  useEffect(() => {
+    console.log(posts)
+  }, [posts])
+  
+
   return (
     <div className={styles.mypageBox}>
       
@@ -79,7 +85,6 @@ const MypageRouter = ({ dbService, functionService }) => {
           dbService={dbService}
           tags={tags}
           nickname={nickname}
-          searchValue={searchValue}
           setSearchValue={setSearchValue}
           setPosts={setPosts}
         />
