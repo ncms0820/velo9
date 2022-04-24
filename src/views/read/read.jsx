@@ -57,7 +57,6 @@ const Read = ({ dbService, userId, functionService }) => {
   };
 
   const goToProfile = () => {
-    console.log(memberThumbnail, "여ㅣ기ㅣㅣㅣㅣㅣㅣㅣ");
     return navigate(`/${nickname}/main`, { state: { memberThumbnail: memberThumbnail && memberThumbnail } });
   };
 
@@ -122,7 +121,7 @@ const Read = ({ dbService, userId, functionService }) => {
                 <div className={styles.meta_button}>
                   <ReactiveButton
                     style={{ borderRadius: "5px" }}
-                    color={"primary"}
+                    color={"light"}
                     idleText={"수정"}
                     onClick={goToWrite}
                   />

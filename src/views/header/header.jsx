@@ -55,7 +55,7 @@ const Header = memo(({ setOnLoginModal, authService, setLoginInfo, userId }) => 
                 </Link>
               </div>
               <div>
-                <ReactiveButton style={{ borderRadius: "5px" }} color={"violet"} idleText={"menu"} onClick={tabMenu} />
+                <ReactiveButton style={{ borderRadius: "5px" }} color={"primary"} idleText={"menu"} onClick={tabMenu} />
               </div>
             </div>
             {tab && <Menu userId={userId} tabMenu={tabMenu} authService={authService} setLoginInfo={setLoginInfo} />}
