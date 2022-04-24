@@ -4,10 +4,9 @@ import Txt from "../../components/Txt";
 import styles from "./mypage.module.scss";
 import { getMyPostsWithTagBtn } from "./mypageService";
 
-const TagHandlerMobile = ( { dbService, tags, nickname, searchValue, setSearchValue, setPosts} ) => {
+const TagHandlerMobile = ( { dbService, tags, nickname, setSearchValue, setPosts} ) => {
 
   const onClickTag = async (e) => {
-    console.log(e.target.name)
     const result = await dbService.memberMain(nickname, 0)
     const newPost = await getMyPostsWithTagBtn(result, e.target.name, setSearchValue)
     setPosts(newPost)

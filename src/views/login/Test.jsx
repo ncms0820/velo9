@@ -26,6 +26,9 @@ const Test = ({ dbService, authService }) => {
     setPosts([...posts, ...targetPost]);
     setLastId(lastId - size); // 반영이 안되네;
   };
+  const lastListRef = useRef(null); // 마지막 요소
+  // 마지막 친구가 들어가야함. // 
+  InfiniteScroll(lastListRef, posts, pagination);
 
   useEffect(() => {
     let working = true;
@@ -43,8 +46,6 @@ const Test = ({ dbService, authService }) => {
     };
   }, [userId, authService, navigate]);
 
-  const lastListRef = useRef(null); // 마지막 요소
-  InfiniteScroll(lastListRef, posts, pagination);
 
   return (
     <>
