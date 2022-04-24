@@ -8,26 +8,26 @@ import Txt from "../../components/Txt";
 import Post from "./Post";
 
 
-const SeriesPosts = ( { userId, dbService } ) => {
+const SeriesPosts = ( { dbService } ) => {
 
-  const { username, seriesName } = useParams();
+  const { nickname, seriesName } = useParams();
   const navigate = useNavigate();
   const [posts, setPosts] = useState([])
   
   const getMyPosts = async() => {
-    const result = await dbService.getSeriesDetail(username, seriesName)
+    const result = await dbService.getSeriesDetail(nickname, seriesName)
     console.log("시리즈 내용물", result.data.content)
     setPosts(result.data.content)
   }
   
   useEffect(() => {
     getMyPosts()
-  }, [username])
+  }, [nickname])
   
   const GoReadPage = (post) => {
     console.log("클릭됨")
     navigate("/read", {
-      state: { content: { member: { nickname: userId.nickname }, postId: post.id } },
+      state: { content: { member: { nickname: nickname }, postId: post.id } },
     });
   }
 
@@ -43,6 +43,7 @@ const SeriesPosts = ( { userId, dbService } ) => {
           posts.map( (post, idx) => {
           return <Post
                     key={idx}
+                    dbService={dbService}
                     post={post}
                     onClick={ () => GoReadPage(post)}
                   />

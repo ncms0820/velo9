@@ -7,7 +7,7 @@ import SeriesContent from "./SeriesContent"
 
 import { dummyData } from "./dummy";
 import { useNavigate } from "react-router-dom";
-import { getMySeries } from "./mypageService";
+import { getMySeries, sweetAlert } from "./mypageService";
 
 const Series = ( { series, nickname, dbService, functionService, searchValue, setSerieses } ) => {
 
@@ -24,13 +24,8 @@ const Series = ( { series, nickname, dbService, functionService, searchValue, se
   }, [])
 
   // 현재 에러남
-  const onClickDeleteSeries = async() => {
-    const confirm = window.confirm("시리즈를 삭제할까요?")
-    if(!confirm) return
-    await functionService.deleteSeries(series.seriesId)
-    const result = await dbService.getSeries(nickname)
-    const newSeries = getMySeries(result, searchValue);
-    setSerieses(newSeries)
+  const onClickDeleteSeries = () => {
+    sweetAlert(functionService, dbService, series.seriesId, nickname, searchValue, setSerieses);
   }
 
   const GoReadPage = (post) => {
@@ -58,6 +53,7 @@ const Series = ( { series, nickname, dbService, functionService, searchValue, se
           seriesContents.slice(seriesContents.length -3, seriesContents.length).map((post, idx) => {
             return <SeriesContent
                     key={idx}
+                    dbService={dbService}
                     post={post}
                     onClick={() => GoReadPage(post)}
                   />

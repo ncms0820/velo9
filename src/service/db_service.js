@@ -127,7 +127,7 @@ class DbService {
   }
 
   //섬네일 encoder
-  async encoderThumbnail(fileName) {
+  encoderThumbnail(fileName) {
     const thumbnail = `${baseURL}/displayPostThumbnail?fileName=${encodeURIComponent(fileName)}`;
     return thumbnail;
   }

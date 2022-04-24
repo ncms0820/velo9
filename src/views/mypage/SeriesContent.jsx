@@ -1,17 +1,21 @@
-import { useState } from "react";
 import Txt from "../../components/Txt";
 import styles from "./mypage.module.scss";
 
-import { dummyData } from "./dummy";
 
-const SeriesContent = ({ post, onClick }) => {
+const SeriesContent = ({ dbService, post, onClick }) => {
+
+  console.log( post.thumbnail)
 
   return(
     <li 
       className={styles.seriesContentBox}
       onClick={onClick} 
     >
-      <img src={post.imgUrl ? post.imgUrl : "test_img.png"} alt="" />
+      { post.thumbnail
+        ? <img src={dbService.encoderThumbnail(post.thumbnail.fileName)} alt="" />
+        : <img src="/test_img.png" alt="" />
+      }
+      
 
       <div className={styles.seriesContentTxtBox} >
         <Txt

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./mypage.module.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,16 +15,18 @@ import TagHandlerMobile from "./TagHandlerMobile";
 import { getMyPosts, getMySeries, getTags } from "./mypageService";
 
 
-const MypageRouter = ( { userId, dbService, functionService } ) => {
+const MypageRouter = ( { dbService, functionService } ) => {
   const navigate = useNavigate();
-
-  const [nickname, setNickname] = useState(userId.nickname)
+  const { nickname } = useParams();
   const [tapState, setTapState] = useState('post') // post, series, introduce는 보류
   const [searchValue, setSearchValue] = useState('')
   const [posts, setPosts] = useState([]);
   const [serieses, setSerieses] = useState([]);
 
   const [tags, setTags] = useState(null)
+
+  
+
 
   const getContents = async () => {
     if (tapState === 'post') {
@@ -40,7 +42,7 @@ const MypageRouter = ( { userId, dbService, functionService } ) => {
 
   // posts는 모든 글에서 받아온 기준으로!
   useEffect(() => {
-    if (!posts.length) return
+    if (!posts.length) return // 포스트 없으면 실행이 안됨. not property
     if (tags !== null) return
     const newTags = getTags(posts);
     setTags(newTags)
@@ -75,8 +77,12 @@ const MypageRouter = ( { userId, dbService, functionService } ) => {
 
       { tapState === "post" &&
         <TagHandlerMobile
+          dbService={dbService}
           tags={tags}
+          nickname={nickname}
+          searchValue={searchValue}
           setSearchValue={setSearchValue}
+          setPosts={setPosts}
         />
       }
 
@@ -86,6 +92,7 @@ const MypageRouter = ( { userId, dbService, functionService } ) => {
           posts.map( (post, idx) => {
           return <Post
                     key={idx}
+                    dbService={dbService}
                     post={post}
                     onClick={ () => GoReadPage(post)}
                   />

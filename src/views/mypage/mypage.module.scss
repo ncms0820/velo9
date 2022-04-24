@@ -107,8 +107,10 @@ $velogD: #12b886;
   // @include shadow();
 
   img {
-    height: 25rem;
-    margin: 1rem 0;
+    object-fit: cover;
+    height: 20rem;
+    width: 520px;
+    margin: 1rem auto;
   }
   
   .postTitle {
@@ -211,6 +213,7 @@ $velogD: #12b886;
 
     img {
       width: 5rem;
+      height: 5rem;
       margin-right: .5rem;
     }
     

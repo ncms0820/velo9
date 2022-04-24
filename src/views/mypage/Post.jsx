@@ -4,12 +4,14 @@ import styles from "./mypage.module.scss";
 import Txt from "../../components/Txt";
 import Button from "../../components/Button";
 
-const Post = ( { post, onClick } ) => {
+const Post = ( { dbService, post, onClick } ) => {
+
+  console.log(dbService.encoderThumbnail(post.thumbnail?.fileName))
 
   return(
     <div className={styles.post} onClick={onClick}>
       {post.thumbnail &&
-        <img src={post.thumbnail} alt="" />
+        <img src={  dbService.encoderThumbnail(post.thumbnail.fileName)} alt="" />
       }
       <Txt
         className={styles.postTitle}
