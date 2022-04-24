@@ -40,8 +40,8 @@ const MypageRouter = ( { userId, dbService, functionService } ) => {
 
   // posts는 모든 글에서 받아온 기준으로!
   useEffect(() => {
-    // if (!posts.length) return
-    if( !posts.length || tags !== null) return
+    if (!posts.length) return
+    if (tags !== null) return
     const newTags = getTags(posts);
     setTags(newTags)
   }, [posts])
