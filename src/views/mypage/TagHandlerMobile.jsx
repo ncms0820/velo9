@@ -2,11 +2,15 @@ import { useState, useEffect, useMemo } from "react";
 import Button from "../../components/Button";
 import Txt from "../../components/Txt";
 import styles from "./mypage.module.scss";
+import { getMyPostsWithTagBtn } from "./mypageService";
 
-const TagHandlerMobile = ( {setSearchValue, tags} ) => {
+const TagHandlerMobile = ( { dbService, tags, nickname, searchValue, setSearchValue, setPosts} ) => {
 
-  const onClickTag = (e) => {
-    setSearchValue(e.target.name)
+  const onClickTag = async (e) => {
+    console.log(e.target.name)
+    const result = await dbService.memberMain(nickname, 0)
+    const newPost = await getMyPostsWithTagBtn(result, e.target.name, setSearchValue)
+    setPosts(newPost)
   }
 
   return(
@@ -14,7 +18,7 @@ const TagHandlerMobile = ( {setSearchValue, tags} ) => {
       <Button
         txt={`전체보기`} // (${posts.length}) 전체 글 길이를 알아야하는데, 따로 tags를 받아오지 않는이상 힘들듯하다.
         className={styles.tagBtn}
-        onClick={() => setSearchValue("")}
+        onClick={(e) => onClickTag(e)}
       />
       { tags &&
         Object.entries(tags).map((tag) => {

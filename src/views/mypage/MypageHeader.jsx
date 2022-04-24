@@ -29,11 +29,13 @@ const MypageHeader = ( { setTapState, setSearchValue, tapState } ) => {
     }
   }
 
-  useEffect(()=>{
-    let timer = setTimeout(()=>{ 
+  useEffect(() => {
+    const timer = setTimeout(()=>{ 
       setSearchValue(inputValue)
      }, 500);
-    return ()=>{ clearTimeout(timer) }
+    return () => { 
+      clearTimeout(timer)
+    }
   }, [inputValue]);
 
 

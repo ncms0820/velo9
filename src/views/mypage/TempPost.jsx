@@ -22,11 +22,9 @@ const TempPost = ( { userId, dbService } ) => {
     getMyPosts()
   }, [])
   
-  const testGoReadPage = (post) => {
-    console.log("클릭됨, 임시작성 -> 실제작성으로")
-    navigate("/read", {
-      state: { content: { member: { nickname: userId.nickname }, postId: post.id } },
-    });
+  const goWritePage = (post) => {
+    console.log(post)
+    navigate("/write", { state: { postId: post.id } });
   }
 
 
@@ -42,7 +40,7 @@ const TempPost = ( { userId, dbService } ) => {
           return <TPost
                     key={idx}
                     post={post}
-                    onClick={ (post) => testGoReadPage(post)}
+                    onClick={ () => goWritePage(post)}
                   />
           })
         }

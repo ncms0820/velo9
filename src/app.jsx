@@ -72,11 +72,16 @@ function App({ dbService, authService, functionService }) {
           element={<Read dbService={dbService} userId={userId} functionService={functionService} />}
         />
         <Route path="/setting" element={<Setting />} />
+<<<<<<< HEAD
+        <Route path="/:nickname">
+          <Route path="main" element={<MypageRouter dbService={dbService} functionService={functionService} />} />
+=======
         <Route path="/:username">
           <Route
             path="main"
             element={<MypageRouter userId={userId} dbService={dbService} functionService={functionService} />}
           />
+>>>>>>> 5aefdf889a84443b00bd926c2a49b53c18496f4c
           <Route path="series/:seriesName" element={<SeriesPost userId={userId} dbService={dbService} />} />
         </Route>
         <Route path="/archive" element={<ArchiveRouter userId={userId} dbService={dbService} />} />
