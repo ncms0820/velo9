@@ -19,6 +19,7 @@ const Read = ({ dbService, userId, functionService }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const data = location.state.content;
+  console.log(location);
   const nickname = data.member.nickname;
   const id = data.postId;
   const onDelete = () => {
@@ -54,13 +55,9 @@ const Read = ({ dbService, userId, functionService }) => {
     setLove(!love);
   };
 
-  const goToProfile = () =>{
+  const goToProfile = () => {};
 
-  }
-
-  const goToSeries = () => {
-    
-  }
+  const goToSeries = () => {};
 
   useEffect(() => {
     const promise = new Promise((resolve, reject) => {
@@ -72,9 +69,15 @@ const Read = ({ dbService, userId, functionService }) => {
       const time = data.createdDate.split("-");
       setCreatedDate(`${time[0]}년 ${time[1]}월 ${time[2]}일`);
       setCardInfo(data);
+      console.log(data);
       return;
     });
   }, [dbService, nickname, id, love]);
+  useEffect(() => {
+    return () => {
+      setCardInfo(null);
+    };
+  }, [id]);
   useEffect(() => {
     if (userId) {
       if (userId.nickname === nickname) {
