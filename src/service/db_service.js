@@ -35,8 +35,8 @@ class DbService {
       tags,
       thumbnailFileName,
     };
+    console.log(body);
     const id = await axios.post(url, body, opt);
-    console.log(url);
     return id;
   }
 

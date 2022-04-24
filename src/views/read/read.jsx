@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./_read.module.scss";
+import "@toast-ui/editor/dist/toastui-editor-viewer.css";
+import { Viewer } from "@toast-ui/react-editor";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import ReactiveButton from "reactive-button";
@@ -13,6 +15,7 @@ const Read = ({ dbService, userId, functionService }) => {
   const [createdDate, setCreatedDate] = useState();
   const [manage, setManage] = useState(false);
   const [love, setLove] = useState(false);
+  const [thumbnail, setThumbnail] = useState();
   const navigate = useNavigate();
   const location = useLocation();
   const data = location.state.content;
@@ -36,6 +39,12 @@ const Read = ({ dbService, userId, functionService }) => {
       }
     });
   };
+  const encoder = async () => {
+    if (data.postThumbnail != null) {
+      const thumb = await dbService.encoderThumbnail(data.postThumbnail.fileName);
+      setThumbnail(thumb);
+    }
+  };
 
   const goToWrite = async () => {
     navigate("/write", { state: { postId: id } });
@@ -44,6 +53,15 @@ const Read = ({ dbService, userId, functionService }) => {
     await functionService.love(cardInfo.id);
     setLove(!love);
   };
+
+  const goToProfile = () =>{
+
+  }
+
+  const goToSeries = () => {
+    
+  }
+
   useEffect(() => {
     const promise = new Promise((resolve, reject) => {
       const data = dbService.getPostDetail(nickname, id);
@@ -51,7 +69,6 @@ const Read = ({ dbService, userId, functionService }) => {
       reject("카드 정보 가져오기 실패");
     });
     promise.then((data) => {
-      console.log(data);
       const time = data.createdDate.split("-");
       setCreatedDate(`${time[0]}년 ${time[1]}월 ${time[2]}일`);
       setCardInfo(data);
@@ -67,6 +84,9 @@ const Read = ({ dbService, userId, functionService }) => {
       }
     }
   }, [userId, nickname]);
+  useEffect(() => {
+    encoder();
+  }, [data]);
   return (
     <>
       {cardInfo ? (
@@ -97,7 +117,7 @@ const Read = ({ dbService, userId, functionService }) => {
           </div>
           <div className={styles.img}>
             {data.postThumbnail ? (
-              <img src={data.postThumbnail} alt="pic" />
+              <img src={thumbnail} alt="pic" />
             ) : (
               <img src={"https://picsum.photos/200"} alt="pic" />
             )}
@@ -106,7 +126,7 @@ const Read = ({ dbService, userId, functionService }) => {
             <h1>{cardInfo.seriesName}</h1>
           </div>
           <div className={styles.content}>
-            <h1>{cardInfo.content}</h1>
+            <Viewer initialValue={cardInfo.content} />
           </div>
           <div className={styles.thumb}>
             <div>

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import ReactiveButton from "reactive-button";
 import styles from "./_write.module.scss";
@@ -30,45 +30,86 @@ const Write = ({ dbService, functionService, userId }) => {
   const titleRef = useRef();
   const introduceRef = useRef();
   const seriesAddRef = useRef();
-  const [initialData, setInitialData] = useState();
 
   ///// what I need to upload this writes
-  const [postId, setPostId] = useState(null);
-  const [title, setTitle] = useState(initialData && initialData.title);
-  const [introduce, setIntroduce] = useState(null);
-  const [content, setContent] = useState(initialData && initialData.content);
-  const [access, setAccess] = useState();
-  const [seriesId, setSeriesId] = useState(null);
+  const [data, setData] = useState({
+    postId: null,
+    title: null,
+    introduce: null,
+    content: "",
+    access: "PUBLIC",
+    seriesId: null,
+    thumbnailFileName: null,
+  });
   const [tags, setTags] = useState([]);
-  const [thumbnailFileName, setThumbnailFileName] = useState(null);
   ////
   const [preview, setPreview] = useState(" ");
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState(true);
   const [seriesToggle, setSeriesToggle] = useState(false);
   const [seriesList, setSeriesList] = useState();
-  const [oneTimeChecker, setOneTimeChecker] = useState(true);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [watcher, setWatcher] = useState(true);
   //
   const goToPrevious = () => {
     navigate(-1);
   };
+  // toggle 작동시 access 바꾸기
   const switchToggle = () => {
     setToggle(!toggle);
     if (toggle) {
-      setAccess("PUBLIC");
+      setData((prev) => {
+        return { ...prev, access: "PRIVATE" };
+      });
     } else {
-      setAccess("PRIVATE");
+      setData((prev) => {
+        return { ...prev, access: "PUBLIC" };
+      });
     }
   };
+  // 수정시 값 불러오기
+  const fetching = async () => {
+    await getSeriesInfo();
+    if (state) {
+      unstable_batchedUpdates(async () => {
+        const fetchingData = await dbService.getWrite(state.postId);
+        setData({
+          postId: fetchingData.postId,
+          title: fetchingData.title,
+          introduce: fetchingData.introduce,
+          content: fetchingData.content,
+          access: fetchingData.access,
+          seriesId: fetchingData.series && fetchingData.series.seriesId,
+          thumbnailFileName: fetchingData.thumbnail && fetchingData.thumbnail.fileName,
+        });
+        setTags(fetchingData.tags);
+        if (fetchingData.thumbnail) {
+          const thumb = await dbService.encoderThumbnail(fetchingData.thumbnail.fileName);
+          setPreview(thumb);
+        }
+        if (fetchingData.access === "PUBLIC") {
+          setToggle(true);
+        } else {
+          setToggle(false);
+        }
+      });
+    }
+  };
+
+  // uploadFile
   const uploadFile = async (event) => {
     const formData = new FormData();
     const inputFile = event.target.files[0];
     formData.append("uploadFile", inputFile);
     const file = await dbService.postThumbnamil(formData);
-    setThumbnailFileName(file.fileName);
-    setPreview(file.thumbnail);
+    unstable_batchedUpdates(() => {
+      setData((prev) => {
+        return { ...prev, thumbnailFileName: file.fileName };
+      });
+      setPreview(file.thumbnail);
+    });
   };
 
+  // function service 시리즈 불러오기 및 더하기
   const findSeriesId = async (event) => {
     const itemLists = document.querySelectorAll(".series_list_write");
     itemLists.forEach((element) => {
@@ -77,15 +118,13 @@ const Write = ({ dbService, functionService, userId }) => {
       }
     });
     const item = event.currentTarget;
-    await item.classList.toggle("selected_item");
+    await item.classList.add("selected_item");
     if (await item.classList.contains("selected_item")) {
-      setSeriesId(item.id);
-    } else {
-      setSeriesId(null);
+      setData((prev) => {
+        return { ...prev, seriesId: item.id };
+      });
     }
   };
-
-  // function service
   const getSeriesInfo = async () => {
     const list = await functionService.getSeriesList();
     setSeriesList(list);
@@ -100,49 +139,28 @@ const Write = ({ dbService, functionService, userId }) => {
     getSeriesInfo();
   };
 
-  const fetching = () => {
-    if (state) {
-      unstable_batchedUpdates(async () => {
-        const fetchingData = await dbService.getWrite(state.postId);
-        const fetchingDataThumbnail = fetchingData.thumbnail;
-        setInitialData(fetchingData);
-        setPostId(fetchingData.postId);
-        setTitle(fetchingData.title);
-        setIntroduce(fetchingData.introduce);
-        setContent(fetchingData.content);
-        setAccess(fetchingData.access);
-        setSeriesId(fetchingData.series.sereisId);
-        setTags(fetchingData.tags);
-        if (fetchingDataThumbnail !== null) {
-          setThumbnailFileName(fetchingDataThumbnail);
-        }
+  /// 저장 구간
 
-        if (fetchingData.access === "PUBLIC") {
-          setToggle(true);
-        } else {
-          setToggle(false);
-        }
-      });
-    }
-    setTimeout(() => setLoading(false), 1000);
-  };
-  const sendPost = async (data) => {
+  /// save Point
+  const sendPost = async (postData) => {
     const savedId = await dbService.postWrite(
-      postId,
-      data.title,
-      data.introduce,
-      data.content,
-      access,
-      seriesId,
+      data.postId,
+      postData.title,
+      postData.introduce,
+      postData.content,
+      data.access,
+      data.seriesId,
       tags,
-      thumbnailFileName
+      data.thumbnailFileName
     );
+    setData((prev) => {
+      return { ...prev, postId: savedId.data.data };
+    });
     return savedId.data.data;
   };
 
-  /// save Point
   const onSave = () => {
-    const promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve) => {
       const editorInstance = editorRef.current.getInstance();
       const getContent_md = editorInstance.getMarkdown();
       const titleValue = titleRef.current.value;
@@ -156,51 +174,80 @@ const Write = ({ dbService, functionService, userId }) => {
     });
     return promise;
   };
+
+  // 버튼 클릭 이벤트들
   const onSaveButton = async () => {
-    const data = await onSave().then((data) => {
-      setTitle(data.titleValue);
-      setContent(data.getContent_md);
-      setIntroduce(data.introduceValue);
+    const postData = await onSave().then((data) => {
+      setData((prev) => {
+        return { ...prev, title: data.title, content: data.content, introduce: data.introduce };
+      });
       return data;
     });
-    const pageNumber = await sendPost(data);
+    const savedId = await sendPost(postData);
     const nickname = userId.nickname;
     navigate("/read", {
-      state: { content: { member: { nickname }, postId: pageNumber } },
+      state: { content: { member: { nickname }, postId: savedId } },
     });
   };
+
   const onSaveButtonTemp = async () => {
-    let savedId = "";
-    const data = await onSave().then((data) => {
-      setTitle(data.titleValue);
-      setContent(data.getContent_md);
-      setIntroduce(data.introduceValue);
+    const postData = await onSave().then((data) => {
+      setData((prev) => {
+        return { ...prev, title: data.title, content: data.content, introduce: data.introduce };
+      });
       return data;
     });
-    if (oneTimeChecker === true) {
-      savedId = await sendPost(data);
-      setPostId(savedId);
-      console.log("실행됨");
-      setOneTimeChecker(false);
+    if (data.postId === null) {
+      const savedId = await sendPost(postData);
+      setData((prev) => {
+        return { ...prev, title: savedId };
+      });
     }
-    console.log(oneTimeChecker);
-    await dbService.writeTemporary(savedId, title, content);
+    await dbService.writeTemporary(data.postId, postData.title, postData.content);
     console.log("success");
   };
+
+  const selectSeriesId = () => {
+    const item = document.getElementById(data.seriesId);
+    if (watcher) {
+      if (item != null) {
+        item.classList.add("selected_item");
+        setWatcher(false);
+        console.log("hi?");
+      }
+    }
+  };
+  const reset = () => {
+    const promise = new Promise((resolve) => {
+      setData((prev) => {
+        return { ...prev, seriesId: null };
+      });
+      resolve();
+    });
+    promise.then(() => {
+      const itemLists = document.querySelectorAll(".series_list_write");
+      itemLists.forEach((element) => {
+        if (element.classList.contains("selected_item")) {
+          element.classList.remove("selected_item");
+        }
+      });
+    });
+  };
   useEffect(() => {
-    getSeriesInfo();
     fetching();
+    setTimeout(() => setLoading(true), 500);
   }, []);
+
   useEffect(() => {
-    console.log(loading);
-    setContent(content);
-  }, [loading]);
+    setTimeout(() => selectSeriesId(), 800);
+  }, [data, seriesList]);
+
   return (
     <>
-      {!loading ? (
+      {loading ? (
         <div className={styles.body}>
           <div className={styles.title}>
-            <input type="text" placeholder="제목을 입력해 주세요.." defaultValue={title} ref={titleRef} />
+            <input type="text" placeholder="제목을 입력해 주세요.." defaultValue={data.title} ref={titleRef} required />
           </div>
           <hr />
           <ReactTagInput
@@ -215,7 +262,7 @@ const Write = ({ dbService, functionService, userId }) => {
           <div className="container">
             <Editor
               ref={editorRef}
-              initialValue={content}
+              initialValue={data.content}
               height="35rem"
               previewStyle="vertical"
               plugins={[chart, codeSyntaxHighlight, colorSyntax, tableMergedCell, uml]}
@@ -237,12 +284,15 @@ const Write = ({ dbService, functionService, userId }) => {
             </div>
             <div>
               <h1>INTRODUCE</h1>
-              <textarea ref={introduceRef} defaultValue={introduce} cols="30" rows="10"></textarea>
+              <textarea ref={introduceRef} defaultValue={data.introduce} cols="30" rows="10"></textarea>
             </div>
             <div className={styles.series_field}>
               <div className={styles.series_header}>
                 <h1>시리즈 목록</h1>
-                <button onClick={() => setSeriesToggle(!seriesToggle)}>시리즈 추가하기</button>
+                <div>
+                  <button onClick={reset}>리셋</button>
+                  <button onClick={() => setSeriesToggle(!seriesToggle)}>시리즈 추가하기</button>
+                </div>
               </div>
               {seriesToggle && (
                 <div className={styles.series_add}>
@@ -282,7 +332,7 @@ const Write = ({ dbService, functionService, userId }) => {
           </footer>
         </div>
       ) : (
-        <Error title={"Loading"} />
+        <Error title="Loading" />
       )}
     </>
   );

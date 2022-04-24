@@ -4,10 +4,12 @@ import styles from "./_error.module.scss";
 
 const Error = ({ handleTab, title }) => {
   useEffect(() => {
-    setTimeout(() => {
-      return handleTab();
-    }, 2000);
-  }, [handleTab]);
+    if (title === " No data found") {
+      setTimeout(() => {
+        return handleTab();
+      }, 2000);
+    }
+  }, [handleTab, title]);
   return (
     <div className={styles.div}>
       <ClipLoader size={20} color={"#123abc"} loading={true} speedMultiplier={1.5} />
