@@ -19,6 +19,7 @@ const Read = ({ dbService, userId, functionService }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const data = location.state.content;
+  console.log(location);
   const nickname = data.member.nickname;
   const id = data.postId;
   const onDelete = () => {
@@ -54,13 +55,9 @@ const Read = ({ dbService, userId, functionService }) => {
     setLove(!love);
   };
 
-  const goToProfile = () =>{
+  const goToProfile = () => {};
 
-  }
-
-  const goToSeries = () => {
-    
-  }
+  const goToSeries = () => {};
 
   useEffect(() => {
     const promise = new Promise((resolve, reject) => {
