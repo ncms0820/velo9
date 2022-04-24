@@ -284,7 +284,7 @@ const Write = ({ dbService, functionService, userId }) => {
             </div>
             <div>
               <h1>INTRODUCE</h1>
-              <textarea ref={introduceRef} defaultValue={data.introduce} cols="30" rows="10"></textarea>
+              <textarea ref={introduceRef} defaultValue={data.introduce} cols="50" rows="10"></textarea>
             </div>
             <div className={styles.series_field}>
               <div className={styles.series_header}>

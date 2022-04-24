@@ -69,9 +69,15 @@ const Read = ({ dbService, userId, functionService }) => {
       const time = data.createdDate.split("-");
       setCreatedDate(`${time[0]}년 ${time[1]}월 ${time[2]}일`);
       setCardInfo(data);
+      console.log(data);
       return;
     });
   }, [dbService, nickname, id, love]);
+  useEffect(() => {
+    return () => {
+      setCardInfo(null);
+    };
+  }, [id]);
   useEffect(() => {
     if (userId) {
       if (userId.nickname === nickname) {
@@ -83,7 +89,7 @@ const Read = ({ dbService, userId, functionService }) => {
   }, [userId, nickname]);
   useEffect(() => {
     encoder();
-  }, [data]);
+  }, [data, encoder]);
   return (
     <>
       {cardInfo ? (
