@@ -138,9 +138,9 @@ class DbService {
     };
   }
 
-  async deleteMemberThumbnail(file) {
-    const url = `${baseURL}/uploadMemberThumbnail`;
-    return await axios.post(url, file, opt);
+  async deleteMemberThumbnail(fileName) {
+    const url = `${baseURL}/deleteMemberThumbnail?fileName=${fileName}`;
+    return await axios.post(url, fileName, opt);
   }
 
   //섬네일 encoder
