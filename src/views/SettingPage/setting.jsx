@@ -149,12 +149,9 @@ const Setting = ({ dbService, authService, setLoginInfo }) => {
   };
   //delete
   const deleteFile = async () => {
-    console.log(data.thumbnail);
-    const file = {
-      fileName: encodeURIComponent(data.thumbnail),
-    };
+    const file = encodeURIComponent(data.thumbnail);
     console.log(file);
-    // await dbService.deleteMemberThumbnail(file);
+    await dbService.deleteMemberThumbnail(file);
     setPreview(null);
     setData((prev) => {
       return { ...prev, thumbnail: "" };
