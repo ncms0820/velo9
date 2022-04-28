@@ -1,10 +1,9 @@
-import Txt from "../../components/Txt";
-import styles from "./mypage.module.scss";
+import Txt from "../../../components/Txt";
+import styles from "../mypage.module.scss";
 
 
 const SeriesContent = ({ dbService, post, onClick }) => {
-
-  console.log( post.thumbnail)
+  
 
   return(
     <li 

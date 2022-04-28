@@ -1,6 +1,6 @@
 import axios from "axios";
 
-//http://3.39.104.213:8080
+// const baseURL = "http://3.39.104.213:8080";
 const baseURL = "http://localhost:8080";
 const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
 

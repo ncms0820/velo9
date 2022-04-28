@@ -5,7 +5,7 @@ import styles from "./mypage.module.scss";
 // Components
 import Txt from "../../components/Txt";
 // page
-import Post from "./Post";
+import Post from "./postPage/Post";
 import MypageProfile from "./MypageProfile";
 
 

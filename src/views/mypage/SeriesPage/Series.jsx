@@ -1,13 +1,12 @@
 import React, { useState, useRef, useEffect } from "react"
-import styles from "./mypage.module.scss";
+import styles from "../mypage.module.scss";
 
-import Txt from "../../components/Txt";
-import Button from "../../components/Button";
+import Txt from "../../../components/Txt";
+import Button from "../../../components/Button";
 import SeriesContent from "./SeriesContent"
 
-import { dummyData } from "./dummy";
 import { useNavigate } from "react-router-dom";
-import { getMySeries, sweetAlert } from "./mypageService";
+import { getMySeries, sweetAlert } from "../mypageService";
 
 const Series = ( { series, nickname, dbService, functionService, searchValue, setSerieses } ) => {
 

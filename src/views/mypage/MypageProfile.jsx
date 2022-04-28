@@ -1,5 +1,4 @@
 import React from "react"
-// import { useParams } from "react-router-dom";
 import Txt from "../../components/Txt";
 import styles from "./mypage.module.scss";
 

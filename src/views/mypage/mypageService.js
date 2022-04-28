@@ -16,10 +16,10 @@ export const getMyPosts = (result, searchValue) => {
 }
 
 // 태그 눌렀을때 (태그만 필터링)
-export const getMyPostsWithTagBtn = (result, tagName, setSearchValue) => {
+export const getMyPostsWithTagBtn = (result, tagName) => {
   const newPosts = result.data.data.content;
   if (tagName === "") return newPosts // 전체보기 눌렀을 때
-  setSearchValue("")
+  // setSearchValue(tagName)
   const filteredPosts = newPosts.filter((post) => post.tags.includes(tagName) )
   return filteredPosts
 }

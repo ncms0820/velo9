@@ -1,11 +1,12 @@
 import React, { useState, useRef, forwardRef } from "react"
-import styles from "./mypage.module.scss";
+import styles from "../mypage.module.scss";
 
-import Txt from "../../components/Txt";
-import Button from "../../components/Button";
+import Txt from "../../../components/Txt";
+import Button from "../../../components/Button";
 
 const Post = forwardRef( ( { dbService, post, onClick }, ref ) => {
 
+  console.log(post)
   
   return(
     <div className={styles.post} onClick={onClick} ref={ref}>
@@ -35,7 +36,7 @@ const Post = forwardRef( ( { dbService, post, onClick }, ref ) => {
       <div>
         <Txt
           className={styles.postDate}
-          txt={post.createdDate + " · "} // 날짜 계산식 적용
+          txt={post.createdDate} // 날짜 계산식 적용
         />
         {/* <Txt
           className={styles.postComments}

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 
-const InfiniteScroll = ( lastListRef, datas, Func, loading, isLoading ) => {
+const InfiniteScroll = ( lastListRef, datas, Func ) => {
 
   const observerRef = useRef();
 
