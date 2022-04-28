@@ -67,15 +67,14 @@
   .loginInput {
     margin-bottom: 1.5rem;
   }
-  
 
   button {
     height: 3rem;
     background: none;
     font-weight: bold;
     border: none;
-    background: $mainColor;
-    border-radius: .25rem;
+    background: #424e6a;
+    border-radius: 0.25rem;
     color: white;
     @include shadowMini();
     @include hoverEvent();
@@ -151,6 +150,4 @@
   padding: 0.5rem;
   border-radius: 1.75rem;
   @include hoverEvent();
-
 }
-

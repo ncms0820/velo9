@@ -5,23 +5,35 @@
     height: 40rem;
     .top {
       height: 40%;
-
       display: flex;
+      justify-content: space-between;
       .profile_field {
-        width: 30%;
-        padding-right: 5%;
+        width: 25%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
+        max-width: 22rem;
         .img {
           height: 55%;
           width: 50%;
           border-radius: 50%;
           overflow: hidden;
           background-color: grey;
+          img {
+            width: 100%;
+            height: 100%;
+          }
         }
-        .upload,
+        .upload {
+          display: inline-block;
+          height: 40px;
+          padding: 0 10px;
+          vertical-align: middle;
+          border: 1px solid #dddddd;
+          width: 78%;
+          color: #999999;
+        }
         .remove {
           font-size: 0.8rem;
           height: 16%;
@@ -32,6 +44,7 @@
           border-radius: 0.8rem;
           background-color: rgb(206, 205, 205);
           transition: all linear 0.5s;
+          cursor: pointer;
           &:hover {
             background-color: rgba(0, 0, 0, 0.315);
             color: white;
@@ -39,8 +52,7 @@
         }
       }
       .nickname_field {
-        width: 70%;
-
+        width: 71%;
         display: flex;
         flex-direction: column;
         .nickname {
@@ -60,11 +72,10 @@
     .middle {
       margin-top: 1rem;
       height: 40%;
-
       display: flex;
       flex-direction: column;
       justify-content: center;
-      div {
+      & > div {
         height: 25%;
         display: flex;
         align-items: center;
@@ -104,6 +115,20 @@
           }
         }
       }
+      .social {
+        display: flex;
+        justify-content: space-between;
+      }
+      .email_field {
+        width: 75%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        input {
+          width: 100%;
+          margin-bottom: 0.2rem;
+        }
+      }
     }
     .bottom {
       margin-top: 1rem;
@@ -122,6 +147,10 @@
         font-size: 0.8rem;
         background-color: rgb(206, 205, 205);
         cursor: pointer;
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.315);
+          color: white;
+        }
       }
     }
   }

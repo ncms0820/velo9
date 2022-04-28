@@ -22,8 +22,8 @@ class AuthService {
   async getSetting() {
     const url = `${baseURL}/setting`;
     return await axios
-      .get(url)
-      .then((data) => data)
+      .get(url, opt)
+      .then((data) => data.data)
       .catch(() => {
         return console.log("세팅 정보 가져오기 실패");
       });
@@ -38,7 +38,7 @@ class AuthService {
       socialEmail,
       socialGithub,
     };
-    return await axios.post(url, body).then(() => console.log("세팅 포스트 완료"));
+    return await axios.post(url, body, opt).then(() => console.log("세팅 포스트 완료"));
   }
 
   // 개인설정에서 쓰는 changePassword 입니다
@@ -48,7 +48,10 @@ class AuthService {
       oldPassword,
       newPassword,
     };
-    return await axios.post(url, body);
+    return await axios
+      .post(url, body, opt)
+      .then(() => true)
+      .catch(() => false);
   }
 
   ///////////////////           로그인           //////////////////////
@@ -110,7 +113,7 @@ class AuthService {
   async validateNickname(nickname) {
     const url = `${baseURL}/validateNickname?nickname=${nickname}`;
     const result = await axios
-      .get(url)
+      .get(url, opt)
       .then(() => true)
       .catch(() => false);
     return result;
@@ -128,7 +131,10 @@ class AuthService {
     const body = {
       oldPassword,
     };
-    return await axios.post(url, body);
+    return await axios
+      .post(url, body, opt)
+      .then(() => true)
+      .catch(() => false);
   }
   // 인증 메일 보내기
   async sendMail(email) {

@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:8080"
-// const baseURL = "http://3.39.104.213:8080";
+//http://3.39.104.213:8080
+const baseURL = "http://localhost:8080";
 const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
 
 class DbService {
@@ -126,10 +126,30 @@ class DbService {
       fileName,
     };
   }
+  async uploadMemberThumbnail(formData) {
+    const url = `${baseURL}/uploadMemberThumbnail`;
+    const data = await axios.post(url, formData, opt);
+    const thumbnail = `${baseURL}/displayMemberThumbnail?fileName=${encodeURIComponent(data.data.fileName)}`;
+    console.log(data.data.fileName);
+    const fileName = data.data.fileName;
+    return {
+      thumbnail,
+      fileName,
+    };
+  }
+
+  async deleteMemberThumbnail(fileName) {
+    const url = `${baseURL}/deleteMemberThumbnail?fileName=${fileName}`;
+    return await axios.post(url, fileName, opt);
+  }
 
   //섬네일 encoder
   encoderThumbnail(fileName) {
     const thumbnail = `${baseURL}/displayPostThumbnail?fileName=${encodeURIComponent(fileName)}`;
+    return thumbnail;
+  }
+  encoderThumbnailMember(fileName) {
+    const thumbnail = `${baseURL}/displayMemberThumbnail?fileName=${encodeURIComponent(fileName)}`;
     return thumbnail;
   }
 }

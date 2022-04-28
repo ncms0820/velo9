@@ -4,7 +4,7 @@ import React, { forwardRef, useEffect, useState } from "react";
 import styles from "./_card.module.scss";
 import { useNavigate } from "react-router-dom";
 
-const Card = forwardRef(( { content }, ref ) => {
+const Card = forwardRef(({ content }, ref) => {
   const postThumbURL = content.postThumbnail;
   const memberURL = content.member.memberThumbnail;
   const data = content;
@@ -35,11 +35,6 @@ const Card = forwardRef(( { content }, ref ) => {
         <div>
           <h1>{content.title}</h1>
           <p>{content.introduce}</p>
-        </div>
-        <div className={styles.meta}>
-          <span>6일전</span>
-          <span>·</span>
-          <span>2개의 댓글</span>
         </div>
       </div>
       <div className={styles.foot}>

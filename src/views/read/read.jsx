@@ -131,7 +131,7 @@ const Read = ({ dbService, userId, functionService }) => {
             </div>
             <div className={styles.tag}>
               {cardInfo.tags.map((data) => (
-                <div># {data}</div>
+                <div>#{data}</div>
               ))}
             </div>
           </div>

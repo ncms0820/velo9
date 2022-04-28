@@ -15,7 +15,7 @@ const Footer = ({ prev, next, nickname }) => {
     <div className={styles.footer}>
       {prev ? (
         <div className={styles.left} onClick={() => goToPage(prev.id, nickname)}>
-          <FontAwesomeIcon icon={faCircleArrowLeft} size={"2x"} color={"black"} />
+          <FontAwesomeIcon icon={faCircleArrowLeft} size={"2x"} />
           <div>
             <span>이전 포스트</span>
             <span>{prev.title}</span>
@@ -30,7 +30,7 @@ const Footer = ({ prev, next, nickname }) => {
             <span>다음 포스트</span>
             <span>{next.title}</span>
           </div>
-          <FontAwesomeIcon icon={faCircleArrowRight} size={"2x"} color={"black"} />
+          <FontAwesomeIcon icon={faCircleArrowRight} size={"2x"} />
         </div>
       )}
     </div>
