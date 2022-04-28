@@ -16,8 +16,9 @@ const Home = ({ dbService, userId, onLoginModal }) => {
   const handleTab = useCallback(
     async (tag = undefined, content = undefined, page = undefined, sort = "createdDate") => {
       try {
-        const db = await dbService.getDb(tag, content, page, sort);
+        const db = await dbService.getDb(tag, content, pageCount, sort);
         console.log(db)
+        console.log(db.content)
         if (db.content.length !== 0) {
           setCards(db.content);
         } else {

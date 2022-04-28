@@ -1,14 +1,14 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, forwardRef } from "react"
 import styles from "./mypage.module.scss";
 
 import Txt from "../../components/Txt";
 import Button from "../../components/Button";
 
-const Post = ( { dbService, post, onClick } ) => {
+const Post = forwardRef( ( { dbService, post, onClick }, ref ) => {
 
   
   return(
-    <div className={styles.post} onClick={onClick}>
+    <div className={styles.post} onClick={onClick} ref={ref}>
       {post.thumbnail &&
         <img src={  dbService.encoderThumbnail(post.thumbnail.fileName)} alt="" />
       }
@@ -44,6 +44,6 @@ const Post = ( { dbService, post, onClick } ) => {
       </div>
     </div>
   )
-}
+})
 
 export default Post;

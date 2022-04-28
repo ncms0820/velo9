@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 
 //  post 받아오기
-export const getMyPosts = (result, searchValue ) => {
+export const getMyPosts = (result, searchValue) => {
   const newPosts = result.data.data.content;
   if (searchValue === "") { // 빈값일때 전체글 로드
     return newPosts
@@ -16,7 +16,7 @@ export const getMyPosts = (result, searchValue ) => {
 }
 
 // 태그 눌렀을때 (태그만 필터링)
-export const getMyPostsWithTagBtn = (result, tagName, setSearchValue ) => {
+export const getMyPostsWithTagBtn = (result, tagName, setSearchValue) => {
   const newPosts = result.data.data.content;
   if (tagName === "") return newPosts // 전체보기 눌렀을 때
   setSearchValue("")
