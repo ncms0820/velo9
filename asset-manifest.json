@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/velo9/static/css/main.89cb453d.chunk.css",
-    "main.js": "/velo9/static/js/main.5a7f0198.chunk.js",
-    "main.js.map": "/velo9/static/js/main.5a7f0198.chunk.js.map",
+    "main.js": "/velo9/static/js/main.fc48ea5a.chunk.js",
+    "main.js.map": "/velo9/static/js/main.fc48ea5a.chunk.js.map",
     "runtime-main.js": "/velo9/static/js/runtime-main.49e49136.js",
     "runtime-main.js.map": "/velo9/static/js/runtime-main.49e49136.js.map",
     "static/css/2.b390d402.chunk.css": "/velo9/static/css/2.b390d402.chunk.css",
-    "static/js/2.b49ddc11.chunk.js": "/velo9/static/js/2.b49ddc11.chunk.js",
-    "static/js/2.b49ddc11.chunk.js.map": "/velo9/static/js/2.b49ddc11.chunk.js.map",
+    "static/js/2.6fe6ffd1.chunk.js": "/velo9/static/js/2.6fe6ffd1.chunk.js",
+    "static/js/2.6fe6ffd1.chunk.js.map": "/velo9/static/js/2.6fe6ffd1.chunk.js.map",
     "index.html": "/velo9/index.html",
     "static/css/2.b390d402.chunk.css.map": "/velo9/static/css/2.b390d402.chunk.css.map",
     "static/css/main.89cb453d.chunk.css.map": "/velo9/static/css/main.89cb453d.chunk.css.map",
-    "static/js/2.b49ddc11.chunk.js.LICENSE.txt": "/velo9/static/js/2.b49ddc11.chunk.js.LICENSE.txt",
+    "static/js/2.6fe6ffd1.chunk.js.LICENSE.txt": "/velo9/static/js/2.6fe6ffd1.chunk.js.LICENSE.txt",
     "static/media/6.png": "/velo9/static/media/6.7658962b.png"
   },
   "entrypoints": [
     "static/js/runtime-main.49e49136.js",
     "static/css/2.b390d402.chunk.css",
-    "static/js/2.b49ddc11.chunk.js",
+    "static/js/2.6fe6ffd1.chunk.js",
     "static/css/main.89cb453d.chunk.css",
-    "static/js/main.5a7f0198.chunk.js"
+    "static/js/main.fc48ea5a.chunk.js"
   ]
 }
