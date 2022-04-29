@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/velo9/static/css/main.89cb453d.chunk.css",
-    "main.js": "/velo9/static/js/main.fc48ea5a.chunk.js",
-    "main.js.map": "/velo9/static/js/main.fc48ea5a.chunk.js.map",
+    "main.js": "/velo9/static/js/main.03a71465.chunk.js",
+    "main.js.map": "/velo9/static/js/main.03a71465.chunk.js.map",
     "runtime-main.js": "/velo9/static/js/runtime-main.49e49136.js",
     "runtime-main.js.map": "/velo9/static/js/runtime-main.49e49136.js.map",
     "static/css/2.b390d402.chunk.css": "/velo9/static/css/2.b390d402.chunk.css",
@@ -19,6 +19,6 @@
     "static/css/2.b390d402.chunk.css",
     "static/js/2.6fe6ffd1.chunk.js",
     "static/css/main.89cb453d.chunk.css",
-    "static/js/main.fc48ea5a.chunk.js"
+    "static/js/main.03a71465.chunk.js"
   ]
 }
