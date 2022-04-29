@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import styles from "./_header.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { memo } from "react/cjs/react.development";
 import { Link, useNavigate } from "react-router-dom";
 import ReactiveButton from "reactive-button";
 import { Switch, useDarkreader } from "react-darkreader";
