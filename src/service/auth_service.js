@@ -1,7 +1,7 @@
 import axios from "axios";
 
 //http://3.39.104.213:8080
-const baseURL = "http://localhost:8080";
+const baseURL = "http://3.39.104.213:8080";
 const opt = { withCredentials: true, headers: { "Content-Type": `application/json` } };
 class AuthService {
   //////////////           정보 가져오기          /////////////////////
@@ -9,13 +9,15 @@ class AuthService {
   // 로그인 정보 가져오기
   async getUserInfo() {
     const url = `${baseURL}/getHeaderInfo`;
-    return await axios
+    const user = await axios
       .get(url, opt)
       .then((data) => data.data)
       .catch((e) => {
         console.log(e);
         return console.log("로그인 정보 가져오기 실패");
       });
+    return user;
+    // axios.get("http://3.39.104.213:8080/getHeaderInfo", { withCredentials: true, headers: { "Content-Type": `application/json` } })
   }
 
   //세팅 정보 가져오기
@@ -65,7 +67,7 @@ class AuthService {
     };
     const data = await axios.post(url, body, opt).then((e) => {
       console.log(e);
-      console.log("성공?");
+      console.log("성공");
       return this.getUserInfo();
     });
     return data;
