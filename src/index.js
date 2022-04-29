@@ -13,10 +13,10 @@ const functionService = new FunctionService();
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+
     {/* 여기 브라우저 라우터  */}
       <App dbService={dbService} authService={authService} functionService={functionService} />
-    </BrowserRouter>
+
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styles from "./mypage.module.scss";
 
@@ -27,7 +27,7 @@ const MypageRouter = ({ dbService, functionService }) => {
   const getContents = async () => {
     if (tapState === "post") {
       const result = await dbService.memberMain(nickname, 0);
-      console.log(result)
+      console.log(result);
       const newPost = getMyPosts(result, searchValue);
       setPosts(newPost);
     } else if (tapState === "series") {
@@ -61,26 +61,16 @@ const MypageRouter = ({ dbService, functionService }) => {
   };
 
   useEffect(() => {
-    console.log(posts)
-  }, [posts])
-  
+    console.log(posts);
+  }, [posts]);
 
   return (
     <div className={styles.mypageBox}>
-      
-      <MypageProfile
-        dbService={dbService}
-        nickname={nickname}
-        thumbnail={location.state?.thumbnail}
-      />
+      <MypageProfile dbService={dbService} nickname={nickname} thumbnail={location.state?.thumbnail} />
 
-      <MypageHeader
-        setTapState={setTapState}
-        tapState={tapState}
-        setSearchValue={setSearchValue}
-      />
+      <MypageHeader setTapState={setTapState} tapState={tapState} setSearchValue={setSearchValue} />
 
-      { tapState === "post" &&
+      {tapState === "post" && (
         <TagHandlerMobile
           dbService={dbService}
           tags={tags}
@@ -88,7 +78,7 @@ const MypageRouter = ({ dbService, functionService }) => {
           setSearchValue={setSearchValue}
           setPosts={setPosts}
         />
-      }
+      )}
 
       <div className={styles.mypageContent}>
         {/* 포스트일때 */}

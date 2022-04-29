@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./app.scss";
 import Explore from "./views/explore/explore";
 import Header from "./views/header/header";
@@ -42,7 +42,7 @@ function App({ dbService, authService, functionService }) {
   }, [userId, authService]);
 
   return (
-    <>
+    <BrowserRouter>
       <Header authService={authService} userId={userId} setLoginInfo={setLoginInfo} setOnLoginModal={setOnLoginModal} />
       {onLoginModal && (
         <LoginRouter
@@ -61,6 +61,10 @@ function App({ dbService, authService, functionService }) {
           path="/home"
           element={<Home dbService={dbService} authService={authService} userId={userId} onLoginModal={onLoginModal} />}
         />
+        <Route
+          path="/velo9"
+          element={<Home dbService={dbService} authService={authService} userId={userId} onLoginModal={onLoginModal} />}
+        />
         <Route path="/success" element={<Redirect setLoginInfo={setLoginInfo} authService={authService} />} />
         <Route path="/explore" element={<Explore dbService={dbService} />} />
         <Route
@@ -71,7 +75,10 @@ function App({ dbService, authService, functionService }) {
           path="/read"
           element={<Read dbService={dbService} userId={userId} functionService={functionService} />}
         />
-        <Route path="/setting" element={<Setting dbService={dbService} authService={authService} setLoginInfo={setLoginInfo} />} />
+        <Route
+          path="/setting"
+          element={<Setting dbService={dbService} authService={authService} setLoginInfo={setLoginInfo} />}
+        />
         <Route path="/:nickname">
           <Route
             path="main"
@@ -86,7 +93,7 @@ function App({ dbService, authService, functionService }) {
           element={<SocialSign authService={authService} setOnLoginModal={setOnLoginModal} />}
         />
       </Routes>
-    </>
+    </BrowserRouter>
   );
 }
 
