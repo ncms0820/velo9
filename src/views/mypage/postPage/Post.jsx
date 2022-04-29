@@ -6,7 +6,6 @@ import Button from "../../../components/Button";
 
 const Post = forwardRef( ( { dbService, post, onClick }, ref ) => {
 
-  console.log(post)
   
   return(
     <div className={styles.post} onClick={onClick} ref={ref}>

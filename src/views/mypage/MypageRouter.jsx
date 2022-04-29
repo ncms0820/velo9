@@ -34,7 +34,7 @@ const MypageRouter = ({ dbService, functionService }) => {
     console.log("실행됨")
     setSeriesContents();
 
-  }, [searchValue, tapState]); // 탭이 왔다-갔다 할때만 바뀜
+  }, [tapState]); // 탭이 왔다-갔다 할때만 바뀜
   // tap State가 바뀌면서 두번 추가된거지 지금. 
 
 

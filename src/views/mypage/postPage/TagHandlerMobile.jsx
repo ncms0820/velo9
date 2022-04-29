@@ -25,6 +25,10 @@ useEffect(() => {
   console.log(selectedTag)
 }, [selectedTag])
 
+const t1 = () => {
+  setSelectedTag(null)
+  setSearchValue("")
+}
 
 
   return(
@@ -32,7 +36,7 @@ useEffect(() => {
       <Button
         txt={`전체보기`} // (${posts.length}) 전체 글 길이를 알아야하는데, 따로 tags를 받아오지 않는이상 힘들듯하다.
         className={styles.tagBtn}
-        onClick={(e) => setSelectedTag(null)}
+        onClick={() => t1()}
       />
       { tags &&
         tags.map((tag) => {
