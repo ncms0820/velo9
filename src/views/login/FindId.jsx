@@ -18,18 +18,24 @@ const FindId = ( { setPage, authService } ) => {
 
   return(
       <>
-        <Txt txt="가입한 이메일을 입력해주세요" />
-        <Input 
-          type="text"
-          onChange={(e) => setEmail(e.target.value)}
-          onEnter={checkEmail}
-          value={email}
-          placeholder="input Email"
-          />
-        <Button
-          onClick={checkEmail}
-          txt={"아이디 찾기"}
+        <Txt
+          txt="가입한 이메일을 입력해주세요" 
         />
+
+        <div className={styles.inputAndBtn}>
+          <Input 
+            type="text"
+            onChange={(e) => setEmail(e.target.value)}
+            onEnter={checkEmail}
+            value={email}
+            placeholder="input Email"
+            />
+          <Button
+            onClick={checkEmail}
+            txt={"아이디 찾기"}
+          />
+        </div>
+
         <Txt 
           txt={
             findedId 

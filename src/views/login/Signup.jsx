@@ -15,14 +15,14 @@ const Signup = ({ page, setPage, authService, setLoginInfo }) => {
   const [newPw, setNewPw] = useState(""); // 비밀번호
   const [nickName, setNickName] = useState(""); // 닉네임
 
-  const [isCheckedId, setIsCheckedId] = useState(null); // null || boolean, 아이디 중복확인여부
+  const [isCheckedId, setIsCheckedId] = useState(""); // null || boolean, 아이디 중복확인여부
   const [isVerified, setIsVerified] = useState(null); // null || boolean, 인증번호 확인여부
   const [isCheckedPw, setIsCheckedPw] = useState(null); // null || boolean, 비밀번호 체크여부
   const [isCheckedNickName, setIsCheckedNickName] = useState(null); // null || boolean, 비밀번호 체크여부
 
   const finishSignup = async () => {
-    if (!isCheckedId) {
-      alert("아이디 중복체크가 필요합니다.");
+    if (isCheckedId !== "ok") {
+      alert("아이디 확인이 필요합니다.");
       return;
     }
     // if (!isVerified) {
